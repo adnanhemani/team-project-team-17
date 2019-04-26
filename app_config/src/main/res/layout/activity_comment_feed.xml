@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- layout for comment feed -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/comment_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <!-- TODO: replace "temp title" with a landmark name -->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/bear_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@color/colorPrimaryDark" />
+
+    <!-- recylcer view -->
+
+    <Button
+        android:id="@+id/sorting"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_above="@+id/comment_recycler"
+        android:layout_alignTop="@+id/bear_toolbar"
+        android:layout_alignEnd="@+id/bear_toolbar"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="9dp"
+        android:background="@color/colorPrimary"
+        android:backgroundTint="@android:color/transparent"
+        android:text="Sort By Upvotes"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/statue_recycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/comment_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="615dp"
+        android:layout_below="@+id/bear_toolbar"
+        android:layout_alignBottom="@+id/llSend"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-1dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="62dp"
+        android:transcriptMode="alwaysScroll"
+        app:stackFromEnd="true" />
+
+    <RelativeLayout
+        android:id="@+id/llSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:paddingBottom="10dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="5dp">
+
+        <!-- new comment edit text  -->
+        <EditText
+            android:id="@+id/comment_input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/send_button"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@+id/send_button"
+            android:gravity="top"
+            android:hint="send a new message"
+            android:inputType="textShortMessage" />
+
+        <!-- send button  -->
+        <Button
+            android:id="@+id/send_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:background="@color/colorPrimaryDark"
+            android:text="send"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+</RelativeLayout>
+
