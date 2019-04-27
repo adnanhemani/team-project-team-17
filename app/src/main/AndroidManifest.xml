@@ -23,5 +23,9 @@
         <activity android:name=".DonorHistoryActivity"/>
         <activity android:name=".PantryViewResponsesActivity"/>
         <activity android:name=".PantryViewDonationsActivity"/>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 </manifest>
