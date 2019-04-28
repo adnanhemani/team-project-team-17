@@ -8,7 +8,7 @@
     tools:context=".Login">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/gray_background"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/lightGray"
@@ -27,7 +27,7 @@
         tools:layout_editor_absoluteY="5dp" />
 
     <TextView
-        android:id="@+id/title_text2"
+        android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -103,7 +103,7 @@
         app:srcCompat="@drawable/camera_icon2" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/food_name_text"
         style="@android:style/Widget.EditText"
         android:layout_width="0dp"
         android:layout_height="20dp"
@@ -119,13 +119,13 @@
         android:text="Food Name"
         android:textColor="#808080"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/gray_background"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/pencil_icon"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/expiration_date_text"
         style="@android:style/Widget.EditText"
         android:layout_width="0dp"
         android:layout_height="20dp"
@@ -140,14 +140,14 @@
         android:singleLine="true"
         android:textColor="#808080"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/gray_background"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/pencil_icon"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/dont_use_me_line3"
         tools:text="Expiration Date" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/item_weight_text"
         style="@android:style/Widget.EditText"
         android:layout_width="0dp"
         android:layout_height="20dp"
@@ -163,9 +163,9 @@
         android:text="Weight/Quantity"
         android:textColor="#808080"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-        app:layout_constraintStart_toEndOf="@+id/pencil_icon3"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintEnd_toEndOf="@+id/gray_background"
+        app:layout_constraintStart_toEndOf="@+id/basket_icon"
+        app:layout_constraintTop_toBottomOf="@+id/dont_use_me_line" />
 
     <ImageView
         android:id="@+id/pencil_icon"
@@ -178,75 +178,76 @@
         app:srcCompat="@drawable/pencil_icon" />
 
     <ImageView
-        android:id="@+id/pencil_icon2"
+        android:id="@+id/calendar_icon"
         android:layout_width="25dp"
         android:layout_height="22dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toEndOf="@+id/main_image"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/dont_use_me_line3"
         app:srcCompat="@drawable/calendar_icon" />
 
     <ImageView
-        android:id="@+id/pencil_icon3"
+        android:id="@+id/basket_icon"
         android:layout_width="25dp"
         android:layout_height="22dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toEndOf="@+id/main_image"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/dont_use_me_line"
         app:srcCompat="@drawable/basket_icon" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/dont_use_me_line"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="2dp"
         android:layout_weight="1"
         android:background="#808080"
         android:text=" "
-        app:layout_constraintEnd_toEndOf="@+id/editText2"
-        app:layout_constraintStart_toStartOf="@+id/pencil_icon2"
-        app:layout_constraintTop_toBottomOf="@+id/pencil_icon2" />
+        app:layout_constraintEnd_toEndOf="@+id/expiration_date_text"
+        app:layout_constraintStart_toStartOf="@+id/calendar_icon"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_icon" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/dont_use_me_line2"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="2dp"
         android:layout_weight="1"
         android:background="#808080"
         android:text=" "
-        app:layout_constraintEnd_toEndOf="@+id/editText3"
-        app:layout_constraintStart_toStartOf="@+id/pencil_icon3"
-        app:layout_constraintTop_toBottomOf="@+id/pencil_icon3" />
+        app:layout_constraintEnd_toEndOf="@+id/item_weight_text"
+        app:layout_constraintStart_toStartOf="@+id/basket_icon"
+        app:layout_constraintTop_toBottomOf="@+id/basket_icon" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/dont_use_me_line3"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="2dp"
         android:layout_weight="1"
         android:background="#808080"
         android:text=" "
-        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintEnd_toEndOf="@+id/food_name_text"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/pencil_icon"
         app:layout_constraintTop_toBottomOf="@+id/pencil_icon" />
 
     <RadioGroup
+        android:id="@+id/perishable_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/gray_background"
         app:layout_constraintStart_toEndOf="@+id/main_image"
-        app:layout_constraintTop_toBottomOf="@+id/button3">
+        app:layout_constraintTop_toBottomOf="@+id/dont_use_me_line2">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/perishable_toggle"
             style="@android:style/Widget.Holo.CompoundButton.RadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -256,7 +257,7 @@
             android:textColor="#404040" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/nonperishable_toggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -266,7 +267,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/clear_list_button"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="160dp"
         android:layout_height="40dp"
@@ -281,7 +282,7 @@
         app:layout_constraintVertical_bias="0.526" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/add_to_list_button"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="160dp"
         android:layout_height="40dp"
@@ -297,6 +298,7 @@
         app:layout_constraintVertical_bias="0.526" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/food_item_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
