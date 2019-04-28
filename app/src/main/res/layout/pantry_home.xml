@@ -38,7 +38,7 @@
     </android.support.v7.widget.Toolbar>
 
     <Button
-        android:id="@+id/donation_history"
+        android:id="@+id/new_donation_button"
         android:layout_width="376dp"
         android:layout_height="192dp"
         android:layout_marginStart="16dp"
@@ -51,10 +51,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/donor_responses2" />
+        app:layout_constraintTop_toBottomOf="@+id/donation_history_button" />
 
     <Button
-        android:id="@+id/donor_responses2"
+        android:id="@+id/donation_history_button"
         android:layout_width="376dp"
         android:layout_height="192dp"
         android:layout_marginStart="16dp"
@@ -62,14 +62,14 @@
         android:layout_marginEnd="16dp"
         android:backgroundTint="#FFC107"
         android:text="Donor Responses"
-        app:layout_constraintBottom_toTopOf="@+id/donation_history"
+        app:layout_constraintBottom_toTopOf="@+id/new_donation_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_donations" />
+        app:layout_constraintTop_toBottomOf="@+id/view_responses_button" />
 
     <Button
-        android:id="@+id/view_donations"
+        android:id="@+id/view_responses_button"
         android:layout_width="376dp"
         android:layout_height="192dp"
         android:layout_marginStart="16dp"
@@ -77,7 +77,7 @@
         android:layout_marginEnd="16dp"
         android:backgroundTint="#FFC107"
         android:text="View Donations"
-        app:layout_constraintBottom_toTopOf="@+id/donor_responses2"
+        app:layout_constraintBottom_toTopOf="@+id/donation_history_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

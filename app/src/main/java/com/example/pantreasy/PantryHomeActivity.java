@@ -14,8 +14,8 @@ public class PantryHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantry_home);
 
-        Button viewDonations = findViewById(R.id.view_donations);
-        Button donorResponses = findViewById(R.id.donor_responses2);
+        Button viewDonations = findViewById(R.id.view_responses_button);
+        Button donorResponses = findViewById(R.id.donation_history_button);
 
         viewDonations.setOnClickListener(new View.OnClickListener() {
             @Override
