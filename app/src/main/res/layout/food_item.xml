@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/food_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/food_image"
+        app:srcCompat="@drawable/thin_long_shadowed_box" />
+
+    <ImageView
+        android:id="@+id/food_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_box"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/image_placeholder" />
+
+    <TextView
+        android:id="@+id/expiration_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/roboto"
+        android:text="Expiration Date"
+        android:textColor="#444444"
+        app:layout_constraintStart_toEndOf="@+id/food_image"
+        app:layout_constraintTop_toBottomOf="@+id/food_name" />
+
+    <TextView
+        android:id="@+id/food_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto"
+        android:text="Food Name"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/food_image"
+        app:layout_constraintTop_toTopOf="@+id/food_image" />
+
+    <TextView
+        android:id="@+id/food_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="casual"
+        android:text="Description of the food"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/food_image"
+        app:layout_constraintTop_toBottomOf="@+id/expiration_date" />
+
+    <ImageButton
+        android:id="@+id/minus_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/plus_button"
+        app:layout_constraintTop_toTopOf="@+id/background"
+        app:srcCompat="@drawable/minus_button" />
+
+    <ImageButton
+        android:id="@+id/x_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="@+id/food_image"
+        app:layout_constraintTop_toTopOf="@+id/food_image"
+        app:srcCompat="@drawable/x_button" />
+
+    <ImageButton
+        android:id="@+id/plus_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="28dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="@+id/background"
+        app:layout_constraintTop_toTopOf="@+id/background"
+        app:srcCompat="@drawable/plus_button" />
+
+    <TextView
+        android:id="@+id/quantity_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/roboto_thin"
+        android:text="Quantity"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/plus_button"
+        app:layout_constraintTop_toBottomOf="@+id/plus_button" />
+
+    <Button
+        android:id="@+id/edit_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:background="@null"
+        android:fontFamily="@font/roboto_thin"
+        android:text="Edit"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/quantity_text"
+        app:layout_constraintTop_toTopOf="@+id/food_description" />
+
+    <EditText
+        android:id="@+id/quantity_value"
+        style="@style/Widget.AppCompat.AutoCompleteTextView"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginBottom="2dp"
+        android:background="@null"
+        android:ems="10"
+        android:fontFamily="@font/roboto"
+        android:inputType="numberDecimal"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/minus_button"
+        app:layout_constraintEnd_toStartOf="@+id/plus_button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/minus_button" />
+
+</android.support.constraint.ConstraintLayout>
