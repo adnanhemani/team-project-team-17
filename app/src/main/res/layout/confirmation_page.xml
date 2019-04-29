@@ -366,7 +366,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:button="null"
+            android:button="@null"
             android:text="PM"
             android:textColor="@color/ourBlack"
             android:textSize="8sp" />

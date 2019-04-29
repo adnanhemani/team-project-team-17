@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-public class DonorAddActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class DonorAddActivity extends AppCompatActivity {
+    private ArrayList<FoodItem> mFoodList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
