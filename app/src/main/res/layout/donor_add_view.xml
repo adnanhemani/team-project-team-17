@@ -23,7 +23,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/main_toolbar"
+        layout="@layout/toolbar"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="0dp" />
 
@@ -309,7 +309,7 @@
 
     <include
         android:id="@+id/popup_confirmation_layout"
-        layout="@layout/confirmation_page"
+        layout="@layout/donor_add_confirm_popup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
