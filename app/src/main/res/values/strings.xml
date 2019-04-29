@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Pantreasy</string>
+    <string-array name="donate_options">
+        <item>PICKED UP</item>
+        <item>DROPPED OFF</item>
+    </string-array>
 </resources>
