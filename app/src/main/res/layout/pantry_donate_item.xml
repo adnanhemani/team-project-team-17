@@ -66,7 +66,7 @@
             android:textColor="#444444"
             app:layout_constraintStart_toEndOf="@+id/donor_image"
             app:layout_constraintTop_toBottomOf="@+id/donor_name" android:layout_marginLeft="16dp"
-            android:textSize="12sp" android:layout_marginTop="16dp"/>
+            android:textSize="14sp" android:layout_marginTop="32dp"/>
 
     <TextView
             android:id="@+id/phone"
@@ -78,6 +78,6 @@
             android:textColor="#444444"
             app:layout_constraintStart_toEndOf="@+id/donor_image"
             app:layout_constraintTop_toBottomOf="@+id/donor_name" android:layout_marginLeft="16dp"
-            android:textSize="12sp" android:textStyle="bold"/>
+            android:textSize="14sp" android:textStyle="bold" android:layout_marginTop="8dp"/>
 
 </android.support.constraint.ConstraintLayout>

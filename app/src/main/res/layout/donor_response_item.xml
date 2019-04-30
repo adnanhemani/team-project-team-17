@@ -55,8 +55,8 @@
             android:textColor="#444444"
             android:textSize="12sp"
             app:layout_constraintTop_toTopOf="@+id/pantry_name"
-            android:layout_marginEnd="44dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginRight="44dp"/>
+            app:layout_constraintEnd_toEndOf="@+id/imageView10"
+    />
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="23dp"
@@ -80,31 +80,32 @@
             android:orientation="vertical"
             android:layout_width="152dp"
             android:layout_height="50dp"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout5" android:layout_marginLeft="8dp"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout5"
+            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             app:layout_constraintTop_toTopOf="@+id/linearLayout5"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout5" android:id="@+id/linearLayout6">
         <TextView
                 android:text="(888)-888-8888"
                 android:layout_width="match_parent"
-                android:layout_height="17dp" android:id="@+id/textView8" android:textSize="10sp"/>
+                android:layout_height="17dp" android:id="@+id/textView8" android:textSize="12sp"/>
         <TextView
-                android:text="1453 University Ave, Berkeley, CA"
+                android:text="1453 University Ave"
                 android:layout_width="match_parent"
-                android:layout_height="17dp" android:id="@+id/textView9" android:textSize="10sp"/>
+                android:layout_height="17dp" android:id="@+id/textView9" android:textSize="12sp"/>
         <TextView
                 android:text="Tomato, Apple, Banana, ...."
                 android:layout_width="match_parent"
-                android:layout_height="17dp" android:id="@+id/textView14" android:textSize="10sp"/>
+                android:layout_height="17dp" android:id="@+id/textView14" android:textSize="12sp"/>
     </LinearLayout>
 
     <ImageView
-            android:layout_width="38dp"
-            android:layout_height="36dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:id="@+id/imageView10"
             android:background="@drawable/round_checked" app:layout_constraintStart_toEndOf="@+id/linearLayout6"
             app:layout_constraintTop_toTopOf="@+id/linearLayout6"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout6" android:layout_marginLeft="4dp"
-            android:layout_marginStart="4dp"/>
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout6" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"/>
 
 </android.support.constraint.ConstraintLayout>
