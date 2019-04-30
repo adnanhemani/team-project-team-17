@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:text="View Donation List"
             android:textColor="#464646"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:typeface="sans"
             app:fontFamily="Roboto"
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:text="View Donor Response"
             android:textColor="#464646"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:typeface="sans"
             app:fontFamily="Roboto"
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:text="View Donation History"
             android:textColor="#464646"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:typeface="sans"
             app:fontFamily="Roboto"
@@ -123,7 +123,7 @@
             app:layout_constraintStart_toStartOf="@+id/new_donation_button"
             app:layout_constraintTop_toTopOf="@+id/new_donation_button"
             app:layout_constraintVertical_bias="0.406"
-            app:srcCompat="@drawable/camera_icon"/>
+            app:srcCompat="@drawable/donation_list_icon"/>
 
     <ImageView
             android:id="@+id/bell_icon"

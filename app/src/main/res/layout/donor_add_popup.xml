@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Your donation will be"
+        android:text="I want my donation to be"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -84,7 +84,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
-        app:srcCompat="@drawable/rounded_box_outline" />
+        app:srcCompat="@drawable/rect_box_outline" />
 
     <ImageView
         android:id="@+id/imageView8"
@@ -94,7 +94,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView7"
         app:layout_constraintStart_toEndOf="@+id/editText4"
         app:layout_constraintTop_toTopOf="@+id/imageView7"
-        app:srcCompat="@drawable/rounded_box_outline" />
+        app:srcCompat="@drawable/rect_box_outline" />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -104,14 +104,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="@+id/imageView5"
-        app:srcCompat="@drawable/rounded_box_outline" />
+        app:srcCompat="@drawable/rect_box_outline" />
 
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="36dp"
         android:layout_height="50dp"
         app:layout_constraintStart_toStartOf="@+id/appCompatSpinner"
-        app:srcCompat="@drawable/rounded_box_outline"
+        app:srcCompat="@drawable/rect_box_outline"
         tools:layout_editor_absoluteY="177dp" />
 
     <ImageButton
@@ -382,51 +382,42 @@
         app:layout_constraintStart_toEndOf="@+id/editText8" />
 
     <Button
-        android:id="@+id/button5"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
-        android:background="#00FFFFFF"
-        android:fontFamily="@font/roboto"
-        android:text="Confirm"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4" />
+            android:id="@+id/button5"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="#00FFFFFF"
+            android:fontFamily="@font/roboto"
+            android:text="Confirm"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4" android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"/>
 
     <Button
-        android:id="@+id/button6"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="12dp"
-        android:background="#00FFFFFF"
-        android:fontFamily="@font/roboto"
-        android:text="Back"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="@+id/guideline3" />
+            android:id="@+id/button6"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="12dp"
+            android:background="#00FFFFFF"
+            android:fontFamily="@font/roboto"
+            android:text="Back"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="@+id/guideline3" app:layout_constraintHorizontal_bias="0.075"/>
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="40dp" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toEndOf="@+id/button6"
-        app:layout_constraintStart_toStartOf="@+id/button6"
-        app:srcCompat="@drawable/thin_down_arrow" />
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9"/>
 
 </android.support.constraint.ConstraintLayout>
