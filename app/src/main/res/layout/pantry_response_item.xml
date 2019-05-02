@@ -76,15 +76,15 @@
         <TextView
                 android:text="(888)-888-8888"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/textView8" android:textSize="12sp"/>
+                android:layout_height="wrap_content" android:id="@+id/phone_number" android:textSize="12sp"/>
         <TextView
                 android:text="1453 University Ave, Berkeley, CA"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/textView9" android:textSize="12sp"/>
+                android:layout_height="wrap_content" android:id="@+id/address_text" android:textSize="12sp"/>
         <TextView
                 android:text="12/04/2019 5:00PM"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/textView14" android:textSize="12sp"/>
+                android:layout_height="wrap_content" android:id="@+id/comment_text" android:textSize="12sp"/>
     </LinearLayout>
 
     <TextView
