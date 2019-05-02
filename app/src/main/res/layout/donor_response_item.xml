@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:id="@+id/food_item"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="wrap_content">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/response_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <ImageView
-            android:id="@+id/background"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/pantry_image"
-            app:srcCompat="@drawable/thin_long_shadowed_box" app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintVertical_bias="1.0"/>
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
+        <ImageView
             android:id="@+id/pantry_image"
             android:layout_width="120dp"
             android:layout_height="120dp"
@@ -27,85 +24,111 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/rect_box"
             android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/image_placeholder" />
+    </android.support.v7.widget.CardView>
 
-    <TextView
-            android:id="@+id/pantry_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/roboto"
-            android:text="Pantry Name"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/pantry_image"
-            app:layout_constraintTop_toTopOf="@+id/pantry_image"
-            android:layout_marginLeft="16dp" android:layout_marginStart="16dp"/>
+    <android.support.v7.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        app:layout_constraintTop_toTopOf="@+id/cardView2">
 
-    <TextView
-            android:id="@+id/distance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:text="1.5 mil"
-            android:textColor="#444444"
-            android:textSize="12sp"
-            app:layout_constraintTop_toTopOf="@+id/pantry_name"
-            app:layout_constraintEnd_toEndOf="@+id/imageView10"
-    />
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="23dp"
-            android:layout_height="51dp" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/pantry_name" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/background" app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/pantry_name"
-            android:id="@+id/linearLayout5">
-        <ImageView
-                android:layout_width="13dp"
-                android:layout_height="17dp" app:srcCompat="@drawable/phone" android:id="@+id/imageView3"/>
-        <ImageView
-                android:layout_width="12dp"
-                android:layout_height="16dp" app:srcCompat="@drawable/location" android:id="@+id/imageView6"/>
-        <ImageView
-                android:layout_width="13dp"
-                android:layout_height="18dp" app:srcCompat="@drawable/food" android:id="@+id/imageView9"/>
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="152dp"
-            android:layout_height="50dp"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout5"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout5"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout5" android:id="@+id/linearLayout6">
-        <TextView
-                android:text="(888)-888-8888"
-                android:layout_width="match_parent"
-                android:layout_height="17dp" android:id="@+id/textView8" android:textSize="12sp"/>
-        <TextView
-                android:text="1453 University Ave"
-                android:layout_width="match_parent"
-                android:layout_height="17dp" android:id="@+id/textView9" android:textSize="12sp"/>
-        <TextView
-                android:text="Tomato, Apple, Banana, ...."
-                android:layout_width="match_parent"
-                android:layout_height="17dp" android:id="@+id/textView14" android:textSize="12sp"/>
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="@drawable/round_checked"
+                tools:layout_editor_absoluteX="345dp"
+                tools:layout_editor_absoluteY="70dp" />
 
-    <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:id="@+id/imageView10"
-            android:background="@drawable/round_checked" app:layout_constraintStart_toEndOf="@+id/linearLayout6"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout6"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout6" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"/>
+            <TextView
+                android:id="@+id/pantry_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="Pantry Name"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="1.5 mil"
+                android:textColor="#444444"
+                android:textSize="12sp"
+                tools:layout_editor_absoluteX="308dp"
+                tools:layout_editor_absoluteY="19dp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="23dp"
+                android:layout_height="51dp"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="186dp"
+                tools:layout_editor_absoluteY="35dp">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="13dp"
+                    android:layout_height="17dp"
+                    app:srcCompat="@drawable/phone" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="12dp"
+                    android:layout_height="16dp"
+                    app:srcCompat="@drawable/location" />
+
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="13dp"
+                    android:layout_height="18dp"
+                    app:srcCompat="@drawable/food" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="152dp"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="8dp">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="17dp"
+                    android:text="(888)-888-8888"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="17dp"
+                    android:text="1453 University Ave"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="17dp"
+                    android:text="Tomato, Apple, Banana, ...."
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>
+

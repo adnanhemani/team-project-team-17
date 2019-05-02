@@ -334,6 +334,21 @@
         />
 
     <include
+        android:id="@+id/request_sent_popup"
+        layout="@layout/donor_request_sent_popup"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
+        android:elevation="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone">
+
+    </include>
+
+    <include
         android:id="@+id/popup_confirmation_layout"
         layout="@layout/donor_add_popup"
         android:layout_width="300dp"

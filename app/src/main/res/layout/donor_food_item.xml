@@ -101,15 +101,21 @@
             app:srcCompat="@drawable/image_placeholder" />
     </android.support.v7.widget.CardView>
 
-    <ImageButton
-        android:id="@+id/x_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/x_button_wrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@+id/food_image_wrapper"
         app:layout_constraintTop_toTopOf="@+id/food_image_wrapper"
-        app:srcCompat="@drawable/x_button"
-        android:elevation="11dp"/>
+        card_view:cardCornerRadius="80dp"
+        card_view:cardElevation="11dp">
+
+        <Button
+            android:id="@+id/x_button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="#00FFFFFF"
+            android:text="X" />
+    </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.pantreasy;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,14 +12,17 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.io.File;
@@ -41,8 +45,22 @@ public class DonorAddActivity extends AppCompatActivity {
     private ImageButton mCheckButton;
     private TextView mQuantityText;
     private RadioButton mPerishableButton;
+    private CardView mRequestSentPopup;
+    private Button mRequestSentConfirmButton;
 
     private ConstraintLayout mDonorAddPopup;
+    private Button mPopupBackButton;
+    private Button mPopupConfirmButton;
+    private EditText mMonthInput;
+    private EditText mDayInput;
+    private EditText mHourInput;
+    private EditText mMinuteInput;
+    private AppCompatSpinner mPickupOptionSpinner;
+    private RadioGroup mAmPmRadioGroup;
+    private RadioButton mAmButton;
+    private RadioButton mPmButton;
+
+
     final int TAKE_PICTURE = 115;
 
     @Override
@@ -58,14 +76,28 @@ public class DonorAddActivity extends AppCompatActivity {
         mFoodNameText = layout.findViewById(R.id.food_name_text);
         mExpirationDateText = layout.findViewById(R.id.expiration_date_text);
         mBlurredBackgroundImage = layout.findViewById(R.id.blurred_background);
-        mDonorAddPopupCard = layout.findViewById(R.id.popup_confirmation_layout);
-        mDonorAddPopup = mDonorAddPopupCard.findViewById(R.id.interior_layout);
         mHomeButton = layout.findViewById(R.id.home_button);
         mCameraButton = layout.findViewById(R.id.camera_button);
         mRecyclerView = layout.findViewById(R.id.food_item_list);
         mCheckButton = layout.findViewById(R.id.check_button);
         mQuantityText = layout.findViewById(R.id.food_quantity_text);
         mPerishableButton = layout.findViewById(R.id.perishable_toggle);
+        mRequestSentPopup = layout.findViewById(R.id.request_sent_popup);
+        mRequestSentConfirmButton = mRequestSentPopup.findViewById(R.id.ok_button);
+
+        mDonorAddPopupCard = layout.findViewById(R.id.popup_confirmation_layout);
+        mDonorAddPopup = mDonorAddPopupCard.findViewById(R.id.interior_layout);
+        mPopupBackButton = mDonorAddPopupCard.findViewById(R.id.back_button_popup);
+        mPopupConfirmButton = mDonorAddPopupCard.findViewById(R.id.confirm_button);
+        mMonthInput = mDonorAddPopupCard.findViewById(R.id.month_input);
+        mDayInput = mDonorAddPopupCard.findViewById(R.id.day_input);
+        mHourInput = mDonorAddPopupCard.findViewById(R.id.hour_input);
+        mMinuteInput = mDonorAddPopupCard.findViewById(R.id.minute_input);
+        mPickupOptionSpinner = mDonorAddPopupCard.findViewById(R.id.pickup_option_spinner);
+        mAmPmRadioGroup = mDonorAddPopupCard.findViewById(R.id.ampm_radio_group);
+        mAmButton = mDonorAddPopupCard.findViewById(R.id.am_button);
+        mPmButton = mDonorAddPopupCard.findViewById(R.id.pm_button);
+
 
         mDonorAddPopupCard.setVisibility(View.GONE);
         mBlurredBackgroundImage.setVisibility(View.GONE);
@@ -76,6 +108,10 @@ public class DonorAddActivity extends AppCompatActivity {
         setOnClickForHomeButton();
         setOnClickForCameraButton();
         setOnClickForCheckButton();
+        setOnClickForPopupRadioButtons();
+        setOnClickForPopupBackButton();
+        setOnClickForPopupConfirmButton();
+        setOnClickForRequestSentConfirmButton();
 
         mFoodImage.setClipToOutline(true);
 
@@ -142,6 +178,56 @@ public class DonorAddActivity extends AppCompatActivity {
                 mBlurredBackgroundImage.setImageBitmap(blurBm);
                 mBlurredBackgroundImage.setVisibility(View.VISIBLE);
                 mDonorAddPopupCard.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void setOnClickForPopupRadioButtons() {
+        mAmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAmButton.setTextColor(Color.BLACK);
+                mPmButton.setTextColor(Color.LTGRAY);
+            }
+        });
+
+        mPmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAmButton.setTextColor(Color.LTGRAY);
+                mPmButton.setTextColor(Color.BLACK);
+            }
+        });
+    }
+
+    private void setOnClickForPopupBackButton() {
+        mPopupBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDonorAddPopupCard.setVisibility(View.GONE);
+                mBlurredBackgroundImage.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void setOnClickForPopupConfirmButton() {
+        mPopupConfirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDonorAddPopupCard.setVisibility(View.GONE);
+                mRequestSentPopup.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void setOnClickForRequestSentConfirmButton() {
+        mRequestSentConfirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRequestSentPopup.setVisibility(View.GONE);
+                mBlurredBackgroundImage.setVisibility(View.GONE);
+                // TODO
+                // Must create a new donation and add it to the firebase database
             }
         });
     }

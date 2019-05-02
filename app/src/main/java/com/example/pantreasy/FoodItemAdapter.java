@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -61,7 +62,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter {
         public TextView mQuantityView;
         public TextView mPerishableView;
         public ImageView mFoodImage;
-        public ImageButton mDeleteButton;
+        public Button mDeleteButton;
 
         public FoodItemViewHolder(View itemView) {
             super(itemView);
