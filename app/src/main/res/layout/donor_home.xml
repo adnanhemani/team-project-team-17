@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/main_toolbar"
+        layout="@layout/toolbar"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="5dp" />
 
@@ -66,86 +66,86 @@
         app:layout_constraintTop_toBottomOf="@+id/view_responses_button" />
 
     <TextView
-        android:id="@+id/add_new_donation_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add New Donation"
-        android:textColor="#464646"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:typeface="sans"
-        app:fontFamily="Roboto"
-        app:layout_constraintBottom_toBottomOf="@+id/new_donation_button"
-        app:layout_constraintEnd_toEndOf="@+id/new_donation_button"
-        app:layout_constraintStart_toStartOf="@+id/new_donation_button"
-        app:layout_constraintTop_toTopOf="@+id/new_donation_button"
-        app:layout_constraintVertical_bias="0.817" />
+            android:id="@+id/donation_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add New Donation"
+            android:textColor="#464646"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:typeface="sans"
+            app:fontFamily="Roboto"
+            app:layout_constraintBottom_toBottomOf="@+id/new_donation_button"
+            app:layout_constraintEnd_toEndOf="@+id/new_donation_button"
+            app:layout_constraintStart_toStartOf="@+id/new_donation_button"
+            app:layout_constraintTop_toTopOf="@+id/new_donation_button"
+            app:layout_constraintVertical_bias="0.691" app:layout_constraintHorizontal_bias="0.548"/>
 
     <TextView
-        android:id="@+id/pantry_response_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pantry Response"
-        android:textColor="#464646"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:typeface="sans"
-        app:fontFamily="Roboto"
-        app:layout_constraintBottom_toBottomOf="@+id/view_responses_button"
-        app:layout_constraintEnd_toEndOf="@+id/view_responses_button"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/view_responses_button"
-        app:layout_constraintTop_toTopOf="@+id/view_responses_button"
-        app:layout_constraintVertical_bias="0.812" />
+            android:id="@+id/pantry_response_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Pantry Response"
+            android:textColor="#464646"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:typeface="sans"
+            app:fontFamily="Roboto"
+            app:layout_constraintBottom_toBottomOf="@+id/view_responses_button"
+            app:layout_constraintEnd_toEndOf="@+id/view_responses_button"
+            app:layout_constraintStart_toStartOf="@+id/view_responses_button"
+            app:layout_constraintTop_toTopOf="@+id/view_responses_button"
+            app:layout_constraintVertical_bias="0.691" app:layout_constraintHorizontal_bias="0.548"/>
 
     <TextView
-        android:id="@+id/donation_history_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Donation History"
-        android:textColor="#464646"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:typeface="sans"
-        app:fontFamily="Roboto"
-        app:layout_constraintBottom_toBottomOf="@+id/donation_history_button"
-        app:layout_constraintEnd_toEndOf="@+id/donation_history_button"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/donation_history_button"
-        app:layout_constraintTop_toTopOf="@+id/donation_history_button"
-        app:layout_constraintVertical_bias="0.812" />
+            android:id="@+id/donation_history_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Donation History"
+            android:textColor="#464646"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:typeface="sans"
+            app:fontFamily="Roboto"
+            app:layout_constraintBottom_toBottomOf="@+id/donation_history_button"
+            app:layout_constraintEnd_toEndOf="@+id/donation_history_button"
+            app:layout_constraintStart_toStartOf="@+id/donation_history_button"
+            app:layout_constraintTop_toTopOf="@+id/donation_history_button"
+            app:layout_constraintVertical_bias="0.691" app:layout_constraintHorizontal_bias="0.548"/>
 
     <ImageView
-        android:id="@+id/camera_icon"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        app:layout_constraintBottom_toBottomOf="@+id/new_donation_button"
-        app:layout_constraintEnd_toEndOf="@+id/new_donation_button"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="@+id/new_donation_button"
-        app:layout_constraintTop_toTopOf="@+id/new_donation_button"
-        app:layout_constraintVertical_bias="0.485"
-        app:srcCompat="@drawable/camera_icon" />
+            android:id="@+id/camera_icon"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:layout_constraintBottom_toBottomOf="@+id/new_donation_button"
+            app:layout_constraintEnd_toEndOf="@+id/new_donation_button"
+            app:layout_constraintHorizontal_bias="0.514"
+            app:layout_constraintStart_toStartOf="@+id/new_donation_button"
+            app:layout_constraintTop_toTopOf="@+id/new_donation_button"
+            app:layout_constraintVertical_bias="0.406"
+            app:srcCompat="@drawable/camera_icon"/>
 
     <ImageView
-        android:id="@+id/bell_icon"
-        android:layout_width="45dp"
-        android:layout_height="55dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view_responses_button"
-        app:layout_constraintEnd_toEndOf="@+id/view_responses_button"
-        app:layout_constraintStart_toStartOf="@+id/view_responses_button"
-        app:layout_constraintTop_toTopOf="@+id/view_responses_button"
-        app:srcCompat="@drawable/bell_icon" />
+            android:id="@+id/bell_icon"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_responses_button"
+            app:layout_constraintEnd_toEndOf="@+id/view_responses_button"
+            app:layout_constraintStart_toStartOf="@+id/view_responses_button"
+            app:layout_constraintTop_toTopOf="@+id/view_responses_button"
+            app:layout_constraintVertical_bias="0.406"
+            app:srcCompat="@drawable/bell_icon"/>
 
     <ImageView
         android:id="@+id/clock_icon"
-        android:layout_width="54dp"
-        android:layout_height="51dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/donation_history_button"
         app:layout_constraintEnd_toEndOf="@+id/donation_history_button"
         app:layout_constraintStart_toStartOf="@+id/donation_history_button"
         app:layout_constraintTop_toTopOf="@+id/donation_history_button"
+        app:layout_constraintVertical_bias="0.406"
         app:srcCompat="@drawable/clock_icon" />
 
     <TextView
@@ -157,7 +157,7 @@
         android:layout_marginTop="8dp"
         android:text="Pantreasy"
         android:textColor="@android:color/black"
-        android:textSize="30sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:fontFamily="@font/roboto"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"

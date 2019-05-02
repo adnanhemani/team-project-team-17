@@ -4,4 +4,105 @@
         <item>PICKED UP</item>
         <item>DROPPED OFF</item>
     </string-array>
+
+    <string name="donor_history">
+    ======= April 29, 2019 ======= \n
+    Berkeley Food Pantry \n
+    Apple, 10 lbs \n
+    Tomato, 20 lbs \n
+    Cabbages, 50 lbs \n
+    Carrots, 20 lbs \n
+        \n
+    ======= May 8, 2019 =======\n
+    Berkeley Food Pantry \n
+    Apple, 10 lbs\n
+    Tomato, 20 lbs\n
+    Cabbages, 50 lbs\n
+    Carrots, 20 lbs\n
+        \n
+    ======= May 10, 2019 =======\n
+    Berkeley Food Pantry\n
+    Apple, 10 lbs\n
+    Tomato, 20 lbs\n
+    Cabbages, 50 lbs\n
+    Carrots, 20 lbs\n
+    </string>
+
+    <string name="donor_reqquest_sent">
+        Your donation request has been\n
+        sent to the pantries and you will be\n
+        notified when the pantries accept\n
+        your request.
+    </string>
+
+
+    <string name="donor_confirmed">
+    You donation will be picked\n
+    up at 3:30pm 12th/April by\n
+    \n
+    Social Food Pantry\n
+    2150 College Ave, Berkeley, CA\n
+    415-239-34309\n
+    \n
+    Thanks for your donation!\n
+    </string>
+
+    <string name="pantry_request">
+    Your request has been sent to the\n
+        donor. You will be notified when\n
+        the donor sends confirm response.
+    </string>
+
+    <string name="pantry_history">
+        ======== April 29, 2019 ======== \n
+        Berkeley Social Club\n
+        Apple, 10 lbs\n
+        Tomato, 20 lbs\n
+        \n
+        Catalyst Cafe\n
+        Cabbages, 50 lbs\n
+        Carrots, 20 lbs\n
+        \n
+        ======== May 8, 2019 ========\n
+        Berkeley Social Club\n
+        Apple, 10 lbs\n
+        Tomato, 20 lbs\n
+        \n
+        Catalyst Cafe\n
+        Cabbages, 50 lbs\n
+        Carrots, 20 lbs\n
+        \n
+
+        ======== May 10, 2019 ========\n
+        Berkeley Social Club\n
+        Apple, 10 lbs\n
+        Tomato, 20 lbs\n
+        \n
+        Catalyst Cafe\n
+        Cabbages, 50 lbs\n
+        Carrots, 20 lbs\n
+        \n
+    </string>
+
+    <string name="item1">
+    Apple\n
+    Quantity: 10 lbs\n
+    Exp Time: 12/04/2019\n
+    Perishable: Yes\n
+    </string>
+
+    <string name="item2">
+    Slice Beef\n
+    Quantity: 10 packs\n
+    Exp Time: 12/04/2019\n
+    Perishable: No\n
+    </string>
+
+    <string name="item3">
+    Tomato\n
+    Quantity: 20 lbs\n
+    Exp Time: 12/04/2019\n
+    Perishable: Yes\n
+    </string>
+
 </resources>
