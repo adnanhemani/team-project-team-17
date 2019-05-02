@@ -1,19 +1,21 @@
 package com.example.pantreasy;
 
+import android.graphics.Bitmap;
+
 import java.util.Date;
 
 public class FoodItem {
+    public Bitmap imageBitmap;
     public String name;
-    public Date expirationDate;
-    public String unitOfMeasurement;
+    public String expirationDate;
     public boolean perishable;
-    float quantity;
+    public String quantity;
 
-    public FoodItem(String name, Date expDate, String unitOfMeasurement, float quanitity, boolean perishable) {
+    public FoodItem(String name, Bitmap bm, String expDate, String quanitity, boolean perishable) {
         this.name = name;
         this.expirationDate = expDate;
-        this.unitOfMeasurement= unitOfMeasurement;
         this.quantity = quanitity;
         this.perishable = perishable;
+        this.imageBitmap = bm;
     }
 }

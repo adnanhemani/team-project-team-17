@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/donor_add"
+    android:id="@+id/donor_add_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -27,57 +27,82 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="0dp" />
 
+    <Button
+        android:id="@+id/dont_use_me_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_weight="1"
+        android:background="#808080"
+        android:text="Expiration Date"
+        app:layout_constraintEnd_toEndOf="@+id/expiration_date_text"
+        app:layout_constraintStart_toStartOf="@+id/calendar_icon"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_icon" />
+
+    <Button
+        android:id="@+id/dont_use_me_line2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_weight="1"
+        android:background="#808080"
+        android:text=" "
+        app:layout_constraintEnd_toEndOf="@+id/food_quantity_text"
+        app:layout_constraintStart_toStartOf="@+id/basket_icon"
+        app:layout_constraintTop_toBottomOf="@+id/basket_icon" />
+
+    <Button
+        android:id="@+id/dont_use_me_line3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_weight="1"
+        android:background="#808080"
+        android:text=" "
+        app:layout_constraintEnd_toEndOf="@+id/food_name_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/pencil_icon"
+        app:layout_constraintTop_toBottomOf="@+id/pencil_icon" />
+
     <TextView
-            android:id="@+id/title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="8dp"
-            android:text="ADD NEW"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:fontFamily="@font/roboto_thin"
-            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-            app:layout_constraintStart_toEndOf="@+id/home_button"
-            app:layout_constraintTop_toTopOf="@+id/toolbar"
-            app:layout_constraintVertical_bias="0.375"/>
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:elevation="10dp"
+        android:text="ADD NEW"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:fontFamily="@font/roboto"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toEndOf="@+id/home_button"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.375" />
 
     <ImageButton
-            android:id="@+id/home_button"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:background="#00FFFFFF"
-            android:scaleType="fitCenter"
-            android:tint="#000000"
-            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-            app:layout_constraintStart_toStartOf="@+id/toolbar"
-            app:layout_constraintTop_toTopOf="@+id/toolbar"
-            app:srcCompat="@drawable/home" app:layout_constraintVertical_bias="0.523"/>
-
-    <ImageButton
-            android:id="@+id/check_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:background="#00FFFFFF"
-            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-            app:layout_constraintEnd_toEndOf="@+id/toolbar"
-            app:layout_constraintTop_toTopOf="@+id/toolbar"
-            app:layout_constraintVertical_bias="0.687"
-            app:srcCompat="@drawable/check"/>
+        android:id="@+id/home_button"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        android:tint="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.523"
+        app:srcCompat="@drawable/home_button"
+        android:elevation="10dp"/>
 
     <ImageButton
         android:id="@+id/main_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/rect_box"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srcCompat="@drawable/image_placeholder" />
@@ -89,11 +114,11 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="300dp" />
 
-    <ImageView
-        android:id="@+id/imageButton5"
+    <ImageButton
+        android:id="@+id/camera_button"
         android:layout_width="39dp"
         android:layout_height="32dp"
-        android:background="#00FFFFFF"
+        android:background="#30FFFFFF"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/main_image"
         app:layout_constraintEnd_toEndOf="@+id/main_image"
@@ -145,10 +170,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/pencil_icon"
         app:layout_constraintTop_toBottomOf="@+id/dont_use_me_line3"
-        tools:text="Expiration Date" />
+        android:text="Expiration Date" />
 
     <EditText
-        android:id="@+id/item_weight_text"
+        android:id="@+id/food_quantity_text"
         style="@android:style/Widget.EditText"
         android:layout_width="0dp"
         android:layout_height="20dp"
@@ -198,43 +223,6 @@
         app:layout_constraintTop_toBottomOf="@+id/dont_use_me_line"
         app:srcCompat="@drawable/basket_icon" />
 
-    <Button
-        android:id="@+id/dont_use_me_line"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="2dp"
-        android:layout_weight="1"
-        android:background="#808080"
-        android:text=" "
-        app:layout_constraintEnd_toEndOf="@+id/expiration_date_text"
-        app:layout_constraintStart_toStartOf="@+id/calendar_icon"
-        app:layout_constraintTop_toBottomOf="@+id/calendar_icon" />
-
-    <Button
-        android:id="@+id/dont_use_me_line2"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="2dp"
-        android:layout_weight="1"
-        android:background="#808080"
-        android:text=" "
-        app:layout_constraintEnd_toEndOf="@+id/item_weight_text"
-        app:layout_constraintStart_toStartOf="@+id/basket_icon"
-        app:layout_constraintTop_toBottomOf="@+id/basket_icon" />
-
-    <Button
-        android:id="@+id/dont_use_me_line3"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="2dp"
-        android:layout_weight="1"
-        android:background="#808080"
-        android:text=" "
-        app:layout_constraintEnd_toEndOf="@+id/food_name_text"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/pencil_icon"
-        app:layout_constraintTop_toBottomOf="@+id/pencil_icon" />
-
     <RadioGroup
         android:id="@+id/perishable_buttons"
         android:layout_width="wrap_content"
@@ -256,7 +244,10 @@
             android:checked="true"
             android:fontFamily="@font/roboto"
             android:text="Perishable"
-            android:textColor="#404040" />
+            android:textColor="#404040"
+            android:textColorHighlight="@color/ourBlack"
+            android:textColorLink="@color/ourBlack"
+            android:textCursorDrawable="@color/ourBlack" />
 
         <RadioButton
             android:id="@+id/nonperishable_toggle"
@@ -265,39 +256,57 @@
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
             android:text="Non-Perishable"
-            android:textColor="#404040" />
+            android:textColor="#404040"
+            android:textColorHighlight="@color/ourBlack"
+            android:textColorLink="@color/ourBlack"
+            android:textCursorDrawable="@color/ourBlack" />
     </RadioGroup>
 
-    <Button
-        android:id="@+id/clear_list_button"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="160dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
+    <android.support.v7.widget.CardView
+        android:id="@+id/clear_list_button_wrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/small_shadowed_button"
-        android:fontFamily="@font/roboto"
-        android:text="CLEAR LIST"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="@+id/main_image"
-        app:layout_constraintTop_toBottomOf="@+id/main_image"
-        app:layout_constraintVertical_bias="0.526" />
+        app:layout_constraintBottom_toTopOf="@+id/food_item_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="20dp"
+        >
 
-    <Button
-        android:id="@+id/add_to_list_button"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="160dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
+        <Button
+            android:id="@+id/clear_list_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="#00FFFFFF"
+            android:fontFamily="@font/roboto"
+            android:text="CLEAR LIST" />
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/small_shadowed_button_orange"
-        android:fontFamily="@font/roboto"
-        android:text="ADD TO LIST"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_image"
-        app:layout_constraintVertical_bias="0.526" />
+        app:layout_constraintTop_toTopOf="@+id/clear_list_button_wrapper"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="20dp">
+
+        <Button
+            android:id="@+id/add_to_list_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/roboto"
+            android:text="ADD TO LIST" />
+    </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/food_item_list"
@@ -305,25 +314,9 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <include
-        android:id="@+id/popup_confirmation_layout"
-        layout="@layout/donor_add_popup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone">
-
-    </include>
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <ImageView
         android:id="@+id/blurred_background"
@@ -336,6 +329,32 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.5"
         tools:srcCompat="@tools:sample/avatars"
-        tools:visibility="gone" />
+        tools:visibility="gone"
+        android:elevation="11dp"
+        />
+
+    <include
+        android:id="@+id/popup_confirmation_layout"
+        layout="@layout/donor_add_popup"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
+        android:elevation="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone">
+
+    </include>
+
+    <ImageButton
+        android:id="@+id/check_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/check_button" />
 
 </android.support.constraint.ConstraintLayout>

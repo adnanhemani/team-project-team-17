@@ -9,7 +9,7 @@ public class PantryViewResponsesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pantry_view_response);
+        setContentView(R.layout.pantry_response_list_view);
 
     }
 }

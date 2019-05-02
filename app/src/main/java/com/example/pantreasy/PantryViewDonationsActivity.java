@@ -9,7 +9,7 @@ public class PantryViewDonationsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pantry_view);
+        setContentView(R.layout.pantry_donate_list_view);
 
     }
 }

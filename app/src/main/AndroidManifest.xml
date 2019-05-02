@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".DonorHomeActivity"></activity>
         <activity android:name=".PantryHomeActivity"/>
-        <activity android:name=".DonorAddActivity"/>
+        <activity android:name=".DonorAddActivity" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".DonorsPantryResponsesActivities"/>
         <activity android:name=".DonorHistoryActivity"/>
         <activity android:name=".PantryViewResponsesActivity"/>

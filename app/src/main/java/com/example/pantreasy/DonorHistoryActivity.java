@@ -9,7 +9,7 @@ public class DonorHistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.donation_history);
+        setContentView(R.layout.donor_history_view);
 
     }
 }

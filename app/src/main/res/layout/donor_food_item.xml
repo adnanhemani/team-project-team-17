@@ -6,69 +6,100 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-            android:id="@+id/background"
-            android:layout_width="397dp"
-            android:layout_height="111dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/food_image"
-            app:srcCompat="@drawable/thin_long_shadowed_box" app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.0"/>
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/food_image_wrapper"
+        app:layout_constraintTop_toTopOf="@+id/food_image_wrapper"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="5dp"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        card_view:layout_constraintStart_toStartOf="@+id/food_image_wrapper">
 
-    <ImageView
-        android:id="@+id/food_image"
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/perishable_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/roboto"
+                android:text="Perishable"
+                android:textColor="#444444"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                card_view:layout_constraintStart_toStartOf="@+id/expiration_text"
+                card_view:layout_constraintTop_toBottomOf="@+id/expiration_text" />
+
+            <TextView
+                android:id="@+id/expiration_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/roboto"
+                android:text="Expire on xx/xx/xxxx"
+                android:textColor="#444444"
+                card_view:layout_constraintStart_toStartOf="@+id/food_name"
+                card_view:layout_constraintTop_toBottomOf="@+id/food_name" />
+
+            <TextView
+                android:id="@+id/food_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="128dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/roboto"
+                android:text="Food Name"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/quantity_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="x units"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintTop_toTopOf="@+id/food_name" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/food_image_wrapper"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/rect_box"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/image_placeholder" />
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="10dp"
+        card_view:layout_constraintBottom_toBottomOf="parent">
 
-    <TextView
-            android:id="@+id/expiration_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:fontFamily="@font/roboto"
-            android:text="Perishable"
-            android:textColor="#444444"
-            app:layout_constraintStart_toEndOf="@+id/food_image"
-            app:layout_constraintTop_toBottomOf="@+id/food_name" android:layout_marginTop="24dp"
-            android:layout_marginLeft="24dp" android:textStyle="italic" android:textSize="12sp"/>
-
-    <TextView
-            android:id="@+id/expiration_date2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:fontFamily="@font/roboto"
-            android:text="Expire on xx/xx/xxxx"
-            android:textColor="#444444"
-            app:layout_constraintStart_toEndOf="@+id/food_image"
-            app:layout_constraintTop_toBottomOf="@+id/food_name"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="4dp"/>
-    <TextView
-        android:id="@+id/food_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/roboto"
-        android:text="Food Name"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/food_image"
-        app:layout_constraintTop_toTopOf="@+id/food_image" />
+        <ImageView
+            android:id="@+id/food_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/rect_box"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/image_placeholder" />
+    </android.support.v7.widget.CardView>
 
     <ImageButton
         android:id="@+id/x_button"
@@ -76,19 +107,9 @@
         android:layout_height="30dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="@+id/food_image"
-        app:layout_constraintTop_toTopOf="@+id/food_image"
-        app:srcCompat="@drawable/x_button" />
-
-    <TextView
-            android:id="@+id/quantity_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_thin"
-            android:text="x units"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            app:layout_constraintTop_toTopOf="@+id/food_name" android:layout_marginEnd="64dp"
-            app:layout_constraintEnd_toEndOf="@+id/background" android:layout_marginRight="64dp"/>
+        app:layout_constraintStart_toStartOf="@+id/food_image_wrapper"
+        app:layout_constraintTop_toTopOf="@+id/food_image_wrapper"
+        app:srcCompat="@drawable/x_button"
+        android:elevation="11dp"/>
 
 </android.support.constraint.ConstraintLayout>
