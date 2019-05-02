@@ -42,6 +42,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="136dp" />
+
             <ImageView
                 android:id="@+id/imageView10"
                 android:layout_width="34dp"
@@ -54,10 +61,14 @@
                 android:id="@+id/pantry_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto"
                 android:text="Pantry Name"
                 android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/guideline7"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/distance"
@@ -75,8 +86,8 @@
                 android:layout_width="23dp"
                 android:layout_height="51dp"
                 android:orientation="vertical"
-                tools:layout_editor_absoluteX="186dp"
-                tools:layout_editor_absoluteY="35dp">
+                app:layout_constraintStart_toEndOf="@+id/linearLayout6"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout6">
 
                 <ImageView
                     android:id="@+id/imageView3"
@@ -102,8 +113,10 @@
                 android:id="@+id/linearLayout6"
                 android:layout_width="152dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical"
-                tools:layout_editor_absoluteX="8dp">
+                app:layout_constraintStart_toStartOf="@+id/pantry_name"
+                app:layout_constraintTop_toBottomOf="@+id/pantry_name">
 
                 <TextView
                     android:id="@+id/textView8"
@@ -126,6 +139,7 @@
                     android:text="Tomato, Apple, Banana, ...."
                     android:textSize="12sp" />
             </LinearLayout>
+
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
