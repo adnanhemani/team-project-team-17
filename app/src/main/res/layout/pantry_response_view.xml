@@ -29,7 +29,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintStart_toEndOf="@+id/home_button"
             app:layout_constraintTop_toTopOf="@+id/toolbar"
-            app:layout_constraintVertical_bias="0.375"/>
+            app:layout_constraintVertical_bias="0.375"
+            android:elevation="10dp"/>
 
     <ImageButton
             android:id="@+id/home_button"
@@ -43,7 +44,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintStart_toStartOf="@+id/toolbar"
             app:layout_constraintTop_toTopOf="@+id/toolbar"
-            app:srcCompat="@drawable/home" app:layout_constraintVertical_bias="0.523"/>
+            app:srcCompat="@drawable/home" app:layout_constraintVertical_bias="0.523"
+            android:elevation="10dp"/>
 
     <TextView
             android:text="Donor Name"
@@ -169,7 +171,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
             app:layout_constraintEnd_toEndOf="@+id/scrollView2"
             app:layout_constraintStart_toStartOf="@+id/scrollView2"
-            android:id="@+id/linearLayout3">
+            android:id="@+id/username_layout">
         <ImageView
                 android:layout_width="120dp"
                 android:layout_height="match_parent" app:srcCompat="@drawable/tomato" android:id="@+id/iamge3"
