@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +17,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.ValueEventRegistration;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PantryViewDonation extends AppCompatActivity {
+    private FirebaseManager mFirebaseManager;
     private ConstraintLayout mLayout;
     private TextView mDonorName;
     private RecyclerView mRecyclerView;
@@ -36,10 +43,14 @@ public class PantryViewDonation extends AppCompatActivity {
     private Button mViewMoreDonations;
     private Button mOkButton;
 
+    private ValueEventListener mValueEventListener;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantry_donate_view);
+
+        mFirebaseManager = new FirebaseManager(this);
 
         mLayout = findViewById(R.id.donor_response_view);
         mDonorName = mLayout.findViewById(R.id.donor_name_pantry_view_donation);
@@ -57,23 +68,38 @@ public class PantryViewDonation extends AppCompatActivity {
 
         mBlurredBackground.setVisibility(View.GONE);
         mPopupMessage.setVisibility(View.GONE);
-
+        setValueEventListener();
         initializeDonationItem();
-        //mDonorName.setText(mDonationItem.profile.name);
-        if (mDonationItem.pickup)
-            mPickupOrDropoffText.setText("Pick-Up");
-        else
-            mPickupOrDropoffText.setText("Drop-Off");
-        mDateTime.setText(mDonationItem.time);
-        //mAddress.setText(mDonationItem.profile.address);
+    }
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        setOnClickForHomeButton();
-        setOnClickForConfirmButton();
-        setOnClickForViewMoreDonationsButton();
-        setOnClickForOkButton();
+    private void setValueEventListener() {
+        mValueEventListener = new ValueEventListener() {
 
-        setAdapterAndUpdateData();
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mDonationItem = mFirebaseManager.getDonationFromDataSnapshot(dataSnapshot);
+                mDonorName.setText(mDonationItem.profileName);
+                if (mDonationItem.pickup)
+                    mPickupOrDropoffText.setText("Pick-Up");
+                else
+                    mPickupOrDropoffText.setText("Drop-Off");
+                mDateTime.setText(mDonationItem.time);
+                //mAddress.setText(mDonationItem.profile.address);
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(PantryViewDonation.this));
+                setOnClickForHomeButton();
+                setOnClickForConfirmButton();
+                setOnClickForViewMoreDonationsButton();
+                setOnClickForOkButton();
+
+                setAdapterAndUpdateData();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
     }
 
     private void setOnClickForOkButton() {
@@ -124,19 +150,12 @@ public class PantryViewDonation extends AppCompatActivity {
     }
 
     private void initializeDonationItem() {
-        List<FoodItem> foodItems = new ArrayList<>();
-        Bitmap icon1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.pantry_a_profile_pic);
-//        foodItems.add(new FoodItem("Eggs", icon1, "2/2/22", "5", true));
-//        foodItems.add(new FoodItem("Butter", icon1, "2/2/22", "5", true));
-//        foodItems.add(new FoodItem("Cheese", icon1, "2/2/22", "5", true));
-//        foodItems.add(new FoodItem("Noodles", icon1, "2/2/22", "5", true));
-//        foodItems.add(new FoodItem("Beef", icon1, "2/2/22", "5", true));
-
-
-        Bitmap icon2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.donor_a_profile_pic);
-        Profile p1 = new Profile("PLACEHOLDER", "Donor A", "555-420-1337", "1777 Hearst Ave", "We are donor A", null, null);
-
-        //mDonationItem = new DonationItem(p1, foodItems, "No comments", "4:00pm", true);
+        Intent goToSecondActivityIntent = getIntent();
+        Bundle intentExtras = goToSecondActivityIntent.getExtras();
+        if(intentExtras!=null) {
+            String donation_UUID = (String) intentExtras.get("donation_UUID");
+            mFirebaseManager.getDonation(donation_UUID, mValueEventListener);
+        }
     }
 
     private void setAdapterAndUpdateData() {

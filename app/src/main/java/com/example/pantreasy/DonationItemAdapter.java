@@ -11,13 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DonationItemAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
-    private ArrayList<DonationItem> mDonations;
+    private List<DonationItem> mDonations;
 
-    public DonationItemAdapter(Context context, ArrayList<DonationItem> donationItems) {
+    public DonationItemAdapter(Context context, List<DonationItem> donationItems) {
         mContext = context;
         mDonations = donationItems;
     }
@@ -66,7 +67,7 @@ public class DonationItemAdapter extends RecyclerView.Adapter {
             mDistance = mDonationItemLayout.findViewById(R.id.distance_text);
         }
 
-        void bind(DonationItem donationItem) {
+        void bind(final DonationItem donationItem) {
 
             //mDonorName.setText(donationItem.profile.name);
             //mDonorImage.setImageBitmap(donationItem.profile.imageBitmap);
@@ -78,6 +79,7 @@ public class DonationItemAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     Intent goToSecondActivityIntent = new Intent(mContext, PantryViewDonation.class);
+                    goToSecondActivityIntent.putExtra("donation_UUID", donationItem.UUID);
                     mContext.startActivity(goToSecondActivityIntent);
                 }
             });

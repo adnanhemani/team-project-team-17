@@ -1,12 +1,14 @@
 package com.example.pantreasy;
 
 import android.graphics.Bitmap;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -15,6 +17,10 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class FirebaseManager {
     private FirebaseDatabase database;
@@ -68,6 +74,55 @@ public class FirebaseManager {
 
     public void getResponses(String donationUUID, ValueEventListener valueEventListener) {
         mDonationItems.child(donationUUID).child("responseItems");
+    }
+
+    public void getDonations(ValueEventListener valueEventListener) {
+        mDonationItems.addListenerForSingleValueEvent(valueEventListener);
+    }
+
+    public DonationItem getDonationFromDataSnapshot(DataSnapshot dataSnapshot) {
+        HashMap<String, Object> h = (HashMap<String, Object>) dataSnapshot.getValue();
+        String UUID = (String) h.get("UUID");
+        int confirmed = ((Long)h.get("confirmed")).intValue();
+        ArrayList<HashMap> foodItemData = (ArrayList<HashMap>) h.get("foodItems");
+        List foodItems = foodItemsFromArrayList (foodItemData);
+        boolean pickup = (boolean) h.get("pickup");
+        String profileName = (String) h.get("profileName");
+        String time = (String) h.get("time");
+        // Add Response Items
+        return new DonationItem(profileName, foodItems, null, time, pickup, UUID);
+    }
+
+    public List<DonationItem> donationsFromSnapshot(DataSnapshot dataSnapshot) {
+        List<DonationItem> result = new ArrayList<DonationItem>();
+        HashMap data = (HashMap)dataSnapshot.getValue();
+        for (Object s : data.keySet()) {
+            HashMap<String, Object> donation = (HashMap<String, Object>) data.get(s);
+            String UUID = (String) donation.get("UUID");
+            int confirmed = ((Long)donation.get("confirmed")).intValue();
+            ArrayList<HashMap> foodItemData = (ArrayList<HashMap>) donation.get("foodItems");
+            List foodItems = foodItemsFromArrayList (foodItemData);
+            boolean pickup = (boolean) donation.get("pickup");
+            String profileName = (String) donation.get("profileName");
+            String time = (String) donation.get("time");
+            // Add Response Items
+            result.add(new DonationItem(profileName, foodItems, null, time, pickup, UUID));
+        }
+        return result;
+    }
+
+    private List<FoodItem> foodItemsFromArrayList (ArrayList<HashMap> foodItemData) {
+        List<FoodItem> foodItems = new ArrayList<FoodItem>();
+        for (int i = 0; i < foodItemData.size(); i++) {
+            HashMap foodItem = foodItemData.get(i);
+            boolean perishable = (boolean)foodItem.get("perishable");
+            String imageName = (String)foodItem.get("imageName");
+            String quantity = (String)foodItem.get("quantity");
+            String name = (String)foodItem.get("name");
+            String expiration = (String)foodItem.get("expirationDate");
+            foodItems.add(new FoodItem(name, imageName, expiration, quantity, perishable));
+        }
+        return foodItems;
     }
 
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,20 +13,30 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class PantryViewDonationsActivity extends AppCompatActivity {
 
-    private ArrayList<DonationItem> mDonations;
+    private List<DonationItem> mDonations;
     private RecyclerView mRecyclerView;
     private ConstraintLayout mLayout;
     private DonationItemAdapter mAdapter;
     private ImageButton mHomeButton;
+    private FirebaseManager mFirebaseManager;
+    private ValueEventListener mDonationEventListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantry_donate_list_view);
+
+        mFirebaseManager = new FirebaseManager(this);
 
         mDonations = new ArrayList<DonationItem>();
 
@@ -35,8 +46,24 @@ public class PantryViewDonationsActivity extends AppCompatActivity {
         mHomeButton = mLayout.findViewById(R.id.home_button);
 
         setOnClickForHomeButton();
+        setDonationEventListener();
 
-        generateDonationItems();
+        getDonationItems();
+    }
+
+    private void setDonationEventListener() {
+        mDonationEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mDonations = mFirebaseManager.donationsFromSnapshot(dataSnapshot);
+                setAdapterAndUpdateData();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
     }
 
     private void setOnClickForHomeButton() {
@@ -54,6 +81,10 @@ public class PantryViewDonationsActivity extends AppCompatActivity {
         // this will "refresh" our recycler view
         mAdapter = new DonationItemAdapter(this, mDonations);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    public void getDonationItems() {
+        mFirebaseManager.getDonations(mDonationEventListener);
     }
 
     public void generateDonationItems() {
