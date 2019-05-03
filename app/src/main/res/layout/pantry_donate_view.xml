@@ -29,7 +29,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintStart_toEndOf="@+id/home_button"
             app:layout_constraintTop_toTopOf="@+id/toolbar"
-            app:layout_constraintVertical_bias="0.375"/>
+            app:layout_constraintVertical_bias="0.375"
+            android:elevation="10dp"/>
 
     <ImageButton
             android:id="@+id/home_button"
@@ -43,7 +44,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintStart_toStartOf="@+id/toolbar"
             app:layout_constraintTop_toTopOf="@+id/toolbar"
-            app:srcCompat="@drawable/home" app:layout_constraintVertical_bias="0.523"/>
+            app:srcCompat="@drawable/home" app:layout_constraintVertical_bias="0.523"
+            android:elevation="10dp"/>
 
     <TextView
             android:text="Donor Name"
@@ -171,9 +173,15 @@
             android:layout_width="346dp"
             android:layout_marginTop="8dp"
             android:layout_height="86dp" app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+<<<<<<< HEAD
             app:layout_constraintEnd_toEndOf="@+id/recycler_view"
             app:layout_constraintStart_toStartOf="@+id/recycler_view"
             android:id="@+id/linearLayout2">
+=======
+            app:layout_constraintEnd_toEndOf="@+id/scrollView2"
+            app:layout_constraintStart_toStartOf="@+id/scrollView2"
+            android:id="@+id/address_layout">
+>>>>>>> 117416e9709b701c13c47222d0b27363b3275dfa
 
         <ImageView
                 android:layout_width="120dp"
@@ -198,10 +206,17 @@
             android:orientation="horizontal"
             android:layout_width="346dp"
             android:layout_height="86dp"
+<<<<<<< HEAD
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="@+id/recycler_view"
             app:layout_constraintStart_toStartOf="@+id/recycler_view"
             android:id="@+id/linearLayout3">
+=======
+            app:layout_constraintTop_toBottomOf="@+id/address_layout"
+            app:layout_constraintEnd_toEndOf="@+id/scrollView2"
+            app:layout_constraintStart_toStartOf="@+id/scrollView2"
+            android:id="@+id/username_layout">
+>>>>>>> 117416e9709b701c13c47222d0b27363b3275dfa
         <ImageView
                 android:layout_width="120dp"
                 android:layout_height="match_parent" app:srcCompat="@drawable/tomato" android:id="@+id/iamge3"
@@ -225,7 +240,7 @@
             android:text="Request Donation"
             android:layout_width="244dp"
             android:layout_height="37dp"
-            android:id="@+id/button"
+            android:id="@+id/logout"
             android:background="@drawable/yellow_button"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout8" android:layout_marginBottom="8dp"

@@ -146,8 +146,8 @@ public class DonorAddActivity extends AppCompatActivity {
         mHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addNewDonation = new Intent(DonorAddActivity.this, DonorHomeActivity.class);
-                DonorAddActivity.this.startActivity(addNewDonation);
+                Intent goHome = new Intent(DonorAddActivity.this, DonorHomeActivity.class);
+                DonorAddActivity.this.startActivity((goHome));
             }
         });
     }

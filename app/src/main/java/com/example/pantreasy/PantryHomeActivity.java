@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class PantryHomeActivity extends AppCompatActivity {
 
@@ -14,9 +15,15 @@ public class PantryHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantry_home);
 
+<<<<<<< HEAD
         Button viewResponses = findViewById(R.id.view_responses_button);
         Button donationHistory = findViewById(R.id.donation_history_button);
         Button viewDonations = findViewById(R.id.view_donations_button);
+=======
+        Button viewDonations = findViewById(R.id.view_responses_button);
+        Button donorResponses = findViewById(R.id.donation_history_button);
+        ImageButton profileIcon = findViewById(R.id.profile_icon);
+>>>>>>> 117416e9709b701c13c47222d0b27363b3275dfa
 
         viewResponses.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +45,14 @@ public class PantryHomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent goToDonationResponses = new Intent(PantryHomeActivity.this, PantryViewResponsesActivity.class);
                 PantryHomeActivity.this.startActivity(goToDonationResponses);
+            }
+        });
+
+        profileIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToProfile = new Intent(PantryHomeActivity.this, Profile.class);
+                PantryHomeActivity.this.startActivity(goToProfile);
             }
         });
     }
