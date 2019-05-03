@@ -14,7 +14,7 @@ import android.widget.ImageView;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private ImageButton home;
+    private ImageButton mHomeButton;
     private ImageButton mCameraButton;
     private Button mLogoutButton;
     private ImageView mProfilePicture;
@@ -29,14 +29,14 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
 
-        home = findViewById(R.id.home_button);
+        mHomeButton = findViewById(R.id.home_button);
         mCameraButton = findViewById(R.id.camera_button);
         mLogoutButton = findViewById(R.id.logout);
         mProfilePicture = findViewById(R.id.profile_picture);
         mEditUsername = findViewById(R.id.edit_username);
         mEditInfo = findViewById(R.id.edit_info);
 
-        home.setOnClickListener(new View.OnClickListener() {
+        mHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { Intent back = new Intent(ProfileActivity.this, DonorHomeActivity.class);
                 ProfileActivity.this.startActivity(back);
