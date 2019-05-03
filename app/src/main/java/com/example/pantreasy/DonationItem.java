@@ -7,6 +7,9 @@ public class DonationItem {
     public ArrayList<FoodItem> foodItems;
     public String comment;
 
-//    public DonationItem(Profile profile, ArrayList<FoodItem> foodItems, String comment)
-
+    public DonationItem(Profile profile, ArrayList<FoodItem> foodItems, String comment) {
+        this.profile = profile;
+        this.foodItems = foodItems;
+        this.comment = comment;
+    }
 }
