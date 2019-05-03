@@ -86,8 +86,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter {
         }
 
         void bind(FoodItem foodItem) {
-            mFoodImage.setImageBitmap(foodItem.imageBitmap);
-            mFoodImage.setClipToOutline(true);
+//            mFoodImage.setClipToOutline(true);
             mFoodNameView.setText(foodItem.name);
             mExpDateView.setText(foodItem.expirationDate);
             mQuantityView.setText(foodItem.quantity);

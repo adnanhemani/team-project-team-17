@@ -239,7 +239,7 @@
             android:text="Log Out"
             android:layout_width="155dp"
             android:layout_height="33dp"
-            android:id="@+id/logout"
+            android:id="@+id/request_donation_button"
             android:background="@drawable/yellow_button"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/bio_layout" android:layout_marginBottom="8dp"

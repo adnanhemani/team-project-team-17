@@ -1,0 +1,99 @@
+package com.example.pantreasy;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+public class PantryResponseItemAdapter extends RecyclerView.Adapter {
+
+    private Context mContext;
+    private ArrayList<DonationItem> mDonations;
+
+    public PantryResponseItemAdapter(Context context, ArrayList<DonationItem> donationItems) {
+        mContext = context;
+        mDonations = donationItems;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // here, we specify what kind of view each cell should have. In our case, all of them will have a view
+        View view = LayoutInflater.from(mContext).inflate(R.layout.pantry_response_item, parent, false);
+        return new DonationItemViewHolder(view);
+    }
+
+
+    // - get element from your dataset at this position
+    // - replace the contents of the view with that element
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        DonationItem donationItem = mDonations.get(position);
+        ((DonationItemViewHolder) holder).bind(donationItem);
+    }
+
+    // Return the size of your dataset (invoked by the layout manager)
+    @Override
+    public int getItemCount() {
+        return mDonations.size();
+    }
+
+    class DonationItemViewHolder extends RecyclerView.ViewHolder {
+
+        // each data item is just a string in this case
+        public ConstraintLayout mDonationItemLayout;
+        public View mItemView;
+        public TextView mDonorName;
+        public ImageView mDonorImage;
+        public TextView mPhoneNumberText;
+        public TextView mTimeText;
+        public TextView mConfirmationText;
+
+        public DonationItemViewHolder(View itemView) {
+            super(itemView);
+            mItemView = itemView;
+            mDonationItemLayout = mItemView.findViewById(R.id.donation_item);
+            mDonorName = mDonationItemLayout.findViewById(R.id.donor_name);
+            mDonorImage = mDonationItemLayout.findViewById(R.id.donor_image);
+            mPhoneNumberText = mDonationItemLayout.findViewById(R.id.phone_number_text);
+            mTimeText = mDonationItemLayout.findViewById(R.id.time_text);
+            mConfirmationText = mDonationItemLayout.findViewById(R.id.confirmed_text);
+        }
+
+        void bind(DonationItem donationItem) {
+            //DonorName.setText(donationItem.profile.name);
+            mPhoneNumberText.setText(donationItem.time);
+            if (donationItem.pickup)
+                mTimeText.setText("Pick-Up: " + donationItem.time);
+            else
+                mTimeText.setText("Drop-Off: " + donationItem.time);
+            //mDonorImage.setImageBitmap(donationItem.profile.imageBitmap);
+            if (donationItem.confirmed < 0) {
+                mConfirmationText.setText("Rejected");
+                mConfirmationText.setBackgroundColor(Color.RED);
+            } else if (donationItem.confirmed == 0) {
+                mConfirmationText.setText("Awaiting Response");
+                mConfirmationText.setBackgroundColor(Color.GRAY);
+            } else {
+                mConfirmationText.setText("Confirmed");
+                mConfirmationText.setBackgroundColor(Color.GREEN);
+            }
+
+            mItemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent goToSecondActivityIntent = new Intent(mContext, PantryViewDonationResponse.class);
+                    mContext.startActivity(goToSecondActivityIntent);
+                }
+            });
+        }
+    }
+}
+

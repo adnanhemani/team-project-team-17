@@ -21,7 +21,6 @@ public class PantryViewDonationsActivity extends AppCompatActivity {
     private ConstraintLayout mLayout;
     private DonationItemAdapter mAdapter;
     private ImageButton mHomeButton;
-    private ImageButton mConfirmButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,10 +33,8 @@ public class PantryViewDonationsActivity extends AppCompatActivity {
         mRecyclerView = mLayout.findViewById(R.id.donation_list_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mHomeButton = mLayout.findViewById(R.id.home_button);
-        mConfirmButton = mLayout.findViewById(R.id.donate_list_confirm_button);
 
         setOnClickForHomeButton();
-        setOnClickForConfirmButton();
 
         generateDonationItems();
     }
@@ -48,15 +45,6 @@ public class PantryViewDonationsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent goHome = new Intent(PantryViewDonationsActivity.this, PantryHomeActivity.class);
                 PantryViewDonationsActivity.this.startActivity(goHome);
-            }
-        });
-    }
-
-    private void setOnClickForConfirmButton() {
-        mConfirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO
             }
         });
     }
@@ -78,17 +66,17 @@ public class PantryViewDonationsActivity extends AppCompatActivity {
 
 
         Bitmap icon1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.donor_a_profile_pic);
-        Profile p1 = new Profile(icon1, "Donor A", "555-420-1337", "1777 Hearst Ave", "We are donor A");
+        Profile p1 = new Profile("PLACEHOLDER", "Donor A", "555-420-1337", "1777 Hearst Ave", "We are donor A", null, null);
 
         Bitmap icon2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.donor_b_profile_pic);
-        Profile p2 = new Profile(icon2, "Donor B", "555-555-5555", "1777 Le Roy Ave", "We are donor B");
+        Profile p2 = new Profile("PLACEHOLDER", "Donor B", "555-555-5555", "1777 Le Roy Ave", "We are donor B", null, null);
 
         Bitmap icon3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.donor_c_profile_pic);
-        Profile p3 = new Profile(icon3, "Donor C", "555-600-2020", "2222 Shattuck Ave", "We are donor C");
+        Profile p3 = new Profile("PLACEHOLDER", "Donor C", "555-600-2020", "2222 Shattuck Ave", "We are donor C", null, null);
 
-        mDonations.add(new DonationItem(p1, foodItems, "", "3pm"));
-        mDonations.add(new DonationItem(p2, foodItems, "", "3pm"));
-        mDonations.add(new DonationItem(p3, foodItems, "", "3pm"));
+        //mDonations.add(new DonationItem(p1, foodItems, "", "3pm", true));
+        //mDonations.add(new DonationItem(p2, foodItems, "", "3pm", false));
+        //mDonations.add(new DonationItem(p3, foodItems, "", "3pm", false));
 
         setAdapterAndUpdateData();
     }

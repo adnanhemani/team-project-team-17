@@ -1,18 +1,25 @@
 package com.example.pantreasy;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DonationItem {
-    public Profile profile;
-    public ArrayList<FoodItem> foodItems;
+    public String profileName;
+    public List<FoodItem> foodItems;
+    public List<DonorResponseItem> responseItems;
     public String comment;
     public String time;
+    public boolean pickup;
+    public int confirmed;
+    public String UUID;
 
-    public DonationItem(Profile profile, ArrayList<FoodItem> foodItems, String comment, String time) {
-        this.profile = profile;
+    public DonationItem(String profileName, List<FoodItem> foodItems, List<DonorResponseItem> responseItems, String time, boolean pickup, String UUID) {
+        this.profileName = profileName;
         this.foodItems = foodItems;
-        this.comment = comment;
+        this.responseItems = responseItems;
         this.time = time;
+        this.pickup = pickup;
+        this.confirmed = 0;
+        this.UUID = UUID;
     }
 
     public String foodListAsString() {

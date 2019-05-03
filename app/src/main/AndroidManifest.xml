@@ -23,6 +23,8 @@
         <activity android:name=".DonorHistoryActivity"/>
         <activity android:name=".PantryViewResponsesActivity"/>
         <activity android:name=".PantryViewDonationsActivity"/>
+        <activity android:name=".PantryViewDonation"/>
+        <activity android:name=".PantryViewDonationResponse"/>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -31,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         mHomeButton = findViewById(R.id.home_button);
         mCameraButton = findViewById(R.id.camera_button);
-        mLogoutButton = findViewById(R.id.logout);
+        mLogoutButton = findViewById(R.id.request_donation_button);
         mProfilePicture = findViewById(R.id.profile_picture);
         mEditUsername = findViewById(R.id.edit_username);
         mEditInfo = findViewById(R.id.edit_info);

@@ -1,6 +1,7 @@
 package com.example.pantreasy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -52,9 +53,11 @@ public class DonationItemAdapter extends RecyclerView.Adapter {
         public TextView mTime;
         public TextView mItemList;
         public TextView mDistance;
+        public View mItemView;
 
         public DonationItemViewHolder(View itemView) {
             super(itemView);
+            mItemView = itemView;
             mDonationItemLayout = itemView.findViewById(R.id.donation_item);
             mDonorName = mDonationItemLayout.findViewById(R.id.donor_name);
             mDonorImage = mDonationItemLayout.findViewById(R.id.donor_image);
@@ -64,11 +67,20 @@ public class DonationItemAdapter extends RecyclerView.Adapter {
         }
 
         void bind(DonationItem donationItem) {
-            mDonorName.setText(donationItem.profile.name);
-            mDonorImage.setImageBitmap(donationItem.profile.imageBitmap);
+
+            //mDonorName.setText(donationItem.profile.name);
+            //mDonorImage.setImageBitmap(donationItem.profile.imageBitmap);
             mTime.setText(donationItem.time);
             mDistance.setText("1000mi");
             mItemList.setText(donationItem.foodListAsString());
+
+            mItemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent goToSecondActivityIntent = new Intent(mContext, PantryViewDonation.class);
+                    mContext.startActivity(goToSecondActivityIntent);
+                }
+            });
         }
     }
 }

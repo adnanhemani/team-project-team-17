@@ -61,17 +61,17 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
     // Replace this with actual code pulling these from firebase
     public void generateResponseItems() {
         Bitmap icon1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.pantry_a_profile_pic);
-        Profile p1 = new Profile(icon1, "Pantry A", "555-420-1337", "1777 Hearst Ave", "We are food pantry A");
+        Profile p1 = new Profile("PLACEHOLDER", "Pantry A", "555-420-1337", "1777 Hearst Ave", "We are food pantry A", null, null);
 
         Bitmap icon2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.pantry_b_profile_pic);
-        Profile p2 = new Profile(icon2, "Pantry B", "555-555-5555", "1777 Le Roy Ave", "We are food pantry B");
+        Profile p2 = new Profile("PLACEHOLDER", "Pantry B", "555-555-5555", "1777 Le Roy Ave", "We are food pantry B", null, null);
 
         Bitmap icon3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.pantry_c_profile_pic);
-        Profile p3 = new Profile(icon3, "Pantry C", "555-600-2020", "2222 Shattuck Ave", "We are food pantry C");
+        Profile p3 = new Profile("PLACEHOLDER", "Pantry C", "555-600-2020", "2222 Shattuck Ave", "We are food pantry C", null, null);
 
-        mResponseItems.add(new DonorResponseItem(p1, "We would like to pickup just the bananas please! Give us a call!"));
-        mResponseItems.add(new DonorResponseItem(p2, "We will take everything you're offering! Thank you."));
-        mResponseItems.add(new DonorResponseItem(p3, "We would like the bread!"));
+        //mResponseItems.add(new DonorResponseItem(p1, "We would like to pickup just the bananas please! Give us a call!"));
+        //mResponseItems.add(new DonorResponseItem(p2, "We will take everything you're offering! Thank you."));
+        //mResponseItems.add(new DonorResponseItem(p3, "We would like the bread!"));
 
         setAdapterAndUpdateData();
     }

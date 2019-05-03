@@ -60,12 +60,12 @@ public class DonorResponseItemAdapter extends RecyclerView.Adapter {
             mPantryImage = mResponseItemLayout.findViewById(R.id.pantry_image);
             mPhoneNumberText = mResponseItemLayout.findViewById(R.id.phone_number_text);
             mAddressText = mResponseItemLayout.findViewById(R.id.address_text);
-            mCommentText = mResponseItemLayout.findViewById(R.id.comment_text);
+            mCommentText = mResponseItemLayout.findViewById(R.id.time_text);
         }
 
         void bind(DonorResponseItem responseItem) {
             mPantryName.setText(responseItem.pantryProfile.name);
-            mPantryImage.setImageBitmap(responseItem.pantryProfile.imageBitmap);
+            //mPantryImage.setImageBitmap(responseItem.pantryProfile.imageBitmap);
             mPhoneNumberText.setText(responseItem.pantryProfile.phoneNumber);
             mAddressText.setText(responseItem.pantryProfile.address);
             mCommentText.setText(responseItem.comment);

@@ -8,6 +8,19 @@
                                              android:background="#FFFFFF"
                                              tools:context=".Login">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/donor_name_pantry_view_donation" />
+
     <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar"
@@ -33,207 +46,177 @@
             android:elevation="10dp"/>
 
     <ImageButton
-            android:id="@+id/home_button"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:background="#00FFFFFF"
-            android:scaleType="fitCenter"
-            android:tint="#000000"
-            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-            app:layout_constraintStart_toStartOf="@+id/toolbar"
-            app:layout_constraintTop_toTopOf="@+id/toolbar"
-            app:srcCompat="@drawable/home" app:layout_constraintVertical_bias="0.523"
-            android:elevation="10dp"/>
+        android:id="@+id/home_button"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:background="#00FFFFFF"
+        android:elevation="10dp"
+        android:scaleType="fitCenter"
+        android:tint="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.523"
+        app:srcCompat="@drawable/home_button" />
 
     <TextView
-            android:text="Donor Name"
-            android:layout_width="209dp"
+        android:id="@+id/donor_name_pantry_view_donation"
+        android:layout_width="209dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="Donor Name"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout9"
+        android:layout_width="40dp"
+        android:layout_height="118dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/request_donation_button"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="27dp"
+            android:layout_height="43dp"
+            app:srcCompat="@drawable/clock" />
+
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="27dp"
+            android:layout_height="36dp"
+            app:srcCompat="@drawable/phone" />
+
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="26dp"
+            android:layout_height="37dp"
+            app:srcCompat="@drawable/location" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="68dp"
+        android:layout_height="118dp"
+        android:layout_marginStart="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout9"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout9"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout9">
+
+        <TextView
+            android:id="@+id/pickup_dropoff_text2"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:gravity="center_vertical"
+            android:text="Drop-off"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:gravity="center_vertical"
+            android:text="Contact"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:gravity="center_vertical"
+            android:text="Address"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="242dp"
+        android:layout_height="118dp"
+        android:layout_marginStart="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout7"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout7"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout7">
+
+        <TextView
+            android:id="@+id/date_time_text"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:id="@+id/donor_name_pantry_view_donation" android:textSize="24sp"
-            android:gravity="center" android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.038"/>
-    <ScrollView
-            android:layout_width="392dp"
-            android:layout_height="367dp" android:layout_marginTop="12dp"
-            app:layout_constraintTop_toBottomOf="@+id/donor_name_pantry_view_donation"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:id="@+id/recycler_view">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical"/>
-    </ScrollView>
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="40dp"
-            android:layout_height="118dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintHorizontal_bias="0.042" android:id="@+id/linearLayout9" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/recycler_view"
-    >
-        <ImageView
-                android:layout_width="27dp"
-                android:layout_height="43dp" app:srcCompat="@drawable/clock" android:id="@+id/imageView15"/>
-        <ImageView
-                android:layout_width="27dp"
-                android:layout_height="36dp" app:srcCompat="@drawable/phone" android:id="@+id/imageView16"/>
-        <ImageView
-                android:layout_width="26dp"
-                android:layout_height="37dp" app:srcCompat="@drawable/location" android:id="@+id/imageView17"/>
-    </LinearLayout>
+            android:gravity="center_vertical"
+            android:text="12/04/2019 5:00PM"
+            android:textSize="16sp" />
 
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="68dp"
-            android:layout_height="118dp"
-            android:id="@+id/linearLayout7"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout9" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.014"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout9"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout9">
         <TextView
-                android:text="Drop-off"
-                android:layout_width="match_parent"
-                android:layout_height="41dp" android:id="@+id/pickup_dropoff_text2" android:gravity="center_vertical"
-                android:textStyle="bold" android:textSize="16sp"/>
-        <TextView
-                android:text="Contact"
-                android:layout_width="match_parent"
-                android:layout_height="38dp" android:id="@+id/textView18" android:gravity="center_vertical"
-                android:textStyle="bold" android:textSize="16sp"/>
-        <TextView
-                android:text="Address"
-                android:layout_width="match_parent"
-                android:layout_height="37dp" android:id="@+id/textView19" android:gravity="center_vertical"
-                android:textStyle="bold" android:textSize="16sp"/>
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="242dp"
-            android:layout_height="118dp"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout7" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp" android:id="@+id/linearLayout8"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout7" app:layout_constraintHorizontal_bias="0.652"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout7">
-        <TextView
-                android:text="12/04/2019 5:00PM"
-                android:layout_width="match_parent"
-                android:layout_height="40dp" android:id="@+id/date_time_text" android:gravity="center_vertical"
-                android:textSize="16sp"/>
-        <TextView
-                android:text="(410) 883-3874"
-                android:layout_width="match_parent"
-                android:layout_height="39dp" android:id="@+id/phone_number_text" android:gravity="center_vertical"
-                android:textSize="16sp"/>
-        <TextView
-                android:text="2050 University Ave, Berkeley"
-                android:layout_width="match_parent"
-                android:layout_height="37dp" android:id="@+id/address_text" android:gravity="center_vertical"
-                android:textSize="16sp"/>
-    </LinearLayout>
+            android:id="@+id/phone_number_text"
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:gravity="center_vertical"
+            android:text="(410) 883-3874"
+            android:textSize="16sp" />
 
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="346dp"
-            android:layout_height="86dp" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="@+id/recycler_view"
-            app:layout_constraintEnd_toEndOf="@+id/recycler_view"
-            app:layout_constraintStart_toStartOf="@+id/recycler_view"
-            android:id="@+id/linearLayout1">
-        <ImageView
-                android:layout_width="120dp"
-                android:layout_height="match_parent" app:srcCompat="@drawable/apple" android:id="@+id/imageView18"
-                android:layout_weight="1"/>
         <TextView
-                android:text=""
-                android:layout_width="50dp"
-                android:layout_height="match_parent" android:id="@+id/textView25" android:layout_weight="1"/>
-        <TextView
-                android:text="@string/item1"
-                android:layout_width="226dp"
-                android:layout_height="match_parent" android:id="@+id/textView23" android:layout_weight="1"
-                android:textSize="16sp"/>
-        <ImageView
-                android:layout_width="62dp"
-                android:layout_height="match_parent" app:srcCompat="@drawable/rect_checked"
-                android:id="@+id/imageView19" android:layout_weight="1"/>
-    </LinearLayout>
-
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="346dp"
-            android:layout_marginTop="8dp"
-            android:layout_height="86dp" app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
-            app:layout_constraintEnd_toEndOf="@+id/recycler_view"
-            app:layout_constraintStart_toStartOf="@+id/recycler_view"
-            android:id="@+id/linearLayout2">
-
-        <ImageView
-                android:layout_width="120dp"
-                android:layout_height="match_parent" app:srcCompat="@drawable/beef" android:id="@+id/image2"
-                android:layout_weight="1"/>
-        <TextView
-                android:text=""
-                android:layout_width="50dp"
-                android:layout_height="match_parent" android:id="@+id/textView26" android:layout_weight="1"/>
-        <TextView
-                android:text="@string/item2"
-                android:layout_width="226dp"
-                android:layout_height="match_parent" android:id="@+id/textView24" android:layout_weight="1"
-                android:textSize="16sp"/>
-        <ImageView
-                android:layout_width="62dp"
-                android:layout_height="match_parent" app:srcCompat="@drawable/rect_unchecked"
-                android:id="@+id/imageView20" android:layout_weight="1"/>
-    </LinearLayout>
-
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="346dp"
-            android:layout_height="86dp"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            app:layout_constraintEnd_toEndOf="@+id/recycler_view"
-            app:layout_constraintStart_toStartOf="@+id/recycler_view"
-            android:id="@+id/linearLayout3">
-        <ImageView
-                android:layout_width="120dp"
-                android:layout_height="match_parent" app:srcCompat="@drawable/tomato" android:id="@+id/iamge3"
-                android:layout_weight="1"/>
-        <TextView
-                android:text=""
-                android:layout_width="50dp"
-                android:layout_height="match_parent" android:id="@+id/blank3" android:layout_weight="1"/>
-        <TextView
-                android:text="@string/item3"
-                android:layout_width="226dp"
-                android:layout_height="match_parent" android:id="@+id/text3" android:layout_weight="1"
-                android:textSize="16sp"/>
-        <ImageView
-                android:layout_width="62dp"
-                android:layout_height="match_parent" app:srcCompat="@drawable/rect_checked"
-                android:id="@+id/box3" android:layout_weight="1"/>
+            android:id="@+id/address_text"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:gravity="center_vertical"
+            android:text="2050 University Ave, Berkeley"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <Button
-            android:text="Request Donation"
-            android:layout_width="244dp"
-            android:layout_height="37dp"
-            android:id="@+id/logout"
-            android:background="@drawable/yellow_button"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout8" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp" app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintVertical_bias="0.311" android:textSize="18sp"/>
+        android:id="@+id/request_donation_button"
+        android:layout_width="244dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/yellow_button"
+        android:text="Request Donation"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/blurred_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars"
+        android:visibility="gone"
+        android:elevation="11dp"/>
+
+    <include
+        android:id="@+id/pantry_request_sent_layout"
+        layout="@layout/pantry_request_popup"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
+        android:elevation="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible"
+        >
+
+    </include>
 
 </android.support.constraint.ConstraintLayout>

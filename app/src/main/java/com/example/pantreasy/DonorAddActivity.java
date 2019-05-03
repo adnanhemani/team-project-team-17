@@ -22,10 +22,13 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import java.util.UUID;
 
 import java.util.ArrayList;
 
 public class DonorAddActivity extends AppCompatActivity {
+    private FirebaseManager mFirebaseManager;
+
     private ArrayList<FoodItem> mFoodList;
     private FoodItemAdapter mAdapter;
     private Button mAddToListButton;
@@ -63,6 +66,8 @@ public class DonorAddActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.donor_add_view);
+
+        mFirebaseManager = new FirebaseManager(this);
 
         mFoodList = new ArrayList<FoodItem>();
         ConstraintLayout layout = findViewById(R.id.donor_add_view);
@@ -124,7 +129,9 @@ public class DonorAddActivity extends AppCompatActivity {
                 String expDate = mExpirationDateText.getText().toString();
                 String quantity = mQuantityText.getText().toString();
                 Boolean perishable = mPerishableButton.isChecked();
-                FoodItem fi = new FoodItem(foodName, ((BitmapDrawable)mFoodImage.getDrawable()).getBitmap(), expDate, quantity, perishable);
+
+                FoodItem fi = new FoodItem(foodName, foodName+".JPEG", expDate, quantity, perishable);
+                mFirebaseManager.uploadBitmap(((BitmapDrawable)mFoodImage.getDrawable()).getBitmap(), fi.name);
                 mFoodList.add(fi);
                 setAdapterAndUpdateData();
             }
@@ -225,6 +232,13 @@ public class DonorAddActivity extends AppCompatActivity {
                 mBlurredBackgroundImage.setVisibility(View.GONE);
                 // TODO
                 // Must create a new donation and add it to the firebase database
+                String profileNamePlaceholder = "Catalyst Cafe";
+                String time = mMonthInput.getText().toString() + " " + mDayInput.getText().toString() + ", " +
+                        mHourInput.getText().toString() + ":" + mMinuteInput.getText().toString();
+                time += (mAmButton.isChecked()) ? " AM" : " PM";
+                boolean pickedUp = (mPickupOptionSpinner.getSelectedItem().toString().equalsIgnoreCase("PICKED UP")) ? true : false;
+                String UUID = java.util.UUID.randomUUID().toString();
+                mFirebaseManager.addDonation(profileNamePlaceholder, new DonationItem(profileNamePlaceholder, mFoodList, null, time, pickedUp, UUID));
                 Intent viewResponses = new Intent(DonorAddActivity.this, DonorsPantryResponsesActivities.class);
                 DonorAddActivity.this.startActivity(viewResponses);
             }
