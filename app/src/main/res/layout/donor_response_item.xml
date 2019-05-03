@@ -129,7 +129,7 @@
                 app:layout_constraintTop_toTopOf="@+id/linearLayout5">
 
                 <TextView
-                    android:id="@+id/phone_number"
+                    android:id="@+id/phone_number_text"
                     android:layout_width="match_parent"
                     android:layout_height="17dp"
                     android:text="(888)-888-8888"

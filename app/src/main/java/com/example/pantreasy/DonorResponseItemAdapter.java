@@ -58,7 +58,7 @@ public class DonorResponseItemAdapter extends RecyclerView.Adapter {
             mResponseItemLayout = itemView.findViewById(R.id.response_item);
             mPantryName = mResponseItemLayout.findViewById(R.id.pantry_name);
             mPantryImage = mResponseItemLayout.findViewById(R.id.pantry_image);
-            mPhoneNumberText = mResponseItemLayout.findViewById(R.id.phone_number);
+            mPhoneNumberText = mResponseItemLayout.findViewById(R.id.phone_number_text);
             mAddressText = mResponseItemLayout.findViewById(R.id.address_text);
             mCommentText = mResponseItemLayout.findViewById(R.id.comment_text);
         }

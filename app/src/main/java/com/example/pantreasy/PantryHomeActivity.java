@@ -14,9 +14,17 @@ public class PantryHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantry_home);
 
-        Button viewDonations = findViewById(R.id.view_responses_button);
-        Button donorResponses = findViewById(R.id.donation_history_button);
+        Button viewResponses = findViewById(R.id.view_responses_button);
+        Button donationHistory = findViewById(R.id.donation_history_button);
+        Button viewDonations = findViewById(R.id.view_donations_button);
 
+        viewResponses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToViewDonations = new Intent(PantryHomeActivity.this, PantryViewResponsesActivity.class);
+                PantryHomeActivity.this.startActivity(goToViewDonations);
+            }
+        });
         viewDonations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -25,7 +33,7 @@ public class PantryHomeActivity extends AppCompatActivity {
             }
         });
 
-        donorResponses.setOnClickListener(new View.OnClickListener() {
+        donationHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToDonationResponses = new Intent(PantryHomeActivity.this, PantryViewResponsesActivity.class);

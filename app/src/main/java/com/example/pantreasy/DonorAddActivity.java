@@ -75,7 +75,7 @@ public class DonorAddActivity extends AppCompatActivity {
         mHomeButton = layout.findViewById(R.id.home_button);
         mCameraButton = layout.findViewById(R.id.camera_button);
         mRecyclerView = layout.findViewById(R.id.food_item_list);
-        mCheckButton = layout.findViewById(R.id.check_button);
+        mCheckButton = layout.findViewById(R.id.check_button_wrapper);
         mQuantityText = layout.findViewById(R.id.food_quantity_text);
         mPerishableButton = layout.findViewById(R.id.perishable_toggle);
         mRequestSentPopup = layout.findViewById(R.id.request_sent_popup);
