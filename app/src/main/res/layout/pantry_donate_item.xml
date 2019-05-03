@@ -1,83 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:id="@+id/food_item"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="wrap_content">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/donation_item"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+
+<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="11dp">
 
     <ImageView
-            android:id="@+id/background"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/donor_image"
-            app:srcCompat="@drawable/thin_long_shadowed_box" />
+        android:id="@+id/donor_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/rect_box"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/image_placeholder" />
+</android.support.v7.widget.CardView>
 
-    <ImageView
-            android:id="@+id/donor_image"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rect_box"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/image_placeholder" />
+<android.support.v7.widget.CardView
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="24dp"
+    android:minHeight="105dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="9dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="@+id/cardView2"
+    app:layout_constraintTop_toTopOf="@+id/cardView2">
 
-    <TextView
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
             android:id="@+id/donor_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
             android:text="Donor Name"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/donor_image"
-            app:layout_constraintTop_toTopOf="@+id/donor_image"
-            android:layout_marginLeft="16dp" android:layout_marginStart="16dp"/>
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-            android:id="@+id/distance"
+        <TextView
+            android:id="@+id/distance_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/roboto"
             android:text="1.5 mil"
             android:textColor="#444444"
             android:textSize="12sp"
-            app:layout_constraintTop_toTopOf="@+id/donor_name" android:layout_marginEnd="44dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="44dp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/donor_name" />
 
-    <TextView
-            android:id="@+id/address"
+        <TextView
+            android:id="@+id/food_items_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/roboto"
             android:text="Items: apple, tomato, beef ..."
             android:textColor="#444444"
-            app:layout_constraintStart_toEndOf="@+id/donor_image"
-            app:layout_constraintTop_toBottomOf="@+id/donor_name" android:layout_marginLeft="16dp"
-            android:textSize="14sp" android:layout_marginTop="32dp"/>
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/pickup_dropoff_time"
+            app:layout_constraintTop_toBottomOf="@+id/pickup_dropoff_time" />
 
-    <TextView
-            android:id="@+id/phone"
+        <TextView
+            android:id="@+id/pickup_dropoff_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
             android:text="drop-off time: 5pm Today"
             android:textColor="#444444"
-            app:layout_constraintStart_toEndOf="@+id/donor_image"
-            app:layout_constraintTop_toBottomOf="@+id/donor_name" android:layout_marginLeft="16dp"
-            android:textSize="14sp" android:textStyle="bold" android:layout_marginTop="8dp"/>
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/donor_name"
+            app:layout_constraintTop_toBottomOf="@+id/donor_name" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="112dp" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>
+

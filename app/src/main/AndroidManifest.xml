@@ -18,11 +18,13 @@
         </activity>
         <activity android:name=".DonorHomeActivity"></activity>
         <activity android:name=".PantryHomeActivity"/>
-        <activity android:name=".DonorAddActivity"/>
+        <activity android:name=".DonorAddActivity" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".DonorsPantryResponsesActivities"/>
         <activity android:name=".DonorHistoryActivity"/>
         <activity android:name=".PantryViewResponsesActivity"/>
         <activity android:name=".PantryViewDonationsActivity"/>
+        <activity android:name=".PantryViewDonation"/>
+        <activity android:name=".PantryViewDonationResponse"/>
 
         <meta-data
             android:name="preloaded_fonts"
