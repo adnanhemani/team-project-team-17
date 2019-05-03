@@ -173,15 +173,9 @@
             android:layout_width="346dp"
             android:layout_marginTop="8dp"
             android:layout_height="86dp" app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
-<<<<<<< HEAD
             app:layout_constraintEnd_toEndOf="@+id/recycler_view"
             app:layout_constraintStart_toStartOf="@+id/recycler_view"
             android:id="@+id/linearLayout2">
-=======
-            app:layout_constraintEnd_toEndOf="@+id/scrollView2"
-            app:layout_constraintStart_toStartOf="@+id/scrollView2"
-            android:id="@+id/address_layout">
->>>>>>> 117416e9709b701c13c47222d0b27363b3275dfa
 
         <ImageView
                 android:layout_width="120dp"
@@ -206,17 +200,10 @@
             android:orientation="horizontal"
             android:layout_width="346dp"
             android:layout_height="86dp"
-<<<<<<< HEAD
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="@+id/recycler_view"
             app:layout_constraintStart_toStartOf="@+id/recycler_view"
             android:id="@+id/linearLayout3">
-=======
-            app:layout_constraintTop_toBottomOf="@+id/address_layout"
-            app:layout_constraintEnd_toEndOf="@+id/scrollView2"
-            app:layout_constraintStart_toStartOf="@+id/scrollView2"
-            android:id="@+id/username_layout">
->>>>>>> 117416e9709b701c13c47222d0b27363b3275dfa
         <ImageView
                 android:layout_width="120dp"
                 android:layout_height="match_parent" app:srcCompat="@drawable/tomato" android:id="@+id/iamge3"

@@ -33,7 +33,6 @@
             android:elevation="10dp"/>
 
     <ImageButton
-<<<<<<< HEAD
         android:id="@+id/home_button"
         android:layout_width="35dp"
         android:layout_height="35dp"
@@ -47,21 +46,6 @@
         app:layout_constraintVertical_bias="0.523"
         app:srcCompat="@drawable/home_button"
         android:elevation="10dp"/>
-=======
-            android:id="@+id/home_button"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:background="#00FFFFFF"
-            android:scaleType="fitCenter"
-            android:tint="#000000"
-            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-            app:layout_constraintStart_toStartOf="@+id/toolbar"
-            app:layout_constraintTop_toTopOf="@+id/toolbar"
-            app:srcCompat="@drawable/home" app:layout_constraintVertical_bias="0.523"
-            android:elevation="10dp"/>
->>>>>>> 117416e9709b701c13c47222d0b27363b3275dfa
 
     <TextView
         android:id="@+id/donor_name_pantry_view_donation"
