@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PantryViewDonationResponse extends AppCompatActivity {
+    private FirebaseManager mFirebaseManager;
     private ConstraintLayout mLayout;
     private TextView mDonorName;
     private RecyclerView mRecyclerView;
@@ -31,6 +32,8 @@ public class PantryViewDonationResponse extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantry_response_view);
+
+        mFirebaseManager = new FirebaseManager(this);
 
         mLayout = findViewById(R.id.pantry_response_view);
         mDonorName = mLayout.findViewById(R.id.donor_name_pantry_view_donation);

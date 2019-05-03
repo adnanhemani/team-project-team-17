@@ -12,13 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PantryResponseItemAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
-    private ArrayList<DonationItem> mDonations;
+    private List<DonationItem> mDonations;
 
-    public PantryResponseItemAdapter(Context context, ArrayList<DonationItem> donationItems) {
+    public PantryResponseItemAdapter(Context context, List<DonationItem> donationItems) {
         mContext = context;
         mDonations = donationItems;
     }

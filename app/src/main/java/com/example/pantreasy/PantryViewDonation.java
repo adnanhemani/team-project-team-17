@@ -44,6 +44,7 @@ public class PantryViewDonation extends AppCompatActivity {
     private Button mOkButton;
 
     private ValueEventListener mValueEventListener;
+    private String mDonationUUID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -135,6 +136,11 @@ public class PantryViewDonation extends AppCompatActivity {
                 mBlurredBackground.setImageBitmap(blurBm);
                 mBlurredBackground.setVisibility(View.VISIBLE);
                 mPopupMessage.setVisibility(View.VISIBLE);
+                Bitmap icon = BitmapFactory.decodeResource(PantryViewDonation.this.getResources(), R.drawable.pantry_a_profile_pic);
+                Profile p = new Profile("Berkeley_Food_Pantry.JPEG", "Berkeley Food Pantry", "510-510-5105", "1111 Berkeley Way", "We are the Berkeley Food Pantry", null, null);
+                mFirebaseManager.addProfile(icon, p);
+                DonorResponseItem r = new DonorResponseItem("Berkeley Food Pantry", "We would like everything you're offering!", mDonationUUID);
+                mFirebaseManager.addResponse("Berkeley Food Pantry", mDonationUUID, r); 
             }
         });
     }
@@ -153,8 +159,8 @@ public class PantryViewDonation extends AppCompatActivity {
         Intent goToSecondActivityIntent = getIntent();
         Bundle intentExtras = goToSecondActivityIntent.getExtras();
         if(intentExtras!=null) {
-            String donation_UUID = (String) intentExtras.get("donation_UUID");
-            mFirebaseManager.getDonation(donation_UUID, mValueEventListener);
+            mDonationUUID = (String) intentExtras.get("donation_UUID");
+            mFirebaseManager.getDonation(mDonationUUID, mValueEventListener);
         }
     }
 

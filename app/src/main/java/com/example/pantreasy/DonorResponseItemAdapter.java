@@ -64,10 +64,10 @@ public class DonorResponseItemAdapter extends RecyclerView.Adapter {
         }
 
         void bind(DonorResponseItem responseItem) {
-            mPantryName.setText(responseItem.pantryProfile.name);
+            mPantryName.setText(responseItem.pantryProfileName);
             //mPantryImage.setImageBitmap(responseItem.pantryProfile.imageBitmap);
-            mPhoneNumberText.setText(responseItem.pantryProfile.phoneNumber);
-            mAddressText.setText(responseItem.pantryProfile.address);
+            //mPhoneNumberText.setText(responseItem.pantryProfile.phoneNumber);
+            //mAddressText.setText(responseItem.pantryProfile.address);
             mCommentText.setText(responseItem.comment);
         }
     }

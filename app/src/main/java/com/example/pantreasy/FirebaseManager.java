@@ -17,7 +17,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,11 +64,11 @@ public class FirebaseManager {
     }
 
     public void getDonationUUIDs(String profileName, ValueEventListener valueEventListener) {
-        mProfiles.child("postedDonationUUIDs").addListenerForSingleValueEvent(valueEventListener);
+        mProfiles.child(profileName).child("postedDonationUUIDs").addListenerForSingleValueEvent(valueEventListener);
     }
 
     public void getRequestUUIDs(String profileName, ValueEventListener valueEventListener) {
-        mProfiles.child("requestedDonationUUIDs").addListenerForSingleValueEvent(valueEventListener);
+        mProfiles.child(profileName).child("requestedDonationUUIDs").addListenerForSingleValueEvent(valueEventListener);
     }
 
     public void getResponses(String donationUUID, ValueEventListener valueEventListener) {
@@ -123,6 +122,15 @@ public class FirebaseManager {
             foodItems.add(new FoodItem(name, imageName, expiration, quantity, perishable));
         }
         return foodItems;
+    }
+
+    public List<String> getDonationUUIDsFromSnapshot(DataSnapshot dataSnapshot) {
+        List<String> result = new ArrayList<String>();
+        HashMap<String, String> h = (HashMap<String, String>)dataSnapshot.getValue();
+        for (String s : h.keySet()) {
+            result.add(h.get(s));
+        }
+        return result;
     }
 
 
