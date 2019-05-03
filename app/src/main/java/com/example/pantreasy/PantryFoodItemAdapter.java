@@ -10,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+
 import java.util.List;
 
 public class PantryFoodItemAdapter extends RecyclerView.Adapter {
@@ -62,9 +64,12 @@ public class PantryFoodItemAdapter extends RecyclerView.Adapter {
         public TextView mPerishableView;
         public ImageView mFoodImage;
         public CheckBox mCheckBox;
+        public FirebaseManager mFirebaseManager;
+        public OnSuccessListener<byte[]> mImageSuccessListener;
 
         public PantryFoodItemViewHolder(View itemView) {
             super(itemView);
+            mFirebaseManager = new FirebaseManager((PantryViewDonation)mContext);
             mFoodItemLayout = itemView.findViewById(R.id.food_item);
             mFoodNameView = mFoodItemLayout.findViewById(R.id.food_name);
             mExpDateView = mFoodItemLayout.findViewById(R.id.expiration_text);
@@ -73,10 +78,16 @@ public class PantryFoodItemAdapter extends RecyclerView.Adapter {
             mFoodImage = mFoodItemLayout.findViewById(R.id.food_image);
             mCheckBox = mFoodItemLayout.findViewById(R.id.checkBox);
             mCheckBox.setChecked(true);
+            mImageSuccessListener = new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    mFoodImage.setImageBitmap(mFirebaseManager.bitmapFromBytes(bytes));
+                }
+            };
         }
 
         void bind(FoodItem foodItem) {
-            //mFoodImage.setImageBitmap(foodItem.imageBitmap);
+            mFirebaseManager.imageFromStorage(foodItem.imageName, mImageSuccessListener);
             mFoodImage.setClipToOutline(true);
             mFoodNameView.setText(foodItem.name);
             mExpDateView.setText("Expires on: " + foodItem.expirationDate);

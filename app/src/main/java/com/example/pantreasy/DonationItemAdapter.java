@@ -2,6 +2,7 @@ package com.example.pantreasy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.ValueEventRegistration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,9 +62,14 @@ public class DonationItemAdapter extends RecyclerView.Adapter {
         public TextView mItemList;
         public TextView mDistance;
         public View mItemView;
+        public FirebaseManager mFirebaseManager;
+        public OnSuccessListener<byte[]> mImageSuccessListener;
+        public ValueEventListener mProfileListener;
+        public Profile mProfile;
 
         public DonationItemViewHolder(View itemView) {
             super(itemView);
+            mFirebaseManager = new FirebaseManager((PantryViewDonationsActivity)mContext);
             mItemView = itemView;
             mDonationItemLayout = itemView.findViewById(R.id.donation_item);
             mDonorName = mDonationItemLayout.findViewById(R.id.donor_name);
@@ -65,12 +77,30 @@ public class DonationItemAdapter extends RecyclerView.Adapter {
             mTime = mDonationItemLayout.findViewById(R.id.pickup_dropoff_time);
             mItemList = mDonationItemLayout.findViewById(R.id.food_items_list);
             mDistance = mDonationItemLayout.findViewById(R.id.distance_text);
+            mImageSuccessListener = new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    mDonorImage.setImageBitmap(mFirebaseManager.bitmapFromBytes(bytes));
+                }
+            };
+            mProfileListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    mProfile = mFirebaseManager.getProfileFromDataSnapshot(dataSnapshot);
+                    mFirebaseManager.imageFromStorage(mProfile.imageName, mImageSuccessListener);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            };
+
         }
 
         void bind(final DonationItem donationItem) {
-
-            //mDonorName.setText(donationItem.profile.name);
-            //mDonorImage.setImageBitmap(donationItem.profile.imageBitmap);
+            mFirebaseManager.getProfile(donationItem.profileName, mProfileListener);
+            mDonorName.setText(donationItem.profileName);
             mTime.setText(donationItem.time);
             mDistance.setText("1000mi");
             mItemList.setText(donationItem.foodListAsString());

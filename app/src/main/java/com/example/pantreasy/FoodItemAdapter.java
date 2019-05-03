@@ -1,6 +1,7 @@
 package com.example.pantreasy;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,17 +13,24 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FoodItemAdapter extends RecyclerView.Adapter {
-
+    private FirebaseManager mFirebaseManager;
     private Context mContext;
     private ArrayList<FoodItem> mFoodItems;
+    private OnSuccessListener mSuccessListener;
+    private List<Bitmap> bitmaps;
 
-    public FoodItemAdapter(Context context, ArrayList<FoodItem> foodItems) {
+    public FoodItemAdapter(Context context, ArrayList<FoodItem> foodItems, List<Bitmap> bitmapList) {
         mContext = context;
         mFoodItems = foodItems;
+        mFirebaseManager = new FirebaseManager((DonorAddActivity)mContext);
+        this.bitmaps = bitmapList;
     }
 
     @Override
@@ -38,7 +46,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         FoodItem foodItem = mFoodItems.get(position);
-        ((FoodItemViewHolder) holder).bind(foodItem);
+        Bitmap bm = bitmaps.get(position);
+        ((FoodItemViewHolder) holder).bind(foodItem, bm);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -85,8 +94,9 @@ public class FoodItemAdapter extends RecyclerView.Adapter {
 
         }
 
-        void bind(FoodItem foodItem) {
-//            mFoodImage.setClipToOutline(true);
+        void bind(FoodItem foodItem, Bitmap bm) {
+            mFoodImage.setClipToOutline(true);
+            mFoodImage.setImageBitmap(bm);
             mFoodNameView.setText(foodItem.name);
             mExpDateView.setText(foodItem.expirationDate);
             mQuantityView.setText(foodItem.quantity);

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -22,14 +23,24 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.List;
 import java.util.UUID;
 
 import java.util.ArrayList;
 
 public class DonorAddActivity extends AppCompatActivity {
     private FirebaseManager mFirebaseManager;
-
+    private OnSuccessListener<byte[]> mImageDownloadSuccessListener;
+    private FirebaseAuth mAuth;
     private ArrayList<FoodItem> mFoodList;
+    private List<Bitmap> mBitmaps;
     private FoodItemAdapter mAdapter;
     private Button mAddToListButton;
     private Button mClearListButton;
@@ -68,8 +79,11 @@ public class DonorAddActivity extends AppCompatActivity {
         setContentView(R.layout.donor_add_view);
 
         mFirebaseManager = new FirebaseManager(this);
+        mAuth = FirebaseAuth.getInstance();
+        signInAnonymously();
 
         mFoodList = new ArrayList<FoodItem>();
+        mBitmaps = new ArrayList<Bitmap>();
         ConstraintLayout layout = findViewById(R.id.donor_add_view);
         mFoodImage = layout.findViewById(R.id.main_image);
         mAddToListButton = layout.findViewById(R.id.add_to_list_button);
@@ -120,6 +134,21 @@ public class DonorAddActivity extends AppCompatActivity {
         setAdapterAndUpdateData();
     }
 
+    private void signInAnonymously() {
+            mAuth.signInAnonymously().addOnSuccessListener(this, new  OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+
+                }
+            })
+            .addOnFailureListener(this, new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+
+                }
+            });
+    }
+
     private void setOnClickForAddButton() {
         mAddToListButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +160,9 @@ public class DonorAddActivity extends AppCompatActivity {
                 Boolean perishable = mPerishableButton.isChecked();
 
                 FoodItem fi = new FoodItem(foodName, foodName+".JPEG", expDate, quantity, perishable);
-                mFirebaseManager.uploadBitmap(((BitmapDrawable)mFoodImage.getDrawable()).getBitmap(), fi.name);
+                Bitmap bm = ((BitmapDrawable)mFoodImage.getDrawable()).getBitmap();
+                mBitmaps.add(bm);
+                mFirebaseManager.uploadBitmap(bm, fi.imageName);
                 mFoodList.add(fi);
                 setAdapterAndUpdateData();
             }
@@ -248,7 +279,7 @@ public class DonorAddActivity extends AppCompatActivity {
     private void setAdapterAndUpdateData() {
         // create a new adapter with the updated mComments array
         // this will "refresh" our recycler view
-        mAdapter = new FoodItemAdapter(this, this.mFoodList);
+        mAdapter = new FoodItemAdapter(DonorAddActivity.this, mFoodList, mBitmaps);
         mRecyclerView.setAdapter(mAdapter);
     }
 

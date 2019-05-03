@@ -1,6 +1,7 @@
 package com.example.pantreasy;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -88,8 +89,23 @@ public class FirebaseManager {
         boolean pickup = (boolean) h.get("pickup");
         String profileName = (String) h.get("profileName");
         String time = (String) h.get("time");
-        // Add Response Items
-        return new DonationItem(profileName, foodItems, null, time, pickup, UUID);
+        HashMap responseItemData = (HashMap) h.get("responseItems");
+        List<DonorResponseItem> responseItems = responseItemsFromHashmap(responseItemData);
+        return new DonationItem(profileName, foodItems, responseItems, time, pickup, UUID);
+    }
+
+    private List<DonorResponseItem> responseItemsFromHashmap(HashMap responseItemData) {
+        List<DonorResponseItem> responseItems = new ArrayList<DonorResponseItem>();
+        if (responseItemData == null)
+            return responseItems;
+        for (Object k : responseItemData.keySet()) {
+            HashMap<String, Object> responseMap = (HashMap<String, Object>)responseItemData.get(k);
+            String UUID = (String) responseMap.get("UUID");
+            String comment = (String) responseMap.get("comment");
+            String pantryProfileName = (String) responseMap.get("pantryProfileName");
+            responseItems.add(new DonorResponseItem(pantryProfileName, comment, UUID));
+        }
+        return responseItems;
     }
 
     public List<DonationItem> donationsFromSnapshot(DataSnapshot dataSnapshot) {
@@ -153,5 +169,27 @@ public class FirebaseManager {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
             }
         });
+    }
+
+    public void imageFromStorage(String imageName, OnSuccessListener successListener) {
+        StorageReference imageRef = mStorageRef.child(imageName);
+
+        final long ONE_MEGABYTE = 1024 * 1024;
+        imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(successListener);
+    }
+
+    public Bitmap bitmapFromBytes(byte[] bytes) {
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
+
+    public Profile getProfileFromDataSnapshot(DataSnapshot dataSnapshot) {
+        HashMap<String, Object> h = (HashMap<String, Object>) dataSnapshot.getValue();
+        String imageName = (String) h.get("imageName");
+        String name = (String) h.get("name");
+        String phoneNumber = (String) h.get("phoneNumber");
+        String address = (String) h.get("address");
+        String description = (String) h.get("description");
+        return new Profile(imageName, name, phoneNumber, address, description, null, null);
+
     }
 }

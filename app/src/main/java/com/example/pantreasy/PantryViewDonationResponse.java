@@ -13,9 +13,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PantryViewDonationResponse extends AppCompatActivity {
     private FirebaseManager mFirebaseManager;
     private ConstraintLayout mLayout;
@@ -43,7 +40,6 @@ public class PantryViewDonationResponse extends AppCompatActivity {
         mAddress = mLayout.findViewById(R.id.address_text);
         mHomeButton = mLayout.findViewById(R.id.home_button);
 
-        initializeDonationItem();
         //mDonorName.setText(mDonationItem.profile.name);
         if (mDonationItem.pickup)
             mPickupOrDropoffText.setText("Pick-Up");
@@ -66,22 +62,6 @@ public class PantryViewDonationResponse extends AppCompatActivity {
                 PantryViewDonationResponse.this.startActivity(goHome);
             }
         });
-    }
-
-    private void initializeDonationItem() {
-        List<FoodItem> foodItems = new ArrayList<FoodItem>();
-        Bitmap icon1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.pantry_a_profile_pic);
-//        foodItems.add(new FoodItem("Eggs", icon1, "2/2/22", "5", true));
-//        foodItems.add(new FoodItem("Butter", icon1, "2/2/22", "5", true));
-//        foodItems.add(new FoodItem("Cheese", icon1, "2/2/22", "5", true));
-//        foodItems.add(new FoodItem("Noodles", icon1, "2/2/22", "5", true));
-//        foodItems.add(new FoodItem("Beef", icon1, "2/2/22", "5", true));
-
-
-        Bitmap icon2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.donor_a_profile_pic);
-        Profile p1 = new Profile("PLACEHOLDER", "Donor A", "555-420-1337", "1777 Hearst Ave", "We are donor A", null, null);
-
-        //mDonationItem = new DonationItem(p1, foodItems, "No comments", "4:00pm", true);
     }
 
     private void setAdapterAndUpdateData() {

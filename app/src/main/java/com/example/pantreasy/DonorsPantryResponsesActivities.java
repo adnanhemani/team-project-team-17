@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +17,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class DonorsPantryResponsesActivities extends AppCompatActivity {
     private ArrayList<DonorResponseItem> mResponseItems;
@@ -31,12 +37,20 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
     private Button mPopupOkayButton;
     private Button mAddAnotherDonationButton;
 
+    private FirebaseManager mFirebaseManager;
+    private ValueEventListener mDonationUUIDListener;
+    private ValueEventListener mResponseListener;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.donor_response_view);
 
+        mFirebaseManager = new FirebaseManager(this);
         mResponseItems = new ArrayList<DonorResponseItem>();
+        initializeValueEventListeners();
+
+
         mLayout = findViewById(R.id.donor_response_view);
         mRecyclerView = mLayout.findViewById(R.id.response_items_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -49,12 +63,45 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
         mBlurredBackground.setVisibility(View.GONE);
         mConfirmationPopup.setVisibility(View.GONE);
 
-
-        generateResponseItems();
         setOnClickForHomeButton();
         setOnClickForConfirmButton();
         setOnClickforPopupButtons();
 
+    }
+
+    private void initializeValueEventListeners() {
+        mResponseListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                DonationItem d = mFirebaseManager.getDonationFromDataSnapshot(dataSnapshot);
+                for (int i = 0; i < d.responseItems.size(); i++) {
+                    mResponseItems.add(d.responseItems.get(i));
+                }
+                setAdapterAndUpdateData();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+
+        mDonationUUIDListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<String> donationUUIDs = mFirebaseManager.getDonationUUIDsFromSnapshot(dataSnapshot);
+                for (int i = 0; i < donationUUIDs.size(); i++) {
+                    mFirebaseManager.getDonation(donationUUIDs.get(i), mResponseListener);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+
+        mFirebaseManager.getDonationUUIDs("Catalyst Cafe", mDonationUUIDListener);
     }
 
     //TODO
