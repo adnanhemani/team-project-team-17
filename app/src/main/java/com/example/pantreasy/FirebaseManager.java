@@ -51,9 +51,11 @@ public class FirebaseManager {
         mDonationItems.child(donation.UUID).setValue(donation);
     }
 
-    public void addResponse(String profileName, String donationUUID, DonorResponseItem responseItem) {
-        mProfiles.child(profileName).child("requestedDonationUUIDs").child(donationUUID).setValue(donationUUID);
-        mDonationItems.child(donationUUID).child("responseItems").child(responseItem.UUID).setValue(responseItem);
+    public void addResponse(String profileName, DonationItem d, DonorResponseItem responseItem) {
+        //Todo
+        // Fix this so that it doesn't keep overwriting the same request
+        mProfiles.child(profileName).child("requestedDonationUUIDs").child(d.UUID).setValue(d.UUID);
+        mDonationItems.child(d.UUID).child("responseItems").child(responseItem.UUID).setValue(responseItem);
     }
 
     public void getProfile(String profileName, ValueEventListener valueEventListener) {
@@ -142,6 +144,8 @@ public class FirebaseManager {
 
     public List<String> getDonationUUIDsFromSnapshot(DataSnapshot dataSnapshot) {
         List<String> result = new ArrayList<String>();
+        if (dataSnapshot == null || dataSnapshot.getValue() == null)
+            return result;
         HashMap<String, String> h = (HashMap<String, String>)dataSnapshot.getValue();
         for (String s : h.keySet()) {
             result.add(h.get(s));

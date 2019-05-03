@@ -1,6 +1,8 @@
 package com.example.pantreasy;
 
 import android.content.Context;
+import android.renderscript.Sampler;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -19,11 +24,13 @@ public class PantryFoodItemAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private List<FoodItem> mFoodItems;
     private boolean mShowCheckBox;
+    private boolean mPantryViewDonationResponseContext;
 
-    public PantryFoodItemAdapter(Context context, List<FoodItem> foodItems, boolean showCheckBox) {
+    public PantryFoodItemAdapter(Context context, List<FoodItem> foodItems, boolean showCheckBox, boolean PantryViewDonationResponse) {
         mContext = context;
         mFoodItems = foodItems;
         mShowCheckBox = showCheckBox;
+        mPantryViewDonationResponseContext = PantryViewDonationResponse;
     }
 
     @Override
@@ -69,7 +76,7 @@ public class PantryFoodItemAdapter extends RecyclerView.Adapter {
 
         public PantryFoodItemViewHolder(View itemView) {
             super(itemView);
-            mFirebaseManager = new FirebaseManager((PantryViewDonation)mContext);
+            mFirebaseManager = (mPantryViewDonationResponseContext) ? new FirebaseManager((PantryViewDonationResponse)mContext) : new FirebaseManager((PantryViewDonation)mContext);
             mFoodItemLayout = itemView.findViewById(R.id.food_item);
             mFoodNameView = mFoodItemLayout.findViewById(R.id.food_name);
             mExpDateView = mFoodItemLayout.findViewById(R.id.expiration_text);
