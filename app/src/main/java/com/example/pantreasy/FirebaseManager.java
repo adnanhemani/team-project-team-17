@@ -1,5 +1,6 @@
 package com.example.pantreasy;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.provider.ContactsContract;
@@ -31,8 +32,8 @@ public class FirebaseManager {
     private FirebaseStorage mStorage;
     private StorageReference mStorageRef;
 
-    public FirebaseManager(AppCompatActivity activity) {
-        FirebaseApp.initializeApp(activity);
+    public FirebaseManager(Context context) {
+        FirebaseApp.initializeApp(context);
         database = FirebaseDatabase.getInstance();
         mProfiles = database.getReference("Profiles");
         mDonationItems = database.getReference("Donations");
@@ -196,11 +197,20 @@ public class FirebaseManager {
         String phoneNumber = (String) h.get("phoneNumber");
         String address = (String) h.get("address");
         String description = (String) h.get("description");
-        return new Profile(imageName, name, phoneNumber, address, description, null, null);
-    }
-
-    public void confirmDonation(String donationUUID) {
-        mProfiles.child(profileName).child("postedDonationUUIDs").child(donation.UUID).setValue(donation.UUID);
-
+        HashMap<String, String> postedDonations = (HashMap<String, String>) h.get("postedDonationUUIDs");
+        List<String> posted = new ArrayList<>();
+        if (postedDonations != null) {
+            for (String s : postedDonations.keySet()) {
+                posted.add(s);
+            }
+        }
+        HashMap<String, String> requestedDonations = (HashMap<String, String>) h.get("requestedDonationUUIDs");
+        List<String> requested = new ArrayList<>();
+        if (requestedDonations != null) {
+            for (String s : requestedDonations.keySet()) {
+                requested.add(s);
+            }
+        }
+        return new Profile(imageName, name, phoneNumber, address, description, posted, requested);
     }
 }

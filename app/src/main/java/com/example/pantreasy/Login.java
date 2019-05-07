@@ -14,12 +14,14 @@ public class Login extends AppCompatActivity {
 
         Button donorLogin = findViewById(R.id.donor_account);
         Button pantryLogin = findViewById(R.id.pantry_account);
+        Utils.updateGlobals(this, "Berkeley Food Pantry");
 
         donorLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToDonorHome = new Intent(Login.this, DonorHomeActivity.class);
                 Login.this.startActivity(goToDonorHome);
+
             }
         });
 
@@ -31,7 +33,4 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-
-
-
 }

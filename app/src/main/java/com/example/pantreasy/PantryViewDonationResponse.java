@@ -72,16 +72,16 @@ public class PantryViewDonationResponse extends AppCompatActivity {
 
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(PantryViewDonationResponse.this));
                 setOnClickForHomeButton();
-                if (mDonationItem.confirmed < 0) {
-                    mConfirmedText.setText("Rejected");
-                    mConfirmedText.setBackgroundColor(Color.RED);
-                } else if (mDonationItem.confirmed == 0) {
-                    mConfirmedText.setText("Awaiting Response");
-                    mConfirmedText.setBackgroundColor(Color.GRAY);
-                } else {
-                    mConfirmedText.setText("Confirmed");
-                    mConfirmedText.setBackgroundColor(Color.GREEN);
-                }
+//                if (mDonationItem.confirmed < 0) {
+//                    mConfirmedText.setText("Rejected");
+//                    mConfirmedText.setBackgroundColor(Color.RED);
+//                } else if (mDonationItem.confirmed == 0) {
+//                    mConfirmedText.setText("Awaiting Response");
+//                    mConfirmedText.setBackgroundColor(Color.GRAY);
+//                } else {
+//                    mConfirmedText.setText("Confirmed");
+//                    mConfirmedText.setBackgroundColor(Color.GREEN);
+//                }
                 setAdapterAndUpdateData();
             }
 
