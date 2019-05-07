@@ -65,6 +65,7 @@ public class PantryResponseItemAdapter extends RecyclerView.Adapter {
         public OnSuccessListener<byte[]> mImageSuccessListener;
         public ValueEventListener mProfileListener;
         public Profile mProfile;
+        public DonorResponseItem mResponseItem;
 
         public DonationItemViewHolder(View itemView) {
             super(itemView);

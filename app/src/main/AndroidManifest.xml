@@ -7,6 +7,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service
+            android:name=".DatabaseUpdates"
+            android:exported="false"/>
         <activity
             android:name=".Login"
             android:label="login">
@@ -25,6 +28,7 @@
         <activity android:name=".PantryViewDonationsActivity"/>
         <activity android:name=".PantryViewDonation"/>
         <activity android:name=".PantryViewDonationResponse"/>
+
 
         <meta-data
             android:name="preloaded_fonts"

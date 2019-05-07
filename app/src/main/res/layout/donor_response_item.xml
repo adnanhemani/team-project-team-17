@@ -55,14 +55,6 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="121dp" />
 
-            <ImageButton
-                android:id="@+id/check_icon"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:background="@drawable/round_checked"
-                app:layout_constraintBottom_toBottomOf="@+id/linearLayout6"
-                app:layout_constraintEnd_toEndOf="@+id/distance_text" />
-
             <TextView
                 android:id="@+id/pantry_name"
                 android:layout_width="wrap_content"
@@ -150,6 +142,13 @@
                     android:textSize="12sp" />
 
             </LinearLayout>
+
+            <RadioButton
+                android:id="@+id/donors_pantry_response_item_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout6"
+                app:layout_constraintEnd_toEndOf="@+id/distance_text" />
 
         </android.support.constraint.ConstraintLayout>
 

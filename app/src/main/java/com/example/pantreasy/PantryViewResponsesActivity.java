@@ -52,7 +52,9 @@ public class PantryViewResponsesActivity extends AppCompatActivity {
         mDonationListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mDonations.add(mFirebaseManager.getDonationFromDataSnapshot(dataSnapshot));
+                DonationItem d = mFirebaseManager.getDonationFromDataSnapshot(dataSnapshot);
+                if (d != null)
+                    mDonations.add(d);
                 setAdapterAndUpdateData();
             }
 
