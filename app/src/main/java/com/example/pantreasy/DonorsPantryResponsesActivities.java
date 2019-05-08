@@ -36,6 +36,7 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
     private ImageButton mConfirmButton;
     private ImageView mBlurredBackground;
     private CardView mConfirmationPopup;
+    private ImageButton mRefreshButton;
 
     private Button mPopupOkayButton;
     private Button mAddAnotherDonationButton;
@@ -55,6 +56,8 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mHomeButton = mLayout.findViewById(R.id.home_button);
         mConfirmButton = mLayout.findViewById(R.id.check_button_wrapper);
+        mRefreshButton = mLayout.findViewById(R.id.refreshButton);
+
         mBlurredBackground = mLayout.findViewById(R.id.blurred_background_response_view);
         mConfirmationPopup = mLayout.findViewById(R.id.response_confirmed_popup);
         mPopupOkayButton = mConfirmationPopup.findViewById(R.id.ok_button);
@@ -65,6 +68,7 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
         setOnClickForHomeButton();
         setOnClickForConfirmButton();
         setOnClickforPopupButtons();
+        setOnClickForRefreshButton();
 
         mReceiver = new BroadcastReceiver() {
             @Override
@@ -91,6 +95,15 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
         for (DonationItem d : donations) {
             mResponseItems.addAll(d.responseItems);
         }
+    }
+
+    private void setOnClickForRefreshButton() {
+        mRefreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.updateGlobals(DonorsPantryResponsesActivities.this, "Catalyst Cafe");
+            }
+        });
     }
 
     private void setOnClickForHomeButton() {

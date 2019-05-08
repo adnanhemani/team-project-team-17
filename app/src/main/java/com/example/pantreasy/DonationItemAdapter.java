@@ -27,7 +27,13 @@ public class DonationItemAdapter extends RecyclerView.Adapter {
 
     public DonationItemAdapter(Context context, List<DonationItem> donationItems) {
         mContext = context;
-        mDonations = donationItems;
+        ArrayList<DonationItem> l = new ArrayList<>();
+        for (int i = 0; i < donationItems.size(); i++) {
+            DonationItem item = donationItems.get(i);
+            if (item.getAvailableFoodItems().size() > 0)
+                l.add(item);
+        }
+        mDonations = l;
     }
 
     @Override
