@@ -32,44 +32,43 @@ public class Login extends AppCompatActivity {
         donorLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToDonorHome = new Intent(Login.this, DonorHomeActivity.class);
-                Login.this.startActivity(goToDonorHome);
-
-//                mAuth = FirebaseAuth.getInstance();
-//                mAuth.signInWithEmailAndPassword(username_et.getText().toString(), password_et.getText().toString()).addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            // Sign in success, update UI with the signed-in user's information
-//                            Intent goToDonorHome = new Intent(Login.this, DonorHomeActivity.class);
-//                            Login.this.startActivity(goToDonorHome);
-//                        } else {
-//                            Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
+                mAuth = FirebaseAuth.getInstance();
+                mAuth.signInWithEmailAndPassword(username_et.getText().toString(), password_et.getText().toString()).addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Utils.updateGlobals(Login.this, "Berkeley Food Pantry");
+                            Utils.updateListOfAllDonationsAndProfiles(Login.this);
+                            Intent goToDonorHome = new Intent(Login.this, DonorHomeActivity.class);
+                            Login.this.startActivity(goToDonorHome);
+                        } else {
+                            Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
 
         pantryLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToPantryHome = new Intent(Login.this, PantryHomeActivity.class);
-                Login.this.startActivity(goToPantryHome);
+//                Intent goToPantryHome = new Intent(Login.this, PantryHomeActivity.class);
+//                Login.this.startActivity(goToPantryHome);
 
-//                mAuth = FirebaseAuth.getInstance();
-//                mAuth.signInWithEmailAndPassword(username_et.getText().toString(), password_et.getText().toString()).addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            // Sign in success, update UI with the signed-in user's information
-//                            Intent goToPantryHome = new Intent(Login.this, PantryHomeActivity.class);
-//                            Login.this.startActivity(goToPantryHome);
-//                        } else {
-//                            Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
+                mAuth = FirebaseAuth.getInstance();
+                mAuth.signInWithEmailAndPassword(username_et.getText().toString(), password_et.getText().toString()).addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Intent goToPantryHome = new Intent(Login.this, PantryHomeActivity.class);
+                            Login.this.startActivity(goToPantryHome);
+                        } else {
+                            Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
     }

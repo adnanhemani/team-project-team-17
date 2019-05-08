@@ -97,6 +97,7 @@ public class PantryResponseItemAdapter extends RecyclerView.Adapter {
                 mConfirmationText.setText("Confirmed");
                 mConfirmationText.setBackgroundColor(Color.GREEN);
             }
+
             mItemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
