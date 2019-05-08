@@ -69,6 +69,7 @@ public class PantryViewResponsesActivity extends AppCompatActivity {
 
     private void setAdapterAndUpdateData() {
         if (((Pantreasy)getApplication()).getRequestedDonations() == null) return;
+        Pantreasy p = ((Pantreasy)getApplication());
         mAdapter = new PantryResponseItemAdapter(this, ((Pantreasy)getApplication()).getRequestedDonations());
         mRecyclerView.setAdapter(mAdapter);
     }

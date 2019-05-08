@@ -141,7 +141,7 @@ public class PantryViewDonation extends AppCompatActivity {
                         }
                     }
                 }
-                DonorResponseItem r = new DonorResponseItem(currentProfileName, "We would like the following items: " + foodItemsWanted, java.util.UUID.randomUUID().toString(), mDonationItem.UUID);
+                DonorResponseItem r = new DonorResponseItem(currentProfileName, "We would like the following items: " + foodItemsWanted, java.util.UUID.randomUUID().toString(), mDonationItem.UUID, 0);
                 mFirebaseManager.addResponse(currentProfileName, mDonationItem, r);
             }
         });

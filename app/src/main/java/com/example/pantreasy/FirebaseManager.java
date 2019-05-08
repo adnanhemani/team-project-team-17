@@ -3,9 +3,7 @@ package com.example.pantreasy;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -88,7 +86,6 @@ public class FirebaseManager {
         if (h == null)
             return null;
         String UUID = (String) h.get("UUID");
-        int confirmed = ((Long)h.get("confirmed")).intValue();
         ArrayList<HashMap> foodItemData = (ArrayList<HashMap>) h.get("foodItems");
         List foodItems = foodItemsFromArrayList (foodItemData);
         boolean pickup = (boolean) h.get("pickup");
@@ -106,10 +103,11 @@ public class FirebaseManager {
         for (Object k : responseItemData.keySet()) {
             HashMap<String, Object> responseMap = (HashMap<String, Object>)responseItemData.get(k);
             String UUID = (String) responseMap.get("UUID");
+            int confirmed = ((Long)responseMap.get("confirmed")).intValue();
             String comment = (String) responseMap.get("comment");
             String pantryProfileName = (String) responseMap.get("pantryProfileName");
             String donationUUID = (String) responseMap.get("donationUUID");
-            responseItems.add(new DonorResponseItem(pantryProfileName, comment, UUID, donationUUID));
+            responseItems.add(new DonorResponseItem(pantryProfileName, comment, UUID, donationUUID, confirmed));
         }
         return responseItems;
     }
