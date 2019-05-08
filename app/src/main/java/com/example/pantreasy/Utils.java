@@ -1,8 +1,14 @@
 package com.example.pantreasy;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.provider.ContactsContract;
+
+import static java.security.AccessController.getContext;
 
 public class Utils {
+    private static final int RSS_JOB_ID = 1000;
     /**
      * Stack Blur Algorithm by Mario Klingemann <mario@quasimondo.com>
      */
@@ -209,5 +215,16 @@ public class Utils {
         bitmap.setPixels(pix, 0, w, 0, 0, w, h);
 
         return (bitmap);
+    }
+
+    public static void updateGlobals(Context context, String profileName) {
+        Intent serviceIntent = new Intent();
+        serviceIntent.putExtra("profileName", profileName);
+        DatabaseUpdates.enqueueWork(context, DatabaseUpdates.class, 12345, serviceIntent);
+    }
+
+    public static void updateListOfAllDonationsAndProfiles(Context context) {
+        Intent serviceIntent = new Intent();
+        DatabaseUpdatesFull.enqueueWork(context, DatabaseUpdatesFull.class, 54321, serviceIntent);
     }
 }

@@ -37,6 +37,8 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            Utils.updateGlobals(Login.this, "Berkeley Food Pantry");
+                            Utils.updateListOfAllDonationsAndProfiles(Login.this);
                             Intent goToDonorHome = new Intent(Login.this, DonorHomeActivity.class);
                             Login.this.startActivity(goToDonorHome);
                         } else {
@@ -66,6 +68,4 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-
-
 }

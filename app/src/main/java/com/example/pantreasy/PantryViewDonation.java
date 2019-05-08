@@ -13,8 +13,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -39,20 +41,21 @@ public class PantryViewDonation extends AppCompatActivity {
     private PantryFoodItemAdapter mAdapter;
     private ImageView mBlurredBackground;
     private CardView mPopupMessage;
+    private TextView mDonorPhoneNumber;
 
     private Button mViewMoreDonations;
     private Button mOkButton;
 
-    private ValueEventListener mValueEventListener;
     private String mDonationUUID;
+    private LinearLayoutManager mLinearLayoutManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantry_donate_view);
-
+        Pantreasy p = ((Pantreasy)getApplicationContext());
+        mLinearLayoutManager = new LinearLayoutManager(PantryViewDonation.this);
         mFirebaseManager = new FirebaseManager(this);
-
         mLayout = findViewById(R.id.donor_response_view);
         mDonorName = mLayout.findViewById(R.id.donor_name_pantry_view_donation);
         mRecyclerView = mLayout.findViewById(R.id.recycler_view);
@@ -63,44 +66,33 @@ public class PantryViewDonation extends AppCompatActivity {
         mHomeButton = mLayout.findViewById(R.id.home_button);
         mBlurredBackground = mLayout.findViewById(R.id.blurred_background);
         mPopupMessage = mLayout.findViewById(R.id.pantry_request_sent_layout);
+        mDonorPhoneNumber = mLayout.findViewById(R.id.phone_number_text);
 
         mViewMoreDonations = mPopupMessage.findViewById(R.id.back_button_popup);
         mOkButton = mPopupMessage.findViewById(R.id.ok_button);
 
         mBlurredBackground.setVisibility(View.GONE);
         mPopupMessage.setVisibility(View.GONE);
-        setValueEventListener();
+
         initializeDonationItem();
-    }
 
-    private void setValueEventListener() {
-        mValueEventListener = new ValueEventListener() {
+        mDonorName.setText(mDonationItem.profileName);
+        if (mDonationItem.pickup)
+            mPickupOrDropoffText.setText("Pick-Up");
+        else
+            mPickupOrDropoffText.setText("Drop-Off");
+        mDateTime.setText(mDonationItem.time);
+        Profile profile = ((Pantreasy)getApplication()).allProfiles.get(mDonationItem.profileName);
+        mAddress.setText(profile.address);
+        mDonorPhoneNumber.setText(profile.phoneNumber);
 
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mDonationItem = mFirebaseManager.getDonationFromDataSnapshot(dataSnapshot);
-                mDonorName.setText(mDonationItem.profileName);
-                if (mDonationItem.pickup)
-                    mPickupOrDropoffText.setText("Pick-Up");
-                else
-                    mPickupOrDropoffText.setText("Drop-Off");
-                mDateTime.setText(mDonationItem.time);
-                //mAddress.setText(mDonationItem.profile.address);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        setOnClickForHomeButton();
+        setOnClickForConfirmButton();
+        setOnClickForViewMoreDonationsButton();
+        setOnClickForOkButton();
 
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(PantryViewDonation.this));
-                setOnClickForHomeButton();
-                setOnClickForConfirmButton();
-                setOnClickForViewMoreDonationsButton();
-                setOnClickForOkButton();
-
-                setAdapterAndUpdateData();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        };
+        setAdapterAndUpdateData();
     }
 
     private void setOnClickForOkButton() {
@@ -136,11 +128,21 @@ public class PantryViewDonation extends AppCompatActivity {
                 mBlurredBackground.setImageBitmap(blurBm);
                 mBlurredBackground.setVisibility(View.VISIBLE);
                 mPopupMessage.setVisibility(View.VISIBLE);
-                Bitmap icon = BitmapFactory.decodeResource(PantryViewDonation.this.getResources(), R.drawable.pantry_a_profile_pic);
-                Profile p = new Profile("Berkeley_Food_Pantry.JPEG", "Berkeley Food Pantry", "510-510-5105", "1111 Berkeley Way", "We are the Berkeley Food Pantry", null, null);
-                mFirebaseManager.addProfile(icon, p);
-                DonorResponseItem r = new DonorResponseItem("Berkeley Food Pantry", "We would like everything you're offering!", java.util.UUID.randomUUID().toString(), mDonationItem.UUID);
-                mFirebaseManager.addResponse("Berkeley Food Pantry", mDonationItem, r);
+                Pantreasy p = ((Pantreasy)getApplication());
+                String currentProfileName = p.getCurrentProfile().name;
+                String foodItemsWanted = "";
+                for (int i = 0; i < mLinearLayoutManager.getItemCount(); i++) {
+                    ConstraintLayout pantryFoodItemView = (ConstraintLayout) mLinearLayoutManager.findViewByPosition(i);
+                    CheckBox box = pantryFoodItemView.findViewById(R.id.checkBox);
+                    if (box.isChecked()) {
+                        foodItemsWanted += ((TextView) pantryFoodItemView.findViewById(R.id.food_name)).getText();
+                        if (i < mLinearLayoutManager.getItemCount() - 1) {
+                            foodItemsWanted += ", ";
+                        }
+                    }
+                }
+                DonorResponseItem r = new DonorResponseItem(currentProfileName, "We would like the following items: " + foodItemsWanted, java.util.UUID.randomUUID().toString(), mDonationItem.UUID);
+                mFirebaseManager.addResponse(currentProfileName, mDonationItem, r);
             }
         });
     }
@@ -160,13 +162,15 @@ public class PantryViewDonation extends AppCompatActivity {
         Bundle intentExtras = goToSecondActivityIntent.getExtras();
         if(intentExtras!=null) {
             mDonationUUID = (String) intentExtras.get("donation_UUID");
-            mFirebaseManager.getDonation(mDonationUUID, mValueEventListener);
+            for (int i = 0; i < ((Pantreasy)getApplication()).allDonations.size(); i++) {
+                DonationItem d = ((Pantreasy)getApplication()).allDonations.get(i);
+                if (d.UUID.equals(mDonationUUID))
+                    mDonationItem = d;
+            }
         }
     }
 
     private void setAdapterAndUpdateData() {
-        // create a new adapter with the updated mComments array
-        // this will "refresh" our recycler view
         mAdapter = new PantryFoodItemAdapter(this, mDonationItem.foodItems, true, false);
         mRecyclerView.setAdapter(mAdapter);
     }

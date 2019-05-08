@@ -1,6 +1,10 @@
 package com.example.pantreasy;
 
+<<<<<<< HEAD
 import android.content.Intent;
+=======
+import android.content.Context;
+>>>>>>> a714958a3358fddee2cfd2b16d46e25384a862c7
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.provider.ContactsContract;
@@ -41,8 +45,8 @@ public class FirebaseManager {
     private FirebaseStorage mStorage;
     private StorageReference mStorageRef;
 
-    public FirebaseManager(AppCompatActivity activity) {
-        FirebaseApp.initializeApp(activity);
+    public FirebaseManager(Context context) {
+        FirebaseApp.initializeApp(context);
         database = FirebaseDatabase.getInstance();
         mProfiles = database.getReference("Profiles");
         mDonationItems = database.getReference("Donations");
@@ -97,7 +101,6 @@ public class FirebaseManager {
         if (h == null)
             return null;
         String UUID = (String) h.get("UUID");
-        int confirmed = ((Long)h.get("confirmed")).intValue();
         ArrayList<HashMap> foodItemData = (ArrayList<HashMap>) h.get("foodItems");
         List foodItems = foodItemsFromArrayList (foodItemData);
         boolean pickup = (boolean) h.get("pickup");
@@ -129,13 +132,6 @@ public class FirebaseManager {
         for (Object s : data.keySet()) {
             HashMap<String, Object> donation = (HashMap<String, Object>) data.get(s);
             String UUID = (String) donation.get("UUID");
-            int confirmed;
-            try {
-                confirmed = ((Long)donation.get("confirmed")).intValue();
-            } catch (Exception e) {
-                confirmed = 0;
-            }
-
             ArrayList<HashMap> foodItemData = (ArrayList<HashMap>) donation.get("foodItems");
             List foodItems = foodItemsFromArrayList (foodItemData);
             boolean pickup = (boolean) donation.get("pickup");
@@ -212,11 +208,20 @@ public class FirebaseManager {
         String phoneNumber = (String) h.get("phoneNumber");
         String address = (String) h.get("address");
         String description = (String) h.get("description");
-        return new Profile(imageName, name, phoneNumber, address, description, null, null);
+        HashMap<String, String> postedDonations = (HashMap<String, String>) h.get("postedDonationUUIDs");
+        List<String> posted = new ArrayList<>();
+        if (postedDonations != null) {
+            for (String s : postedDonations.keySet()) {
+                posted.add(s);
+            }
+        }
+        HashMap<String, String> requestedDonations = (HashMap<String, String>) h.get("requestedDonationUUIDs");
+        List<String> requested = new ArrayList<>();
+        if (requestedDonations != null) {
+            for (String s : requestedDonations.keySet()) {
+                requested.add(s);
+            }
+        }
+        return new Profile(imageName, name, phoneNumber, address, description, posted, requested);
     }
-
-//    public void confirmDonation(String donationUUID) {
-//        mProfiles.child(profileName).child("postedDonationUUIDs").child(donation.UUID).setValue(donation.UUID);
-//
-//    }
 }

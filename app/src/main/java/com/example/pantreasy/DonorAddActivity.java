@@ -28,16 +28,13 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.List;
-import java.util.UUID;
 
 import java.util.ArrayList;
 
 public class DonorAddActivity extends AppCompatActivity {
     private FirebaseManager mFirebaseManager;
-    private OnSuccessListener<byte[]> mImageDownloadSuccessListener;
     private FirebaseAuth mAuth;
     private ArrayList<FoodItem> mFoodList;
     private List<Bitmap> mBitmaps;
