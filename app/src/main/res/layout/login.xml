@@ -5,31 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".MainActivity">
+    tools:context=".Login">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:cropToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/log_in" />
+        app:layout_constraintVertical_bias="0"
+        android:adjustViewBounds="false"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/log_in"
+        android:gravity="fill_horizontal|fill_vertical"/>
 
     <TextView
         android:id="@+id/pantreasy"
-        android:layout_width="150dp"
-        android:layout_height="38dp"
+        android:layout_width="169dp"
+        android:layout_height="34dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:text="PANTREASY"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.53"
@@ -37,17 +40,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="Username"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.144"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pantreasy" android:textStyle="bold" android:textSize="18sp"/>
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:text="Username"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pantreasy" />
 
     <TextView
             android:id="@+id/password"
@@ -61,10 +66,10 @@
 
     <TextView
         android:id="@+id/go_to"
-        android:layout_width="53dp"
+        android:layout_width="75dp"
         android:layout_height="25dp"
         android:layout_marginTop="70dp"
-        android:text="Go To"
+        android:text="Go To:"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/password"

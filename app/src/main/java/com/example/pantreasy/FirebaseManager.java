@@ -199,8 +199,8 @@ public class FirebaseManager {
         return new Profile(imageName, name, phoneNumber, address, description, null, null);
     }
 
-    public void confirmDonation(String donationUUID) {
-        mProfiles.child(profileName).child("postedDonationUUIDs").child(donation.UUID).setValue(donation.UUID);
-
-    }
+//    public void confirmDonation(String donationUUID) {
+//        mProfiles.child(profileName).child("postedDonationUUIDs").child(donation.UUID).setValue(donation.UUID);
+//
+//    }
 }
