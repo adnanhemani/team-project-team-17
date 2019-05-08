@@ -139,6 +139,7 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
                 mBlurredBackground.setImageBitmap(blurBm);
                 mBlurredBackground.setVisibility(View.VISIBLE);
                 mConfirmationPopup.setVisibility(View.VISIBLE);
+                mRefreshButton.callOnClick();
             }
         });
     }

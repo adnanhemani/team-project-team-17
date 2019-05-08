@@ -62,7 +62,8 @@
         app:layout_constraintEnd_toEndOf="@+id/food_name_text"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/pencil_icon"
-        app:layout_constraintTop_toBottomOf="@+id/pencil_icon" />
+        app:layout_constraintTop_toBottomOf="@+id/pencil_icon"
+        />
 
     <TextView
         android:id="@+id/title_text"
@@ -142,13 +143,14 @@
         android:fontFamily="@font/roboto"
         android:inputType="textPersonName"
         android:singleLine="true"
-        android:text="Food Name"
         android:textColor="#808080"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/gray_background"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/pencil_icon"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:text=""
+        android:hint="Food Name"/>
 
     <EditText
         android:id="@+id/expiration_date_text"
@@ -170,7 +172,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/pencil_icon"
         app:layout_constraintTop_toBottomOf="@+id/dont_use_me_line3"
-        android:text="Expiration Date" />
+        android:text=""
+        android:hint="Expiration Date"/>
 
     <EditText
         android:id="@+id/food_quantity_text"
@@ -186,12 +189,13 @@
         android:fontFamily="@font/roboto"
         android:inputType="textPersonName"
         android:singleLine="true"
-        android:text="Weight/Quantity"
+        android:text=""
         android:textColor="#808080"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/gray_background"
         app:layout_constraintStart_toEndOf="@+id/basket_icon"
-        app:layout_constraintTop_toBottomOf="@+id/dont_use_me_line" />
+        app:layout_constraintTop_toBottomOf="@+id/dont_use_me_line"
+        android:hint="Weight/Quantity"/>
 
     <ImageView
         android:id="@+id/pencil_icon"

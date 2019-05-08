@@ -42,8 +42,8 @@ public class DonorAddActivity extends AppCompatActivity {
     private FoodItemAdapter mAdapter;
     private Button mAddToListButton;
     private Button mClearListButton;
-    private TextView mFoodNameText;
-    private TextView mExpirationDateText;
+    private EditText mFoodNameText;
+    private EditText mExpirationDateText;
     private ImageView mBlurredBackgroundImage;
     private ImageView mFoodImage;
     private CardView mDonorAddPopupCard;
@@ -51,7 +51,7 @@ public class DonorAddActivity extends AppCompatActivity {
     private ImageButton mCameraButton;
     private RecyclerView mRecyclerView;
     private ImageButton mCheckButton;
-    private TextView mQuantityText;
+    private EditText mQuantityText;
     private RadioButton mPerishableButton;
     private CardView mRequestSentPopup;
     private Button mRequestSentConfirmButton;

@@ -26,6 +26,7 @@ public class PantryViewDonationResponse extends AppCompatActivity {
     private Profile mProfile;
     private TextView mConfirmedText;
     private DonorResponseItem mResponse;
+    private TextView mPhoneNumber;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class PantryViewDonationResponse extends AppCompatActivity {
         mAddress = mLayout.findViewById(R.id.address_text);
         mHomeButton = mLayout.findViewById(R.id.home_button);
         mConfirmedText = mLayout.findViewById(R.id.confirmed_text);
+        mPhoneNumber = mLayout.findViewById(R.id.phone_number_text);
 
         mDonorName.setText(mDonationItem.profileName);
         if (mDonationItem.pickup)
@@ -50,7 +52,7 @@ public class PantryViewDonationResponse extends AppCompatActivity {
             mPickupOrDropoffText.setText("Drop-Off");
         mDateTime.setText(mDonationItem.time);
         mAddress.setText(mProfile.address);
-
+        mPhoneNumber.setText(mProfile.phoneNumber);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(PantryViewDonationResponse.this));
         setOnClickForHomeButton();
         mResponse = null;
