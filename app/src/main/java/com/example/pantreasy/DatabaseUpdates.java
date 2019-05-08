@@ -106,9 +106,6 @@ public class DatabaseUpdates extends JobIntentService {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 DonationItem d = mFirebaseManager.getDonationFromDataSnapshot(dataSnapshot);
-                for (int i = 0; i < d.responseItems.size(); i++) {
-                    pantryProfileSet.add(d.responseItems.get(i).pantryProfileName);
-                }
                 mDonationsPosted.add(d);
 
                 getPantryProfilesIfDoneGettingDonationRequests();
@@ -138,7 +135,7 @@ public class DatabaseUpdates extends JobIntentService {
                     if (pantryProfileSet.contains(pantryName)) {
                         numUniquePantryProfiles--;
                         getImagesIfDone();
-                        return;
+                        continue;
                     }
                     pantryProfileSet.add(pantryName);
                     mFirebaseManager.getProfile(pantryName, mPantryProfileListener);
@@ -242,7 +239,7 @@ public class DatabaseUpdates extends JobIntentService {
     void updateGlobalsIfDone() {
         if (mPictures.size() != numUniquePantryProfiles + numUniqueDonorProfiles + 1 + foodItemSet.size()) return;
 
-        ((Pantreasy) this.getApplication()).setCurrentProfile(new Profile(mProfile.imageName, mProfile.name, mProfile.phoneNumber, mProfile.address, mProfile.description, mProfile.postedDonationUUIDs, mProfile.requestedDonationUUIDs));
+        ((Pantreasy) this.getApplication()).setCurrentProfile(mProfile);
         ((Pantreasy) this.getApplication()).setPostedDonations(mDonationsPosted);
         ((Pantreasy) this.getApplication()).setRequestedDonations(mDonationsRequested);
         ((Pantreasy) this.getApplication()).donorProfiles = new HashMap<>(donorProfiles);

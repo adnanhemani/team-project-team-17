@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DonorsPantryResponsesActivities extends AppCompatActivity {
-    private ArrayList<DonorResponseItem> mResponseItems;
     private RecyclerView mRecyclerView;
     private ConstraintLayout mLayout;
     private DonorResponseItemAdapter mAdapter;
@@ -37,19 +36,15 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
     private Button mPopupOkayButton;
     private Button mAddAnotherDonationButton;
 
-    private FirebaseManager mFirebaseManager;
-    private ValueEventListener mDonationUUIDListener;
-    private ValueEventListener mResponseListener;
+    private ArrayList<DonorResponseItem> mResponseItems;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.donor_response_view);
 
-        mFirebaseManager = new FirebaseManager(this);
-        mResponseItems = new ArrayList<DonorResponseItem>();
-        initializeValueEventListeners();
 
+        initResponseItems();
 
         mLayout = findViewById(R.id.donor_response_view);
         mRecyclerView = mLayout.findViewById(R.id.response_items_recycler);
@@ -67,41 +62,17 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
         setOnClickForConfirmButton();
         setOnClickforPopupButtons();
 
+        setAdapterAndUpdateData();
     }
 
-    private void initializeValueEventListeners() {
-        mResponseListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                DonationItem d = mFirebaseManager.getDonationFromDataSnapshot(dataSnapshot);
-                for (int i = 0; i < d.responseItems.size(); i++) {
-                    mResponseItems.add(d.responseItems.get(i));
-                }
-                setAdapterAndUpdateData();
-            }
+    private void initResponseItems() {
+        mResponseItems = new ArrayList<>();
+        Pantreasy p = ((Pantreasy)getApplication());
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        };
-
-        mDonationUUIDListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<String> donationUUIDs = mFirebaseManager.getDonationUUIDsFromSnapshot(dataSnapshot);
-                for (int i = 0; i < donationUUIDs.size(); i++) {
-                    mFirebaseManager.getDonation(donationUUIDs.get(i), mResponseListener);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        };
-
-        mFirebaseManager.getDonationUUIDs("Catalyst Cafe", mDonationUUIDListener);
+        List<DonationItem> donations = ((Pantreasy)getApplication()).getPostedDonations();
+        for (DonationItem d : donations) {
+            mResponseItems.addAll(d.responseItems);
+        }
     }
 
     private void setOnClickForHomeButton() {
@@ -115,6 +86,7 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
     }
 
     private void setOnClickForConfirmButton() {
+        //TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         mConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,8 +123,6 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
     }
 
     private void setAdapterAndUpdateData() {
-        // create a new adapter with the updated mComments array
-        // this will "refresh" our recycler view
         mAdapter = new DonorResponseItemAdapter(this, this.mResponseItems);
         mRecyclerView.setAdapter(mAdapter);
     }

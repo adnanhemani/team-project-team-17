@@ -14,7 +14,6 @@ public class Login extends AppCompatActivity {
 
         Button donorLogin = findViewById(R.id.donor_account);
         Button pantryLogin = findViewById(R.id.pantry_account);
-        Utils.updateGlobals(this, "Berkeley Food Pantry");
         Utils.updateListOfAllDonationsAndProfiles(this);
 
         donorLogin.setOnClickListener(new View.OnClickListener() {
