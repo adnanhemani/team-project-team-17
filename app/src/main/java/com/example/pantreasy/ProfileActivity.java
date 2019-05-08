@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -28,6 +29,20 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
+        TextView profile_name = findViewById(R.id.textView10);
+        TextView phone = findViewById(R.id.textView11);
+        TextView addr = findViewById(R.id.textView12);
+        TextView bio = findViewById(R.id.textView13);
+        ImageView profile_pic = findViewById(R.id.profile_picture);
+
+
+        Profile this_profile = ((Pantreasy)getApplication()).getCurrentProfile();
+        if (this_profile != null) {
+            profile_name.setText(this_profile.name);
+            phone.setText(this_profile.phoneNumber);
+            addr.setText(this_profile.address);
+            bio.setText(this_profile.description);
+        }
 
         mHomeButton = findViewById(R.id.home_button);
         mCameraButton = findViewById(R.id.camera_button);
