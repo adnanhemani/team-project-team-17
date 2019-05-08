@@ -37,7 +37,6 @@
         android:text="DONATION"
         android:textColor="@android:color/black"
         android:textSize="24sp"
-        android:textStyle="bold"
         app:fontFamily="sans-serif-medium"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toEndOf="@+id/home_button"

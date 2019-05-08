@@ -31,6 +31,7 @@ public class PantryViewDonationsActivity extends AppCompatActivity {
     private DonationItemAdapter mAdapter;
     private ImageButton mHomeButton;
     private BroadcastReceiver mReceiver;
+    private ImageButton mRefreshButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,8 +41,11 @@ public class PantryViewDonationsActivity extends AppCompatActivity {
         mRecyclerView = mLayout.findViewById(R.id.donation_list_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mHomeButton = mLayout.findViewById(R.id.home_button);
+        mRefreshButton = mLayout.findViewById(R.id.refreshButton);
 
         setOnClickForHomeButton();
+        setOnClickForRefreshButton();
+
         setAdapterAndUpdateData();
         mReceiver = new BroadcastReceiver() {
             @Override
@@ -53,6 +57,16 @@ public class PantryViewDonationsActivity extends AppCompatActivity {
         getApplication().registerReceiver(mReceiver, new IntentFilter(((Pantreasy)getApplicationContext()).ALL_DONATIONS_AND_PROFILES_FILTER));
 
         Utils.updateListOfAllDonationsAndProfiles(this);
+    }
+
+    private void setOnClickForRefreshButton() {
+        mRefreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.updateGlobals(PantryViewDonationsActivity.this, "Berkeley Food Pantry");
+                Utils.updateListOfAllDonationsAndProfiles(PantryViewDonationsActivity.this);
+            }
+        });
     }
 
     private void setOnClickForHomeButton() {

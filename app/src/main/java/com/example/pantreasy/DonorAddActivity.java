@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.HashMap;
 import java.util.List;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class DonorAddActivity extends AppCompatActivity {
     private FirebaseManager mFirebaseManager;
     private FirebaseAuth mAuth;
     private ArrayList<FoodItem> mFoodList;
-    private List<Bitmap> mBitmaps;
+    private HashMap<String, Bitmap> mBitmaps;
     private FoodItemAdapter mAdapter;
     private Button mAddToListButton;
     private Button mClearListButton;
@@ -80,7 +81,7 @@ public class DonorAddActivity extends AppCompatActivity {
         signInAnonymously();
 
         mFoodList = new ArrayList<FoodItem>();
-        mBitmaps = new ArrayList<Bitmap>();
+        mBitmaps = new HashMap<>();
         ConstraintLayout layout = findViewById(R.id.donor_add_view);
         mFoodImage = layout.findViewById(R.id.main_image);
         mAddToListButton = layout.findViewById(R.id.add_to_list_button);
@@ -158,7 +159,7 @@ public class DonorAddActivity extends AppCompatActivity {
 
                 FoodItem fi = new FoodItem(foodName, foodName+".JPEG", expDate, quantity, perishable);
                 Bitmap bm = ((BitmapDrawable)mFoodImage.getDrawable()).getBitmap();
-                mBitmaps.add(bm);
+                mBitmaps.put(foodName, bm);
                 mFirebaseManager.uploadBitmap(bm, fi.imageName);
                 mFoodList.add(fi);
                 setAdapterAndUpdateData();
@@ -258,15 +259,13 @@ public class DonorAddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mRequestSentPopup.setVisibility(View.GONE);
                 mBlurredBackgroundImage.setVisibility(View.GONE);
-                // TODO
-                // Must create a new donation and add it to the firebase database
-                String profileNamePlaceholder = "Catalyst Cafe";
+                String profileName = ((Pantreasy)getApplication()).getCurrentProfile().name;
                 String time = mMonthInput.getText().toString() + " " + mDayInput.getText().toString() + ", " +
                         mHourInput.getText().toString() + ":" + mMinuteInput.getText().toString();
                 time += (mAmButton.isChecked()) ? " AM" : " PM";
                 boolean pickedUp = (mPickupOptionSpinner.getSelectedItem().toString().equalsIgnoreCase("PICKED UP")) ? true : false;
                 String UUID = java.util.UUID.randomUUID().toString();
-                mFirebaseManager.addDonation(profileNamePlaceholder, new DonationItem(profileNamePlaceholder, mFoodList, null, time, pickedUp, UUID));
+                mFirebaseManager.addDonation(profileName, new DonationItem(profileName, mFoodList, new ArrayList<DonorResponseItem>(), time, pickedUp, UUID, " "));
                 Intent viewResponses = new Intent(DonorAddActivity.this, DonorsPantryResponsesActivities.class);
                 DonorAddActivity.this.startActivity(viewResponses);
             }
@@ -274,8 +273,6 @@ public class DonorAddActivity extends AppCompatActivity {
     }
 
     private void setAdapterAndUpdateData() {
-        // create a new adapter with the updated mComments array
-        // this will "refresh" our recycler view
         mAdapter = new FoodItemAdapter(DonorAddActivity.this, mFoodList, mBitmaps);
         mRecyclerView.setAdapter(mAdapter);
     }

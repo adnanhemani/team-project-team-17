@@ -25,7 +25,6 @@
         android:text="DONOR RESPONSE"
         android:textColor="@android:color/black"
         android:textSize="24sp"
-        android:textStyle="bold"
         app:fontFamily="sans-serif-medium"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toEndOf="@+id/home_button"
@@ -55,5 +54,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <ImageButton
+        android:id="@+id/refreshButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="4dp"
+        android:background="#00FFFFFF"
+        android:elevation="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/home_button"
+        app:srcCompat="@drawable/refresh_icon" />
 
 </android.support.constraint.ConstraintLayout>

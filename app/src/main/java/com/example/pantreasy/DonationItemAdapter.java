@@ -27,19 +27,21 @@ public class DonationItemAdapter extends RecyclerView.Adapter {
 
     public DonationItemAdapter(Context context, List<DonationItem> donationItems) {
         mContext = context;
-        mDonations = donationItems;
+        ArrayList<DonationItem> l = new ArrayList<>();
+        for (int i = 0; i < donationItems.size(); i++) {
+            DonationItem item = donationItems.get(i);
+            if (item.getAvailableFoodItems().size() > 0)
+                l.add(item);
+        }
+        mDonations = l;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // here, we specify what kind of view each cell should have. In our case, all of them will have a view
         View view = LayoutInflater.from(mContext).inflate(R.layout.pantry_donate_item, parent, false);
         return new DonationItemViewHolder(view);
     }
 
-
-    // - get element from your dataset at this position
-    // - replace the contents of the view with that element
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         DonationItem donationItem = mDonations.get(position);
@@ -77,7 +79,7 @@ public class DonationItemAdapter extends RecyclerView.Adapter {
         void bind(final DonationItem donationItem) {
             mDonorName.setText(donationItem.profileName);
             mTime.setText(donationItem.time);
-            mDistance.setText("1000mi");
+            mDistance.setText("0m away");
             mItemList.setText(donationItem.foodListAsString());
             Profile p = ((Pantreasy) mContext.getApplicationContext()).allProfiles.get(donationItem.profileName);
             mDonorImage.setImageBitmap(((Pantreasy) mContext.getApplicationContext()).mAllPictures.get(p.imageName));

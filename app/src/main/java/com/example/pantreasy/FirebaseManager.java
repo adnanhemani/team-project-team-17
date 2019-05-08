@@ -1,17 +1,9 @@
 package com.example.pantreasy;
 
-<<<<<<< HEAD
-import android.content.Intent;
-=======
 import android.content.Context;
->>>>>>> a714958a3358fddee2cfd2b16d46e25384a862c7
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -55,6 +47,15 @@ public class FirebaseManager {
         mStorageRef = mStorage.getReferenceFromUrl("gs://pantreasy.appspot.com");
     }
 
+    public void confirmDonation(DonorResponseItem responseItem, DonationItem donation) {
+        mDonationItems.child(donation.UUID).child("responseItems").child(responseItem.UUID).child("confirmed").setValue(1);
+        mDonationItems.child(donation.UUID).child("itemsTaken").setValue(donation.itemsTaken + responseItem.indexesOfitemsToTake);
+    }
+
+    public void denyDonation(DonorResponseItem responseItem, DonationItem donation) {
+        mDonationItems.child(donation.UUID).child("responseItems").child(responseItem.UUID).child("confirmed").setValue(-1);
+    }
+
     public void addProfile(Bitmap bm, Profile profile) {
         uploadBitmap(bm, profile.imageName);
         mProfiles.child(profile.name).setValue(profile);
@@ -66,8 +67,6 @@ public class FirebaseManager {
     }
 
     public void addResponse(String profileName, DonationItem d, DonorResponseItem responseItem) {
-        //Todo
-        // Fix this so that it doesn't keep overwriting the same request
         mProfiles.child(profileName).child("requestedDonationUUIDs").child(d.UUID).setValue(d.UUID);
         mDonationItems.child(d.UUID).child("responseItems").child(responseItem.UUID).setValue(responseItem);
     }
@@ -108,7 +107,8 @@ public class FirebaseManager {
         String time = (String) h.get("time");
         HashMap responseItemData = (HashMap) h.get("responseItems");
         List<DonorResponseItem> responseItems = responseItemsFromHashmap(responseItemData);
-        return new DonationItem(profileName, foodItems, responseItems, time, pickup, UUID);
+        String itemsTaken = (String) h.get("itemsTaken");
+        return new DonationItem(profileName, foodItems, responseItems, time, pickup, UUID, itemsTaken);
     }
 
     private List<DonorResponseItem> responseItemsFromHashmap(HashMap responseItemData) {
@@ -118,10 +118,12 @@ public class FirebaseManager {
         for (Object k : responseItemData.keySet()) {
             HashMap<String, Object> responseMap = (HashMap<String, Object>)responseItemData.get(k);
             String UUID = (String) responseMap.get("UUID");
+            int confirmed = ((Long)responseMap.get("confirmed")).intValue();
             String comment = (String) responseMap.get("comment");
             String pantryProfileName = (String) responseMap.get("pantryProfileName");
             String donationUUID = (String) responseMap.get("donationUUID");
-            responseItems.add(new DonorResponseItem(pantryProfileName, comment, UUID, donationUUID));
+            String itemsToTake = (String) responseMap.get("indexesOfitemsToTake");
+            responseItems.add(new DonorResponseItem(pantryProfileName, comment, UUID, donationUUID, confirmed, itemsToTake));
         }
         return responseItems;
     }
@@ -129,6 +131,7 @@ public class FirebaseManager {
     public List<DonationItem> donationsFromSnapshot(DataSnapshot dataSnapshot) {
         List<DonationItem> result = new ArrayList<DonationItem>();
         HashMap data = (HashMap)dataSnapshot.getValue();
+        if (data == null) return result;
         for (Object s : data.keySet()) {
             HashMap<String, Object> donation = (HashMap<String, Object>) data.get(s);
             String UUID = (String) donation.get("UUID");
@@ -137,8 +140,9 @@ public class FirebaseManager {
             boolean pickup = (boolean) donation.get("pickup");
             String profileName = (String) donation.get("profileName");
             String time = (String) donation.get("time");
+            String itemsTaken = (String) donation.get("itemsTaken");
             // Add Response Items
-            result.add(new DonationItem(profileName, foodItems, null, time, pickup, UUID));
+            result.add(new DonationItem(profileName, foodItems, null, time, pickup, UUID, itemsTaken));
         }
         return result;
     }

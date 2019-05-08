@@ -44,7 +44,10 @@ public class DatabaseUpdates extends JobIntentService {
     public HashMap<String, Profile> pantryProfiles;
     public HashMap<String, Profile> donorProfiles;
 
-    private int numPantryProfiles;
+    private int numUniquePantryProfiles;
+    private int numUniqueDonorProfiles;
+    private Set<String> pantryProfileSet;
+    private Set<String> donorProfilesSet;
     private Set<String> foodItemSet;
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
@@ -61,7 +64,8 @@ public class DatabaseUpdates extends JobIntentService {
         pantryProfiles = new HashMap<>();
         donorProfiles = new HashMap<>();
 
-        numPantryProfiles = 0;
+        pantryProfileSet = new HashSet<>();
+        donorProfilesSet = new HashSet<>();
 
         mFirebaseManager.getProfile(profileName, mProfileListener);
     }
@@ -72,7 +76,6 @@ public class DatabaseUpdates extends JobIntentService {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Profile p = mFirebaseManager.getProfileFromDataSnapshot(dataSnapshot);
                 donorProfiles.put(p.name, p);
-
                 getImagesIfDone();
             }
             @Override
@@ -88,7 +91,6 @@ public class DatabaseUpdates extends JobIntentService {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Profile p = mFirebaseManager.getProfileFromDataSnapshot(dataSnapshot);
                 pantryProfiles.put(p.name, p);
-
                 getImagesIfDone();
             }
 
@@ -104,9 +106,6 @@ public class DatabaseUpdates extends JobIntentService {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 DonationItem d = mFirebaseManager.getDonationFromDataSnapshot(dataSnapshot);
-                for (int i = 0; i < d.responseItems.size(); i++) {
-                    numPantryProfiles++;
-                }
                 mDonationsPosted.add(d);
 
                 getPantryProfilesIfDoneGettingDonationRequests();
@@ -122,11 +121,26 @@ public class DatabaseUpdates extends JobIntentService {
     }
 
     private void getPantryProfilesIfDoneGettingDonationRequests() {
-        if (mDonationsPosted.size() == mProfile.postedDonationUUIDs.size()) {
+        if (mDonationsPosted.size() == mProfile.postedDonationUUIDs.size() && mDonationsPosted.size() > 0) {
+            // First pass to get total number of unique pantry profiles
             for (int i = 0; i < mDonationsPosted.size(); i++) {
                 DonationItem d = mDonationsPosted.get(i);
+                if (d.responseItems == null) continue;
+                numUniquePantryProfiles += d.responseItems.size();
+            }
+            // Second pass actually gets the profiles
+            for (int i = 0; i < mDonationsPosted.size(); i++) {
+                DonationItem d = mDonationsPosted.get(i);
+                if (d.responseItems == null) continue;
                 for (int j = 0; j < d.responseItems.size(); j++) {
-                    mFirebaseManager.getProfile(d.responseItems.get(j).pantryProfileName, mPantryProfileListener);
+                    String pantryName = d.responseItems.get(j).pantryProfileName;
+                    if (pantryProfileSet.contains(pantryName)) {
+                        numUniquePantryProfiles--;
+                        getImagesIfDone();
+                        continue;
+                    }
+                    pantryProfileSet.add(pantryName);
+                    mFirebaseManager.getProfile(pantryName, mPantryProfileListener);
                 }
             }
         }
@@ -138,9 +152,14 @@ public class DatabaseUpdates extends JobIntentService {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 DonationItem d = mFirebaseManager.getDonationFromDataSnapshot(dataSnapshot);
                 mDonationsRequested.add(d);
-                mFirebaseManager.getProfile(d.profileName, mDonorProfileListener);
+                if (donorProfilesSet.contains(d.profileName)) {
+                    numUniqueDonorProfiles--;
+                    getImagesIfDone();
+                    return;
+                }
+                donorProfilesSet.add(d.profileName);
 
-                getImagesIfDone();
+                mFirebaseManager.getProfile(d.profileName, mDonorProfileListener);
             }
 
             @Override
@@ -157,6 +176,7 @@ public class DatabaseUpdates extends JobIntentService {
                 mProfile = mFirebaseManager.getProfileFromDataSnapshot(dataSnapshot);
                 mDonationsRequested = new ArrayList<>();
                 mDonationsPosted = new ArrayList<>();
+                numUniqueDonorProfiles = mProfile.requestedDonationUUIDs.size();
                 for (int i = 0; i < mProfile.requestedDonationUUIDs.size(); i++) {
                     mFirebaseManager.getDonation(mProfile.requestedDonationUUIDs.get(i), mRequestedDonationListener);
                 }
@@ -219,10 +239,9 @@ public class DatabaseUpdates extends JobIntentService {
     }
 
     void updateGlobalsIfDone() {
-        int numRequested = (mProfile.requestedDonationUUIDs != null) ? mProfile.requestedDonationUUIDs.size() : 0;
-        if (mPictures.size() != numPantryProfiles + numRequested + 1 + foodItemSet.size()) return;
+        if (mPictures.size() != numUniquePantryProfiles + numUniqueDonorProfiles + 1 + foodItemSet.size()) return;
 
-        ((Pantreasy) this.getApplication()).setCurrentProfile(new Profile(mProfile.imageName, mProfile.name, mProfile.phoneNumber, mProfile.address, mProfile.description, mProfile.postedDonationUUIDs, mProfile.requestedDonationUUIDs));
+        ((Pantreasy) this.getApplication()).setCurrentProfile(mProfile);
         ((Pantreasy) this.getApplication()).setPostedDonations(mDonationsPosted);
         ((Pantreasy) this.getApplication()).setRequestedDonations(mDonationsRequested);
         ((Pantreasy) this.getApplication()).donorProfiles = new HashMap<>(donorProfiles);
@@ -235,8 +254,8 @@ public class DatabaseUpdates extends JobIntentService {
         foodItemSet = new HashSet<>();
         if (mProfile.postedDonationUUIDs.size() != mDonationsPosted.size()
             || mProfile.requestedDonationUUIDs.size() != mDonationsRequested.size()
-            || pantryProfiles.size() != numPantryProfiles
-            || donorProfiles.size() != mDonationsRequested.size())
+            || pantryProfiles.size() != numUniquePantryProfiles
+            || donorProfiles.size() != numUniqueDonorProfiles)
             return;
         mImageGetters.add(new ImageGetter(mProfile.imageName));
         for (String s : donorProfiles.keySet()) {

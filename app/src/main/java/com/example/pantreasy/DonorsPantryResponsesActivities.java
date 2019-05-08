@@ -1,6 +1,9 @@
 package com.example.pantreasy;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -25,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DonorsPantryResponsesActivities extends AppCompatActivity {
-    private ArrayList<DonorResponseItem> mResponseItems;
+    private FirebaseManager mFirebaseManager;
     private RecyclerView mRecyclerView;
     private ConstraintLayout mLayout;
     private DonorResponseItemAdapter mAdapter;
@@ -33,13 +36,14 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
     private ImageButton mConfirmButton;
     private ImageView mBlurredBackground;
     private CardView mConfirmationPopup;
+    private ImageButton mRefreshButton;
 
     private Button mPopupOkayButton;
     private Button mAddAnotherDonationButton;
 
-    private FirebaseManager mFirebaseManager;
-    private ValueEventListener mDonationUUIDListener;
-    private ValueEventListener mResponseListener;
+    private ArrayList<DonorResponseItem> mResponseItems;
+
+    private BroadcastReceiver mReceiver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,15 +51,13 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
         setContentView(R.layout.donor_response_view);
 
         mFirebaseManager = new FirebaseManager(this);
-        mResponseItems = new ArrayList<DonorResponseItem>();
-        initializeValueEventListeners();
-
-
         mLayout = findViewById(R.id.donor_response_view);
         mRecyclerView = mLayout.findViewById(R.id.response_items_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mHomeButton = mLayout.findViewById(R.id.home_button);
         mConfirmButton = mLayout.findViewById(R.id.check_button_wrapper);
+        mRefreshButton = mLayout.findViewById(R.id.refreshButton);
+
         mBlurredBackground = mLayout.findViewById(R.id.blurred_background_response_view);
         mConfirmationPopup = mLayout.findViewById(R.id.response_confirmed_popup);
         mPopupOkayButton = mConfirmationPopup.findViewById(R.id.ok_button);
@@ -66,42 +68,42 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
         setOnClickForHomeButton();
         setOnClickForConfirmButton();
         setOnClickforPopupButtons();
+        setOnClickForRefreshButton();
 
-    }
-
-    private void initializeValueEventListeners() {
-        mResponseListener = new ValueEventListener() {
+        mReceiver = new BroadcastReceiver() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                DonationItem d = mFirebaseManager.getDonationFromDataSnapshot(dataSnapshot);
-                for (int i = 0; i < d.responseItems.size(); i++) {
-                    mResponseItems.add(d.responseItems.get(i));
-                }
+            public void onReceive(Context context, Intent intent) {
+                initResponseItems();
                 setAdapterAndUpdateData();
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
         };
+        getApplication().registerReceiver(mReceiver, new IntentFilter(((Pantreasy)getApplicationContext()).USER_DATA_FILTER));
+        if (((Pantreasy)getApplication()).getCurrentProfile() == null) {
+            Utils.updateGlobals(this, "Catalyst Cafe");
+        }
+        else {
+            initResponseItems();
+            setAdapterAndUpdateData();
+        }
+    }
 
-        mDonationUUIDListener = new ValueEventListener() {
+    private void initResponseItems() {
+        mResponseItems = new ArrayList<>();
+        Pantreasy p = ((Pantreasy)getApplication());
+
+        List<DonationItem> donations = ((Pantreasy)getApplication()).getPostedDonations();
+        for (DonationItem d : donations) {
+            mResponseItems.addAll(d.responseItems);
+        }
+    }
+
+    private void setOnClickForRefreshButton() {
+        mRefreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<String> donationUUIDs = mFirebaseManager.getDonationUUIDsFromSnapshot(dataSnapshot);
-                for (int i = 0; i < donationUUIDs.size(); i++) {
-                    mFirebaseManager.getDonation(donationUUIDs.get(i), mResponseListener);
-                }
+            public void onClick(View v) {
+                Utils.updateGlobals(DonorsPantryResponsesActivities.this, "Catalyst Cafe");
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        };
-
-        mFirebaseManager.getDonationUUIDs("Catalyst Cafe", mDonationUUIDListener);
+        });
     }
 
     private void setOnClickForHomeButton() {
@@ -118,7 +120,17 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
         mConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mFirebaseManager.confirmDonation()
+                DonorResponseItem responseItem = ((DonorResponseItemAdapter)mAdapter).mSelectedItem;
+                DonationItem donation = null;
+                for (DonationItem d : ((Pantreasy)getApplication()).getPostedDonations()) {
+                    if (d.UUID.equals(responseItem.donationUUID))
+                        donation = d;
+                }
+                for (DonorResponseItem response : donation.responseItems) {
+                    if (response.UUID != responseItem.UUID)
+                        mFirebaseManager.denyDonation(responseItem, donation);
+                }
+                mFirebaseManager.confirmDonation(responseItem, donation);
                 ConstraintLayout view = (ConstraintLayout) findViewById(R.id.donor_response_view);
                 view.setDrawingCacheEnabled(true);
                 view.buildDrawingCache();
@@ -151,8 +163,7 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
     }
 
     private void setAdapterAndUpdateData() {
-        // create a new adapter with the updated mComments array
-        // this will "refresh" our recycler view
+        if (mResponseItems == null) return;
         mAdapter = new DonorResponseItemAdapter(this, this.mResponseItems);
         mRecyclerView.setAdapter(mAdapter);
     }

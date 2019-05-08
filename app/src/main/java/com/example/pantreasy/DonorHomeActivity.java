@@ -14,8 +14,8 @@ public class DonorHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.updateGlobals(this, "Catalyst Cafe");
         setContentView(R.layout.donor_home);
-        Toolbar toolbar = findViewById(R.id.toolbar);
         ImageButton profileButton = findViewById(R.id.profile_icon);
         Button addNewDonation = findViewById(R.id.new_donation_button);
         Button pantryResponses = findViewById(R.id.view_responses_button);

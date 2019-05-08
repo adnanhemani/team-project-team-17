@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.List;
 
 public class PantryResponseItemAdapter extends RecyclerView.Adapter {
@@ -53,9 +51,10 @@ public class PantryResponseItemAdapter extends RecyclerView.Adapter {
         public TextView mPhoneNumberText;
         public TextView mTimeText;
         public TextView mConfirmationText;
-        public ValueEventListener mProfileListener;
+        public TextView mAddressText;
         public Profile mProfile;
         public DonorResponseItem mResponseItem;
+        public Profile mDonorProfile;
 
         public DonationItemViewHolder(View itemView) {
             super(itemView);
@@ -66,21 +65,32 @@ public class PantryResponseItemAdapter extends RecyclerView.Adapter {
             mPhoneNumberText = mDonationItemLayout.findViewById(R.id.phone_number_text);
             mTimeText = mDonationItemLayout.findViewById(R.id.time_text);
             mConfirmationText = mDonationItemLayout.findViewById(R.id.confirmed_text);
+            mAddressText = mDonationItemLayout.findViewById(R.id.address_text);
+
             mProfile = ((Pantreasy)mContext.getApplicationContext()).getCurrentProfile();
         }
 
         void bind(final DonationItem donationItem) {
+            // TODO Implement this so that donations with multiple accepted responses are shown rather than just one response to one donation
+            Pantreasy p = ((Pantreasy)mContext.getApplicationContext());
+            mDonorProfile = p.donorProfiles.get(donationItem.profileName);
+            mDonorImage.setImageBitmap(p.mPictures.get(mDonorProfile.imageName));
+            for (int i = 0; i < donationItem.responseItems.size(); i++) {
+                DonorResponseItem response = donationItem.responseItems.get(i);
+                if (response.pantryProfileName.equals(mProfile.name))
+                    mResponseItem = response;
+            }
             mDonorName.setText(donationItem.profileName);
-            mPhoneNumberText.setText(donationItem.time);
+            mPhoneNumberText.setText(mDonorProfile.phoneNumber);
+            mAddressText.setText(mDonorProfile.address);
             if (donationItem.pickup)
                 mTimeText.setText("Pick-Up: " + donationItem.time);
             else
                 mTimeText.setText("Drop-Off: " + donationItem.time);
-
-            if (donationItem.responseItems. < 0) {
+            if (mResponseItem.confirmed < 0) {
                 mConfirmationText.setText("Rejected");
                 mConfirmationText.setBackgroundColor(Color.RED);
-            } else if (donationItem.confirmed == 0) {
+            } else if (mResponseItem.confirmed == 0) {
                 mConfirmationText.setText("Awaiting Response");
                 mConfirmationText.setBackgroundColor(Color.GRAY);
             } else {

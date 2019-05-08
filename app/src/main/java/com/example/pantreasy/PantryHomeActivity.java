@@ -16,7 +16,7 @@ public class PantryHomeActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantry_home);
-        Pantreasy p = ((Pantreasy)getApplicationContext());
+        Utils.updateGlobals(this, "Berkeley Food Pantry");
         Button viewResponses = findViewById(R.id.view_responses_button);
         Button donationHistory = findViewById(R.id.donation_history_button);
         Button viewDonations = findViewById(R.id.view_donations_button);

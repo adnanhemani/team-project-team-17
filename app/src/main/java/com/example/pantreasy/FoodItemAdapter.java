@@ -8,55 +8,43 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class FoodItemAdapter extends RecyclerView.Adapter {
-    private FirebaseManager mFirebaseManager;
     private Context mContext;
     private ArrayList<FoodItem> mFoodItems;
-    private OnSuccessListener mSuccessListener;
-    private List<Bitmap> bitmaps;
+    private HashMap<String, Bitmap> bitmaps;
 
-    public FoodItemAdapter(Context context, ArrayList<FoodItem> foodItems, List<Bitmap> bitmapList) {
+    public FoodItemAdapter(Context context, ArrayList<FoodItem> foodItems, HashMap<String, Bitmap> bitmapList) {
         mContext = context;
         mFoodItems = foodItems;
-        mFirebaseManager = new FirebaseManager((DonorAddActivity)mContext);
         this.bitmaps = bitmapList;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // here, we specify what kind of view each cell should have. In our case, all of them will have a view
         View view = LayoutInflater.from(mContext).inflate(R.layout.donor_food_item, parent, false);
         return new FoodItemViewHolder(view);
     }
 
-
-    // - get element from your dataset at this position
-    // - replace the contents of the view with that element
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         FoodItem foodItem = mFoodItems.get(position);
-        Bitmap bm = bitmaps.get(position);
+        Bitmap bm = bitmaps.get(foodItem.name);
         ((FoodItemViewHolder) holder).bind(foodItem, bm);
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mFoodItems.size();
     }
 
     public void removeAt(int position) {
+        if (position < 0 || position > getItemCount() - 1) return;
         mFoodItems.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, mFoodItems.size());

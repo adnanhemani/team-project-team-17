@@ -24,6 +24,7 @@ public class Login extends AppCompatActivity {
 
         Button donorLogin = findViewById(R.id.donor_account);
         Button pantryLogin = findViewById(R.id.pantry_account);
+        Utils.updateListOfAllDonationsAndProfiles(this);
         final EditText username_et = findViewById(R.id.input1);
         final EditText password_et = findViewById(R.id.input2);
         final FirebaseManager fm = new FirebaseManager(this);
@@ -52,6 +53,9 @@ public class Login extends AppCompatActivity {
         pantryLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Intent goToPantryHome = new Intent(Login.this, PantryHomeActivity.class);
+//                Login.this.startActivity(goToPantryHome);
+
                 mAuth = FirebaseAuth.getInstance();
                 mAuth.signInWithEmailAndPassword(username_et.getText().toString(), password_et.getText().toString()).addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                     @Override

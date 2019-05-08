@@ -32,6 +32,7 @@ public class PantryViewResponsesActivity extends AppCompatActivity {
     private PantryResponseItemAdapter mAdapter;
     private ImageButton mHomeButton;
     private BroadcastReceiver mReceiver;
+    private ImageButton mRefreshButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,8 +44,10 @@ public class PantryViewResponsesActivity extends AppCompatActivity {
         mRecyclerView = mLayout.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mHomeButton = mLayout.findViewById(R.id.home_button);
+        mRefreshButton = mLayout.findViewById(R.id.refreshButton);
 
         setOnClickForHomeButton();
+        setOnClickForRefreshButton();
         setAdapterAndUpdateData();
         mReceiver = new BroadcastReceiver() {
             @Override
@@ -53,8 +56,16 @@ public class PantryViewResponsesActivity extends AppCompatActivity {
             }
         };
         getApplication().registerReceiver(mReceiver, new IntentFilter(((Pantreasy)getApplicationContext()).USER_DATA_FILTER));
+        Utils.updateGlobals(this, "Berkeley Food Pantry");
+    }
 
-        Utils.updateGlobals(this, ((Pantreasy)getApplication()).getCurrentProfile().name);
+    private void setOnClickForRefreshButton() {
+        mRefreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.updateGlobals(PantryViewResponsesActivity.this, "Berkeley Food Pantry");
+            }
+        });
     }
 
     private void setOnClickForHomeButton() {
@@ -69,6 +80,7 @@ public class PantryViewResponsesActivity extends AppCompatActivity {
 
     private void setAdapterAndUpdateData() {
         if (((Pantreasy)getApplication()).getRequestedDonations() == null) return;
+        Pantreasy p = ((Pantreasy)getApplication());
         mAdapter = new PantryResponseItemAdapter(this, ((Pantreasy)getApplication()).getRequestedDonations());
         mRecyclerView.setAdapter(mAdapter);
     }

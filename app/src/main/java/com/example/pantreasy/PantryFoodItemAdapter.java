@@ -17,13 +17,11 @@ public class PantryFoodItemAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private List<FoodItem> mFoodItems;
     private boolean mShowCheckBox;
-    private boolean mPantryViewDonationResponseContext;
 
     public PantryFoodItemAdapter(Context context, List<FoodItem> foodItems, boolean showCheckBox, boolean PantryViewDonationResponse) {
         mContext = context;
         mFoodItems = foodItems;
         mShowCheckBox = showCheckBox;
-        mPantryViewDonationResponseContext = PantryViewDonationResponse;
     }
 
     @Override
@@ -42,12 +40,6 @@ public class PantryFoodItemAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return mFoodItems.size();
-    }
-
-    public void removeAt(int position) {
-        mFoodItems.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mFoodItems.size());
     }
 
     class PantryFoodItemViewHolder extends RecyclerView.ViewHolder {
