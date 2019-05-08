@@ -1,7 +1,6 @@
 package com.example.pantreasy;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,26 +20,28 @@ public class DonorResponseItemAdapter extends RecyclerView.Adapter {
 
     public DonorResponseItemAdapter(Context context, ArrayList<DonorResponseItem> responseItems) {
         mContext = context;
-        mResponseItems = responseItems;
+        ArrayList<DonorResponseItem> l = new ArrayList<>();
+        for (int i = 0; i < responseItems.size(); i++) {
+            DonorResponseItem item = responseItems.get(i);
+            if (item.confirmed == 0)
+                l.add(item);
+        }
+        mResponseItems = l;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // here, we specify what kind of view each cell should have. In our case, all of them will have a view
         View view = LayoutInflater.from(mContext).inflate(R.layout.donor_response_item, parent, false);
         return new ResponseItemViewHolder(view);
     }
 
 
-    // - get element from your dataset at this position
-    // - replace the contents of the view with that element
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         DonorResponseItem responseItem = mResponseItems.get(position);
         ((ResponseItemViewHolder) holder).bind(responseItem);
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mResponseItems.size();
@@ -48,14 +49,12 @@ public class DonorResponseItemAdapter extends RecyclerView.Adapter {
 
     class ResponseItemViewHolder extends RecyclerView.ViewHolder {
 
-        // each data item is just a string in this case
         public ConstraintLayout mResponseItemLayout;
         public TextView mPantryName;
         public ImageView mPantryImage;
         public TextView mPhoneNumberText;
         public TextView mAddressText;
         public TextView mCommentText;
-        public Profile mProfile;
         public View.OnClickListener mClickListener;
         public RadioButton mRadioButton;
         public DonorResponseItem mResponseItem;
@@ -91,6 +90,7 @@ public class DonorResponseItemAdapter extends RecyclerView.Adapter {
             mPantryName.setText(responseItem.pantryProfileName);
             mCommentText.setText(responseItem.comment);
             mResponseItemLayout.setOnClickListener(mClickListener);
+            mRadioButton.setOnClickListener(mClickListener);
         }
     }
 }

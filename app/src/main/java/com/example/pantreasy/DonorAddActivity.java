@@ -265,7 +265,7 @@ public class DonorAddActivity extends AppCompatActivity {
                 time += (mAmButton.isChecked()) ? " AM" : " PM";
                 boolean pickedUp = (mPickupOptionSpinner.getSelectedItem().toString().equalsIgnoreCase("PICKED UP")) ? true : false;
                 String UUID = java.util.UUID.randomUUID().toString();
-                mFirebaseManager.addDonation(profileName, new DonationItem(profileName, mFoodList, null, time, pickedUp, UUID));
+                mFirebaseManager.addDonation(profileName, new DonationItem(profileName, mFoodList, new ArrayList<DonorResponseItem>(), time, pickedUp, UUID, " "));
                 Intent viewResponses = new Intent(DonorAddActivity.this, DonorsPantryResponsesActivities.class);
                 DonorAddActivity.this.startActivity(viewResponses);
             }

@@ -40,6 +40,15 @@ public class FirebaseManager {
         mStorageRef = mStorage.getReferenceFromUrl("gs://pantreasy.appspot.com");
     }
 
+    public void confirmDonation(DonorResponseItem responseItem, DonationItem donation) {
+        mDonationItems.child(donation.UUID).child("responseItems").child(responseItem.UUID).child("confirmed").setValue(1);
+        mDonationItems.child(donation.UUID).child("itemsTaken").setValue(donation.itemsTaken + responseItem.indexesOfitemsToTake);
+    }
+
+    public void denyDonation(DonorResponseItem responseItem, DonationItem donation) {
+        mDonationItems.child(donation.UUID).child("responseItems").child(responseItem.UUID).child("confirmed").setValue(-1);
+    }
+
     public void addProfile(Bitmap bm, Profile profile) {
         uploadBitmap(bm, profile.imageName);
         mProfiles.child(profile.name).setValue(profile);
@@ -51,8 +60,6 @@ public class FirebaseManager {
     }
 
     public void addResponse(String profileName, DonationItem d, DonorResponseItem responseItem) {
-        //Todo
-        // Fix this so that it doesn't keep overwriting the same request
         mProfiles.child(profileName).child("requestedDonationUUIDs").child(d.UUID).setValue(d.UUID);
         mDonationItems.child(d.UUID).child("responseItems").child(responseItem.UUID).setValue(responseItem);
     }
@@ -93,7 +100,8 @@ public class FirebaseManager {
         String time = (String) h.get("time");
         HashMap responseItemData = (HashMap) h.get("responseItems");
         List<DonorResponseItem> responseItems = responseItemsFromHashmap(responseItemData);
-        return new DonationItem(profileName, foodItems, responseItems, time, pickup, UUID);
+        String itemsTaken = (String) h.get("itemsTaken");
+        return new DonationItem(profileName, foodItems, responseItems, time, pickup, UUID, itemsTaken);
     }
 
     private List<DonorResponseItem> responseItemsFromHashmap(HashMap responseItemData) {
@@ -107,7 +115,8 @@ public class FirebaseManager {
             String comment = (String) responseMap.get("comment");
             String pantryProfileName = (String) responseMap.get("pantryProfileName");
             String donationUUID = (String) responseMap.get("donationUUID");
-            responseItems.add(new DonorResponseItem(pantryProfileName, comment, UUID, donationUUID, confirmed));
+            String itemsToTake = (String) responseMap.get("indexesOfitemsToTake");
+            responseItems.add(new DonorResponseItem(pantryProfileName, comment, UUID, donationUUID, confirmed, itemsToTake));
         }
         return responseItems;
     }
@@ -115,6 +124,7 @@ public class FirebaseManager {
     public List<DonationItem> donationsFromSnapshot(DataSnapshot dataSnapshot) {
         List<DonationItem> result = new ArrayList<DonationItem>();
         HashMap data = (HashMap)dataSnapshot.getValue();
+        if (data == null) return result;
         for (Object s : data.keySet()) {
             HashMap<String, Object> donation = (HashMap<String, Object>) data.get(s);
             String UUID = (String) donation.get("UUID");
@@ -123,8 +133,9 @@ public class FirebaseManager {
             boolean pickup = (boolean) donation.get("pickup");
             String profileName = (String) donation.get("profileName");
             String time = (String) donation.get("time");
+            String itemsTaken = (String) donation.get("itemsTaken");
             // Add Response Items
-            result.add(new DonationItem(profileName, foodItems, null, time, pickup, UUID));
+            result.add(new DonationItem(profileName, foodItems, null, time, pickup, UUID, itemsTaken));
         }
         return result;
     }

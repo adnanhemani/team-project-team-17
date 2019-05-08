@@ -131,17 +131,20 @@ public class PantryViewDonation extends AppCompatActivity {
                 Pantreasy p = ((Pantreasy)getApplication());
                 String currentProfileName = p.getCurrentProfile().name;
                 String foodItemsWanted = "";
+                String indexesOfWanted = "";
                 for (int i = 0; i < mLinearLayoutManager.getItemCount(); i++) {
                     ConstraintLayout pantryFoodItemView = (ConstraintLayout) mLinearLayoutManager.findViewByPosition(i);
                     CheckBox box = pantryFoodItemView.findViewById(R.id.checkBox);
                     if (box.isChecked()) {
                         foodItemsWanted += ((TextView) pantryFoodItemView.findViewById(R.id.food_name)).getText();
+                        indexesOfWanted += i + " ";
                         if (i < mLinearLayoutManager.getItemCount() - 1) {
+
                             foodItemsWanted += ", ";
                         }
                     }
                 }
-                DonorResponseItem r = new DonorResponseItem(currentProfileName, "Items Requested: " + foodItemsWanted, java.util.UUID.randomUUID().toString(), mDonationItem.UUID, 0);
+                DonorResponseItem r = new DonorResponseItem(currentProfileName, "Items Requested: " + foodItemsWanted, java.util.UUID.randomUUID().toString(), mDonationItem.UUID, 0, indexesOfWanted);
                 mFirebaseManager.addResponse(currentProfileName, mDonationItem, r);
             }
         });
@@ -171,7 +174,7 @@ public class PantryViewDonation extends AppCompatActivity {
     }
 
     private void setAdapterAndUpdateData() {
-        mAdapter = new PantryFoodItemAdapter(this, mDonationItem.foodItems, true, false);
+        mAdapter = new PantryFoodItemAdapter(this, mDonationItem.getAvailableFoodItems(), true, false);
         mRecyclerView.setAdapter(mAdapter);
     }
 

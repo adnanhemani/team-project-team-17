@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DonorsPantryResponsesActivities extends AppCompatActivity {
+    private FirebaseManager mFirebaseManager;
     private RecyclerView mRecyclerView;
     private ConstraintLayout mLayout;
     private DonorResponseItemAdapter mAdapter;
@@ -45,7 +46,7 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
 
 
         initResponseItems();
-
+        mFirebaseManager = new FirebaseManager(this);
         mLayout = findViewById(R.id.donor_response_view);
         mRecyclerView = mLayout.findViewById(R.id.response_items_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -86,11 +87,20 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
     }
 
     private void setOnClickForConfirmButton() {
-        //TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         mConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mFirebaseManager.confirmDonation()
+                DonorResponseItem responseItem = ((DonorResponseItemAdapter)mAdapter).mSelectedItem;
+                DonationItem donation = null;
+                for (DonationItem d : ((Pantreasy)getApplication()).getPostedDonations()) {
+                    if (d.UUID.equals(responseItem.donationUUID))
+                        donation = d;
+                }
+                for (DonorResponseItem response : donation.responseItems) {
+                    if (response.UUID != responseItem.UUID)
+                        mFirebaseManager.denyDonation(responseItem, donation);
+                }
+                mFirebaseManager.confirmDonation(responseItem, donation);
                 ConstraintLayout view = (ConstraintLayout) findViewById(R.id.donor_response_view);
                 view.setDrawingCacheEnabled(true);
                 view.buildDrawingCache();

@@ -25,6 +25,7 @@ public class PantryViewDonationResponse extends AppCompatActivity {
     private PantryFoodItemAdapter mAdapter;
     private Profile mProfile;
     private TextView mConfirmedText;
+    private DonorResponseItem mResponse;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,15 +53,15 @@ public class PantryViewDonationResponse extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(PantryViewDonationResponse.this));
         setOnClickForHomeButton();
-        DonorResponseItem response = null;
+        mResponse = null;
         for (DonorResponseItem r : mDonationItem.responseItems) {
             if (r.pantryProfileName.equals(pantreasy.getCurrentProfile().name))
-                response = r;
+                mResponse = r;
         }
-        if (response.confirmed < 0) {
+        if (mResponse.confirmed < 0) {
             mConfirmedText.setText("Rejected");
             mConfirmedText.setBackgroundColor(Color.RED);
-        } else if (response.confirmed == 0) {
+        } else if (mResponse.confirmed == 0) {
             mConfirmedText.setText("Awaiting Response");
             mConfirmedText.setBackgroundColor(Color.GRAY);
         } else {
@@ -93,7 +94,7 @@ public class PantryViewDonationResponse extends AppCompatActivity {
     }
 
     private void setAdapterAndUpdateData() {
-        mAdapter = new PantryFoodItemAdapter(this, mDonationItem.foodItems, false, true);
+        mAdapter = new PantryFoodItemAdapter(this, mDonationItem.getTakenFoodItems(mResponse.indexesOfitemsToTake), false, true);
         mRecyclerView.setAdapter(mAdapter);
     }
 

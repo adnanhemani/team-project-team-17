@@ -121,15 +121,17 @@ public class DatabaseUpdates extends JobIntentService {
     }
 
     private void getPantryProfilesIfDoneGettingDonationRequests() {
-        if (mDonationsPosted.size() == mProfile.postedDonationUUIDs.size()) {
+        if (mDonationsPosted.size() == mProfile.postedDonationUUIDs.size() && mDonationsPosted.size() > 0) {
             // First pass to get total number of unique pantry profiles
             for (int i = 0; i < mDonationsPosted.size(); i++) {
                 DonationItem d = mDonationsPosted.get(i);
+                if (d.responseItems == null) continue;
                 numUniquePantryProfiles += d.responseItems.size();
             }
             // Second pass actually gets the profiles
             for (int i = 0; i < mDonationsPosted.size(); i++) {
                 DonationItem d = mDonationsPosted.get(i);
+                if (d.responseItems == null) continue;
                 for (int j = 0; j < d.responseItems.size(); j++) {
                     String pantryName = d.responseItems.get(j).pantryProfileName;
                     if (pantryProfileSet.contains(pantryName)) {
