@@ -32,14 +32,10 @@ public class DonationItemAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // here, we specify what kind of view each cell should have. In our case, all of them will have a view
         View view = LayoutInflater.from(mContext).inflate(R.layout.pantry_donate_item, parent, false);
         return new DonationItemViewHolder(view);
     }
 
-
-    // - get element from your dataset at this position
-    // - replace the contents of the view with that element
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         DonationItem donationItem = mDonations.get(position);

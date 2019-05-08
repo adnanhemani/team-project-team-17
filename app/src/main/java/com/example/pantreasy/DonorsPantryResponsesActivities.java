@@ -1,6 +1,9 @@
 package com.example.pantreasy;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -39,13 +42,13 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
 
     private ArrayList<DonorResponseItem> mResponseItems;
 
+    private BroadcastReceiver mReceiver;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.donor_response_view);
 
-
-        initResponseItems();
         mFirebaseManager = new FirebaseManager(this);
         mLayout = findViewById(R.id.donor_response_view);
         mRecyclerView = mLayout.findViewById(R.id.response_items_recycler);
@@ -63,7 +66,21 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
         setOnClickForConfirmButton();
         setOnClickforPopupButtons();
 
-        setAdapterAndUpdateData();
+        mReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                initResponseItems();
+                setAdapterAndUpdateData();
+            }
+        };
+        getApplication().registerReceiver(mReceiver, new IntentFilter(((Pantreasy)getApplicationContext()).USER_DATA_FILTER));
+        if (((Pantreasy)getApplication()).getCurrentProfile() == null) {
+            Utils.updateGlobals(this, "Catalyst Cafe");
+        }
+        else {
+            initResponseItems();
+            setAdapterAndUpdateData();
+        }
     }
 
     private void initResponseItems() {
@@ -133,6 +150,7 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
     }
 
     private void setAdapterAndUpdateData() {
+        if (mResponseItems == null) return;
         mAdapter = new DonorResponseItemAdapter(this, this.mResponseItems);
         mRecyclerView.setAdapter(mAdapter);
     }

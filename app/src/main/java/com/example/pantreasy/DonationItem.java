@@ -45,7 +45,7 @@ public class DonationItem {
             temp[j] = true;
         }
         for (int i = 0; i < foodItems.size(); i++) {
-            if (temp[i] == false)
+            if (temp[i])
                 result.add(foodItems.get(i));
         }
         return result;

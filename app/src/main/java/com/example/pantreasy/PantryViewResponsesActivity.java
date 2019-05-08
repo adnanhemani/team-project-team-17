@@ -53,8 +53,8 @@ public class PantryViewResponsesActivity extends AppCompatActivity {
             }
         };
         getApplication().registerReceiver(mReceiver, new IntentFilter(((Pantreasy)getApplicationContext()).USER_DATA_FILTER));
-
-        Utils.updateGlobals(this, ((Pantreasy)getApplication()).getCurrentProfile().name);
+        if (((Pantreasy)getApplication()).getCurrentProfile() != null)
+            Utils.updateGlobals(this, ((Pantreasy)getApplication()).getCurrentProfile().name);
     }
 
     private void setOnClickForHomeButton() {

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PantryResponseItemAdapter extends RecyclerView.Adapter {
@@ -20,7 +21,13 @@ public class PantryResponseItemAdapter extends RecyclerView.Adapter {
 
     public PantryResponseItemAdapter(Context context, List<DonationItem> donationItems) {
         mContext = context;
-        mDonations = donationItems;
+        ArrayList<DonationItem> l = new ArrayList<>();
+        for (int i = 0; i < donationItems.size(); i++) {
+            DonationItem item = donationItems.get(i);
+            if (item.getAvailableFoodItems().size() != 0)
+                l.add(item);
+        }
+        mDonations = l;
     }
 
     @Override
