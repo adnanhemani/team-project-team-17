@@ -40,7 +40,7 @@
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.523"
-        app:srcCompat="@drawable/home_button" />
+        app:srcCompat="@drawable/home" />
 
     <ImageView
         android:id="@+id/edit_info"
