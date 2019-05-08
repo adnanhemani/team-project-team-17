@@ -20,6 +20,7 @@ public class DonorHomeActivity extends AppCompatActivity {
         Button addNewDonation = findViewById(R.id.new_donation_button);
         Button pantryResponses = findViewById(R.id.view_responses_button);
         Button donationHistory = findViewById(R.id.donation_history_button);
+        ImageButton profileIcon = findViewById(R.id.profile_icon);
 
         addNewDonation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +43,14 @@ public class DonorHomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent viewHistory = new Intent(DonorHomeActivity.this, DonorHistoryActivity.class);
                 DonorHomeActivity.this.startActivity(viewHistory);
+            }
+        });
+
+        profileIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToProfile = new Intent(DonorHomeActivity.this, ProfileActivity.class);
+                DonorHomeActivity.this.startActivity(goToProfile);
             }
         });
 
