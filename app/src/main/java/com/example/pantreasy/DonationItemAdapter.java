@@ -79,7 +79,7 @@ public class DonationItemAdapter extends RecyclerView.Adapter {
         void bind(final DonationItem donationItem) {
             mDonorName.setText(donationItem.profileName);
             mTime.setText(donationItem.time);
-            mDistance.setText("1000mi");
+            mDistance.setText("0m away");
             mItemList.setText(donationItem.foodListAsString());
             Profile p = ((Pantreasy) mContext.getApplicationContext()).allProfiles.get(donationItem.profileName);
             mDonorImage.setImageBitmap(((Pantreasy) mContext.getApplicationContext()).mAllPictures.get(p.imageName));

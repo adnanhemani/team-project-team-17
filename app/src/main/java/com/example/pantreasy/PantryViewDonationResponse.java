@@ -94,7 +94,7 @@ public class PantryViewDonationResponse extends AppCompatActivity {
     }
 
     private void setAdapterAndUpdateData() {
-        mAdapter = new PantryFoodItemAdapter(this, mDonationItem.getTakenFoodItems(mResponse.indexesOfitemsToTake), false, true);
+        mAdapter = new PantryFoodItemAdapter(this, mDonationItem.getFoodItems(mResponse.indexesOfitemsToTake), false, true);
         mRecyclerView.setAdapter(mAdapter);
     }
 

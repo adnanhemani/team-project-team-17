@@ -51,16 +51,39 @@ public class DonationItem {
         return result;
     }
 
-    public List<FoodItem> getTakenFoodItems(String takenItems) {
+    public List<FoodItem> getTakenFoodItems() {
         List<FoodItem> result = new ArrayList<>();
         boolean[] temp = new boolean[foodItems.size()];
-        String[] indexes = takenItems.split(" ");
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = true;
+        }
+        String[] indexes = itemsTaken.split(" ");
         for (int i = 0; i < indexes.length; i++) {
+            if (indexes[i].equals("")) continue;
             int j = Integer.parseInt(indexes[i]);
-            temp[j] = true;
+            temp[j] = false;
         }
         for (int i = 0; i < foodItems.size(); i++) {
-            if (temp[i] == false)
+            if (!temp[i])
+                result.add(foodItems.get(i));
+        }
+        return result;
+    }
+
+    public List<FoodItem> getFoodItems(String foodItemIndexes) {
+        List<FoodItem> result = new ArrayList<>();
+        boolean[] temp = new boolean[foodItems.size()];
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = true;
+        }
+        String[] indexes = foodItemIndexes.split(" ");
+        for (int i = 0; i < indexes.length; i++) {
+            if (indexes[i].equals("")) continue;
+            int j = Integer.parseInt(indexes[i]);
+            temp[j] = false;
+        }
+        for (int i = 0; i < foodItems.size(); i++) {
+            if (!temp[i])
                 result.add(foodItems.get(i));
         }
         return result;

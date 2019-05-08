@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PantryResponseItemAdapter extends RecyclerView.Adapter {
@@ -21,13 +20,7 @@ public class PantryResponseItemAdapter extends RecyclerView.Adapter {
 
     public PantryResponseItemAdapter(Context context, List<DonationItem> donationItems) {
         mContext = context;
-        ArrayList<DonationItem> l = new ArrayList<>();
-        for (int i = 0; i < donationItems.size(); i++) {
-            DonationItem item = donationItems.get(i);
-            if (item.getAvailableFoodItems().size() != 0)
-                l.add(item);
-        }
-        mDonations = l;
+        mDonations = donationItems;
     }
 
     @Override
@@ -78,6 +71,7 @@ public class PantryResponseItemAdapter extends RecyclerView.Adapter {
         }
 
         void bind(final DonationItem donationItem) {
+            // TODO Implement this so that donations with multiple accepted responses are shown rather than just one response to one donation
             Pantreasy p = ((Pantreasy)mContext.getApplicationContext());
             mDonorProfile = p.donorProfiles.get(donationItem.profileName);
             mDonorImage.setImageBitmap(p.mPictures.get(mDonorProfile.imageName));

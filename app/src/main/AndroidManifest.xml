@@ -36,6 +36,7 @@
         <activity android:name=".PantryViewDonationsActivity"/>
         <activity android:name=".PantryViewDonation"/>
         <activity android:name=".PantryViewDonationResponse"/>
+        <activity android:name=".ProfileActivity"/>
 
 
         <meta-data
