@@ -65,6 +65,7 @@ public class PantryResponseItemAdapter extends RecyclerView.Adapter {
         public OnSuccessListener<byte[]> mImageSuccessListener;
         public ValueEventListener mProfileListener;
         public Profile mProfile;
+        public DonorResponseItem mResponseItem;
 
         public DonationItemViewHolder(View itemView) {
             super(itemView);
@@ -105,16 +106,16 @@ public class PantryResponseItemAdapter extends RecyclerView.Adapter {
                 mTimeText.setText("Pick-Up: " + donationItem.time);
             else
                 mTimeText.setText("Drop-Off: " + donationItem.time);
-            if (donationItem.confirmed < 0) {
-                mConfirmationText.setText("Rejected");
-                mConfirmationText.setBackgroundColor(Color.RED);
-            } else if (donationItem.confirmed == 0) {
-                mConfirmationText.setText("Awaiting Response");
-                mConfirmationText.setBackgroundColor(Color.GRAY);
-            } else {
-                mConfirmationText.setText("Confirmed");
-                mConfirmationText.setBackgroundColor(Color.GREEN);
-            }
+//            if (donationItem.confirmed < 0) {
+//                mConfirmationText.setText("Rejected");
+//                mConfirmationText.setBackgroundColor(Color.RED);
+//            } else if (donationItem.confirmed == 0) {
+//                mConfirmationText.setText("Awaiting Response");
+//                mConfirmationText.setBackgroundColor(Color.GRAY);
+//            } else {
+//                mConfirmationText.setText("Confirmed");
+//                mConfirmationText.setBackgroundColor(Color.GREEN);
+//            }
 
             mItemView.setOnClickListener(new View.OnClickListener() {
                 @Override

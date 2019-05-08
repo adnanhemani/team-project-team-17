@@ -30,27 +30,27 @@
 
     <string name="donor_reqquest_sent">
         Your donation request has been\n
-        sent to the pantries and you will be\n
+        sent to the pantries! You will be\n
         notified when the pantries accept\n
         your request.
     </string>
 
 
     <string name="donor_confirmed">
-    You donation will be picked\n
-    up at 3:30pm 12th/April by\n
+    Your donation will be picked\n
+    up at 3:30pm 12th/April by:\n
     \n
     Social Food Pantry\n
     2150 College Ave, Berkeley, CA\n
     415-239-34309\n
     \n
-    Thanks for your donation!\n
+    Thank you for your donation!\n
     </string>
 
     <string name="pantry_request">
     Your request has been sent to the\n
-        donor. You will be notified when\n
-        the donor sends confirm response.
+        donor! You will be notified when\n
+        the donor sends a confirmation response.
     </string>
 
     <string name="pantry_history">

@@ -55,7 +55,7 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
         mRecyclerView = mLayout.findViewById(R.id.response_items_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mHomeButton = mLayout.findViewById(R.id.home_button);
-        mConfirmButton = mLayout.findViewById(R.id.response_view_confirm_button);
+        mConfirmButton = mLayout.findViewById(R.id.check_button_wrapper);
         mBlurredBackground = mLayout.findViewById(R.id.blurred_background_response_view);
         mConfirmationPopup = mLayout.findViewById(R.id.response_confirmed_popup);
         mPopupOkayButton = mConfirmationPopup.findViewById(R.id.ok_button);
@@ -104,25 +104,6 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
         mFirebaseManager.getDonationUUIDs("Catalyst Cafe", mDonationUUIDListener);
     }
 
-    //TODO
-    // Replace this with actual code pulling these from firebase
-    public void generateResponseItems() {
-        Bitmap icon1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.pantry_a_profile_pic);
-        Profile p1 = new Profile("PLACEHOLDER", "Pantry A", "555-420-1337", "1777 Hearst Ave", "We are food pantry A", null, null);
-
-        Bitmap icon2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.pantry_b_profile_pic);
-        Profile p2 = new Profile("PLACEHOLDER", "Pantry B", "555-555-5555", "1777 Le Roy Ave", "We are food pantry B", null, null);
-
-        Bitmap icon3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.pantry_c_profile_pic);
-        Profile p3 = new Profile("PLACEHOLDER", "Pantry C", "555-600-2020", "2222 Shattuck Ave", "We are food pantry C", null, null);
-
-        //mResponseItems.add(new DonorResponseItem(p1, "We would like to pickup just the bananas please! Give us a call!"));
-        //mResponseItems.add(new DonorResponseItem(p2, "We will take everything you're offering! Thank you."));
-        //mResponseItems.add(new DonorResponseItem(p3, "We would like the bread!"));
-
-        setAdapterAndUpdateData();
-    }
-
     private void setOnClickForHomeButton() {
         mHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +118,7 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
         mConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //mFirebaseManager.confirmDonation()
                 ConstraintLayout view = (ConstraintLayout) findViewById(R.id.donor_response_view);
                 view.setDrawingCacheEnabled(true);
                 view.buildDrawingCache();

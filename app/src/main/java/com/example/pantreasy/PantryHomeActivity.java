@@ -50,7 +50,7 @@ public class PantryHomeActivity extends AppCompatActivity {
         profileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToProfile = new Intent(PantryHomeActivity.this, Profile.class);
+                Intent goToProfile = new Intent(PantryHomeActivity.this, ProfileActivity.class);
                 PantryHomeActivity.this.startActivity(goToProfile);
             }
         });

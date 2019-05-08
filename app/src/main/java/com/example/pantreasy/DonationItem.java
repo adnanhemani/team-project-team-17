@@ -6,10 +6,8 @@ public class DonationItem {
     public String profileName;
     public List<FoodItem> foodItems;
     public List<DonorResponseItem> responseItems;
-    public String comment;
     public String time;
     public boolean pickup;
-    public int confirmed;
     public String UUID;
 
     public DonationItem(String profileName, List<FoodItem> foodItems, List<DonorResponseItem> responseItems, String time, boolean pickup, String UUID) {
@@ -18,7 +16,6 @@ public class DonationItem {
         this.responseItems = responseItems;
         this.time = time;
         this.pickup = pickup;
-        this.confirmed = 0;
         this.UUID = UUID;
     }
 

@@ -1,8 +1,6 @@
 package com.example.pantreasy;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -74,16 +72,16 @@ public class PantryViewDonationResponse extends AppCompatActivity {
 
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(PantryViewDonationResponse.this));
                 setOnClickForHomeButton();
-                if (mDonationItem.confirmed < 0) {
-                    mConfirmedText.setText("Rejected");
-                    mConfirmedText.setBackgroundColor(Color.RED);
-                } else if (mDonationItem.confirmed == 0) {
-                    mConfirmedText.setText("Awaiting Response");
-                    mConfirmedText.setBackgroundColor(Color.GRAY);
-                } else {
-                    mConfirmedText.setText("Confirmed");
-                    mConfirmedText.setBackgroundColor(Color.GREEN);
-                }
+//                if (mDonationItem.confirmed < 0) {
+//                    mConfirmedText.setText("Rejected");
+//                    mConfirmedText.setBackgroundColor(Color.RED);
+//                } else if (mDonationItem.confirmed == 0) {
+//                    mConfirmedText.setText("Awaiting Response");
+//                    mConfirmedText.setBackgroundColor(Color.GRAY);
+//                } else {
+//                    mConfirmedText.setText("Confirmed");
+//                    mConfirmedText.setBackgroundColor(Color.GREEN);
+//                }
                 setAdapterAndUpdateData();
             }
 

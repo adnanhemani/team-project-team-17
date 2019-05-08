@@ -139,7 +139,7 @@ public class PantryViewDonation extends AppCompatActivity {
                 Bitmap icon = BitmapFactory.decodeResource(PantryViewDonation.this.getResources(), R.drawable.pantry_a_profile_pic);
                 Profile p = new Profile("Berkeley_Food_Pantry.JPEG", "Berkeley Food Pantry", "510-510-5105", "1111 Berkeley Way", "We are the Berkeley Food Pantry", null, null);
                 mFirebaseManager.addProfile(icon, p);
-                DonorResponseItem r = new DonorResponseItem("Berkeley Food Pantry", "We would like everything you're offering!", java.util.UUID.randomUUID().toString());
+                DonorResponseItem r = new DonorResponseItem("Berkeley Food Pantry", "We would like everything you're offering!", java.util.UUID.randomUUID().toString(), mDonationItem.UUID);
                 mFirebaseManager.addResponse("Berkeley Food Pantry", mDonationItem, r);
             }
         });

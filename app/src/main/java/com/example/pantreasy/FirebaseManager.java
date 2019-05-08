@@ -94,6 +94,8 @@ public class FirebaseManager {
 
     public DonationItem getDonationFromDataSnapshot(DataSnapshot dataSnapshot) {
         HashMap<String, Object> h = (HashMap<String, Object>) dataSnapshot.getValue();
+        if (h == null)
+            return null;
         String UUID = (String) h.get("UUID");
         int confirmed = ((Long)h.get("confirmed")).intValue();
         ArrayList<HashMap> foodItemData = (ArrayList<HashMap>) h.get("foodItems");
@@ -115,7 +117,8 @@ public class FirebaseManager {
             String UUID = (String) responseMap.get("UUID");
             String comment = (String) responseMap.get("comment");
             String pantryProfileName = (String) responseMap.get("pantryProfileName");
-            responseItems.add(new DonorResponseItem(pantryProfileName, comment, UUID));
+            String donationUUID = (String) responseMap.get("donationUUID");
+            responseItems.add(new DonorResponseItem(pantryProfileName, comment, UUID, donationUUID));
         }
         return responseItems;
     }
@@ -210,6 +213,10 @@ public class FirebaseManager {
         String address = (String) h.get("address");
         String description = (String) h.get("description");
         return new Profile(imageName, name, phoneNumber, address, description, null, null);
-
     }
+
+//    public void confirmDonation(String donationUUID) {
+//        mProfiles.child(profileName).child("postedDonationUUIDs").child(donation.UUID).setValue(donation.UUID);
+//
+//    }
 }
