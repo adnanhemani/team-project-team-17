@@ -33,6 +33,7 @@ public class PantryViewResponsesActivity extends AppCompatActivity {
     private ImageButton mHomeButton;
     private BroadcastReceiver mReceiver;
     private ImageButton mRefreshButton;
+    private FirebaseManager fm = new FirebaseManager(PantryViewResponsesActivity.this);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,7 +46,22 @@ public class PantryViewResponsesActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mHomeButton = mLayout.findViewById(R.id.home_button);
         mRefreshButton = mLayout.findViewById(R.id.refreshButton);
+        final List<DonationItem> dataForAdapter = new ArrayList<DonationItem>();
+        ((Pantreasy)getApplication()).getCurrentProfile();
+        for (String uuid: ((Pantreasy)getApplication()).getCurrentProfile().requestedDonationUUIDs) {
+            fm.getDonation(uuid, new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    dataForAdapter.add(fm.getDonationFromDataSnapshot(dataSnapshot));
+                    ((Pantreasy)getApplication()).setRequestedDonations(dataForAdapter);
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
         setOnClickForHomeButton();
         setOnClickForRefreshButton();
         setAdapterAndUpdateData();
@@ -80,7 +96,6 @@ public class PantryViewResponsesActivity extends AppCompatActivity {
 
     private void setAdapterAndUpdateData() {
         if (((Pantreasy)getApplication()).getRequestedDonations() == null) return;
-        Pantreasy p = ((Pantreasy)getApplication());
         mAdapter = new PantryResponseItemAdapter(this, ((Pantreasy)getApplication()).getRequestedDonations());
         mRecyclerView.setAdapter(mAdapter);
     }
