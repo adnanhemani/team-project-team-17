@@ -35,7 +35,6 @@ import java.util.ArrayList;
 
 public class DonorAddActivity extends AppCompatActivity {
     private FirebaseManager mFirebaseManager;
-    private OnSuccessListener<byte[]> mImageDownloadSuccessListener;
     private FirebaseAuth mAuth;
     private ArrayList<FoodItem> mFoodList;
     private List<Bitmap> mBitmaps;

@@ -1,6 +1,9 @@
 package com.example.pantreasy;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -28,62 +31,30 @@ public class PantryViewResponsesActivity extends AppCompatActivity {
     private ConstraintLayout mLayout;
     private PantryResponseItemAdapter mAdapter;
     private ImageButton mHomeButton;
-    private FirebaseManager mFirebaseManager;
-    private ValueEventListener mResponseUUIDListener;
-    private ValueEventListener mDonationListener;
+    private BroadcastReceiver mReceiver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantry_response_list_view);
 
-        mFirebaseManager = new FirebaseManager(this);
-        mDonations = new ArrayList<DonationItem>();
-        initializeValueEventListeners();
+        mDonations = new ArrayList<>();
         mLayout = findViewById(R.id.pantry_response_list);
         mRecyclerView = mLayout.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mHomeButton = mLayout.findViewById(R.id.home_button);
 
         setOnClickForHomeButton();
-    }
-
-    private void initializeValueEventListeners() {
-        mDonationListener = new ValueEventListener() {
+        setAdapterAndUpdateData();
+        mReceiver = new BroadcastReceiver() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                DonationItem d = mFirebaseManager.getDonationFromDataSnapshot(dataSnapshot);
-                if (d != null)
-                    mDonations.add(d);
+            public void onReceive(Context context, Intent intent) {
                 setAdapterAndUpdateData();
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
         };
+        getApplication().registerReceiver(mReceiver, new IntentFilter(((Pantreasy)getApplicationContext()).USER_DATA_FILTER));
 
-        mResponseUUIDListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<String> donationUUIDs = mFirebaseManager.getDonationUUIDsFromSnapshot(dataSnapshot);
-                for (int i = 0; i < donationUUIDs.size(); i++) {
-                    mFirebaseManager.getDonation(donationUUIDs.get(i), mDonationListener);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        };
-
-
-
-        mFirebaseManager.getRequestUUIDs("Berkeley Food Pantry", mResponseUUIDListener);
-
-
+        Utils.updateGlobals(this, ((Pantreasy)getApplication()).getCurrentProfile().name);
     }
 
     private void setOnClickForHomeButton() {
@@ -97,9 +68,8 @@ public class PantryViewResponsesActivity extends AppCompatActivity {
     }
 
     private void setAdapterAndUpdateData() {
-        // create a new adapter with the updated mComments array
-        // this will "refresh" our recycler view
-        mAdapter = new PantryResponseItemAdapter(this, mDonations);
+        if (((Pantreasy)getApplication()).getRequestedDonations() == null) return;
+        mAdapter = new PantryResponseItemAdapter(this, ((Pantreasy)getApplication()).getRequestedDonations());
         mRecyclerView.setAdapter(mAdapter);
     }
 }

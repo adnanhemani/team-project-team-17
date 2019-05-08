@@ -217,9 +217,14 @@ public class Utils {
         return (bitmap);
     }
 
-    public static void updateGlobals(Context context, String profile) {
+    public static void updateGlobals(Context context, String profileName) {
         Intent serviceIntent = new Intent();
-        serviceIntent.putExtra("profileName", profile);
-        DatabaseUpdates.enqueueWork(context, DatabaseUpdates.class, RSS_JOB_ID, serviceIntent);
+        serviceIntent.putExtra("profileName", profileName);
+        DatabaseUpdates.enqueueWork(context, DatabaseUpdates.class, 12345, serviceIntent);
+    }
+
+    public static void updateListOfAllDonationsAndProfiles(Context context) {
+        Intent serviceIntent = new Intent();
+        DatabaseUpdatesFull.enqueueWork(context, DatabaseUpdatesFull.class, 54321, serviceIntent);
     }
 }

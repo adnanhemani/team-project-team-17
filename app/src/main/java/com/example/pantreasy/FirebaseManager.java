@@ -120,7 +120,6 @@ public class FirebaseManager {
         for (Object s : data.keySet()) {
             HashMap<String, Object> donation = (HashMap<String, Object>) data.get(s);
             String UUID = (String) donation.get("UUID");
-            int confirmed = ((Long)donation.get("confirmed")).intValue();
             ArrayList<HashMap> foodItemData = (ArrayList<HashMap>) donation.get("foodItems");
             List foodItems = foodItemsFromArrayList (foodItemData);
             boolean pickup = (boolean) donation.get("pickup");

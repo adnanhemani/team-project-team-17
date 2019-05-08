@@ -1,5 +1,6 @@
 package com.example.pantreasy;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
@@ -15,7 +16,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DatabaseUpdates extends JobIntentService {
     public String profileName;
@@ -30,45 +33,37 @@ public class DatabaseUpdates extends JobIntentService {
     public ValueEventListener mPantryProfileListener;
     public ValueEventListener mDonorProfileListener;
 
+
     // Temporary versions of the globals in Pantreasy
     private List<DonationItem> mDonationsRequested;
     private List<DonationItem> mDonationsPosted;
-    private List<DonationItem> mDonations;
     public ArrayList<ImageGetter> mImageGetters;
+
 
     public HashMap<String, Bitmap> mPictures;
     public HashMap<String, Profile> pantryProfiles;
     public HashMap<String, Profile> donorProfiles;
 
     private int numPantryProfiles;
+    private Set<String> foodItemSet;
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
-        init(intent.getStringExtra("profileName"));
+        String profileName = intent.getStringExtra("profileName");
+        init(profileName);
     }
 
     private void pullData() {
         mDonationsRequested = new ArrayList<>();
         mDonationsPosted = new ArrayList<>();
         mImageGetters = new ArrayList<>();
-        mDonations = new ArrayList<>();
 
         mPictures = new HashMap<>();
         pantryProfiles = new HashMap<>();
         donorProfiles = new HashMap<>();
 
-
         numPantryProfiles = 0;
 
         mFirebaseManager.getProfile(profileName, mProfileListener);
-        mFirebaseManager.getDonations(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mDonations = mFirebaseManager.donationsFromSnapshot(dataSnapshot);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError){}
-        });
     }
 
     private void setDonorProfileListener() {
@@ -160,8 +155,8 @@ public class DatabaseUpdates extends JobIntentService {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mProfile = mFirebaseManager.getProfileFromDataSnapshot(dataSnapshot);
-                mDonationsRequested = new ArrayList<DonationItem>();
-                mDonationsPosted = new ArrayList<DonationItem>();
+                mDonationsRequested = new ArrayList<>();
+                mDonationsPosted = new ArrayList<>();
                 for (int i = 0; i < mProfile.requestedDonationUUIDs.size(); i++) {
                     mFirebaseManager.getDonation(mProfile.requestedDonationUUIDs.get(i), mRequestedDonationListener);
                 }
@@ -225,17 +220,19 @@ public class DatabaseUpdates extends JobIntentService {
 
     void updateGlobalsIfDone() {
         int numRequested = (mProfile.requestedDonationUUIDs != null) ? mProfile.requestedDonationUUIDs.size() : 0;
-        if (mPictures.size() != numPantryProfiles + numRequested + 1) return;
+        if (mPictures.size() != numPantryProfiles + numRequested + 1 + foodItemSet.size()) return;
 
-        ((Pantreasy) this.getApplication()).setCurrentProfile(mProfile);
+        ((Pantreasy) this.getApplication()).setCurrentProfile(new Profile(mProfile.imageName, mProfile.name, mProfile.phoneNumber, mProfile.address, mProfile.description, mProfile.postedDonationUUIDs, mProfile.requestedDonationUUIDs));
         ((Pantreasy) this.getApplication()).setPostedDonations(mDonationsPosted);
         ((Pantreasy) this.getApplication()).setRequestedDonations(mDonationsRequested);
         ((Pantreasy) this.getApplication()).donorProfiles = new HashMap<>(donorProfiles);
         ((Pantreasy) this.getApplication()).pantryProfiles = new HashMap<>(pantryProfiles);
         ((Pantreasy) this.getApplication()).mPictures = new HashMap<>(mPictures);
+        sendBroadcast(new Intent(((Pantreasy)getApplicationContext()).USER_DATA_FILTER));
     }
 
     void getImagesIfDone() {
+        foodItemSet = new HashSet<>();
         if (mProfile.postedDonationUUIDs.size() != mDonationsPosted.size()
             || mProfile.requestedDonationUUIDs.size() != mDonationsRequested.size()
             || pantryProfiles.size() != numPantryProfiles
@@ -250,5 +247,30 @@ public class DatabaseUpdates extends JobIntentService {
             Profile p = pantryProfiles.get(s);
             mImageGetters.add(new ImageGetter(p.imageName));
         }
+        for (int i = 0; i < mDonationsRequested.size(); i++) {
+            DonationItem d = mDonationsRequested.get(i);
+            for (FoodItem f : d.foodItems) {
+                foodItemSet.add(f.imageName);
+            }
+        }
+        for (int i = 0; i < mDonationsPosted.size(); i++) {
+            DonationItem d = mDonationsPosted.get(i);
+            for (FoodItem f : d.foodItems) {
+                foodItemSet.add(f.imageName);
+            }
+        }
+        for (int i = 0; i < mDonationsRequested.size(); i++) {
+            DonationItem d = mDonationsRequested.get(i);
+            for (FoodItem f : d.foodItems) {
+                mImageGetters.add(new ImageGetter(f.imageName));
+            }
+        }
+        for (int i = 0; i < mDonationsPosted.size(); i++) {
+            DonationItem d = mDonationsPosted.get(i);
+            for (FoodItem f : d.foodItems) {
+                mImageGetters.add(new ImageGetter(f.imageName));
+            }
+        }
+
     }
 }

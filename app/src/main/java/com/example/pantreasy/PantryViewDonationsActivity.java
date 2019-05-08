@@ -1,6 +1,9 @@
 package com.example.pantreasy;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -23,47 +26,33 @@ import java.util.List;
 
 public class PantryViewDonationsActivity extends AppCompatActivity {
 
-    private List<DonationItem> mDonations;
     private RecyclerView mRecyclerView;
     private ConstraintLayout mLayout;
     private DonationItemAdapter mAdapter;
     private ImageButton mHomeButton;
-    private FirebaseManager mFirebaseManager;
-    private ValueEventListener mDonationEventListener;
+    private BroadcastReceiver mReceiver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantry_donate_list_view);
-
-        mFirebaseManager = new FirebaseManager(this);
-
-        mDonations = new ArrayList<DonationItem>();
-
         mLayout = findViewById(R.id.donor_response_view);
         mRecyclerView = mLayout.findViewById(R.id.donation_list_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mHomeButton = mLayout.findViewById(R.id.home_button);
 
         setOnClickForHomeButton();
-        setDonationEventListener();
-
-        getDonationItems();
-    }
-
-    private void setDonationEventListener() {
-        mDonationEventListener = new ValueEventListener() {
+        setAdapterAndUpdateData();
+        mReceiver = new BroadcastReceiver() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mDonations = mFirebaseManager.donationsFromSnapshot(dataSnapshot);
+            public void onReceive(Context context, Intent intent) {
+                Pantreasy p = ((Pantreasy) getApplication());
                 setAdapterAndUpdateData();
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
         };
+        getApplication().registerReceiver(mReceiver, new IntentFilter(((Pantreasy)getApplicationContext()).ALL_DONATIONS_AND_PROFILES_FILTER));
+
+        Utils.updateListOfAllDonationsAndProfiles(this);
     }
 
     private void setOnClickForHomeButton() {
@@ -77,38 +66,9 @@ public class PantryViewDonationsActivity extends AppCompatActivity {
     }
 
     private void setAdapterAndUpdateData() {
-        // create a new adapter with the updated mComments array
-        // this will "refresh" our recycler view
-        mAdapter = new DonationItemAdapter(this, mDonations);
+        if (((Pantreasy)getApplication()).allDonations == null)
+            return;
+        mAdapter = new DonationItemAdapter(this, ((Pantreasy)getApplication()).allDonations);
         mRecyclerView.setAdapter(mAdapter);
-    }
-
-    public void getDonationItems() {
-        mFirebaseManager.getDonations(mDonationEventListener);
-    }
-
-    public void generateDonationItems() {
-        ArrayList<FoodItem> foodItems = new ArrayList<FoodItem>();
-        foodItems.add(new FoodItem("Eggs", null, "2/2/22", "5", true));
-        foodItems.add(new FoodItem("Butter", null, "2/2/22", "5", true));
-        foodItems.add(new FoodItem("Cheese", null, "2/2/22", "5", true));
-        foodItems.add(new FoodItem("Noodles", null, "2/2/22", "5", true));
-        foodItems.add(new FoodItem("Beef", null, "2/2/22", "5", true));
-
-
-        Bitmap icon1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.donor_a_profile_pic);
-        Profile p1 = new Profile("PLACEHOLDER", "Donor A", "555-420-1337", "1777 Hearst Ave", "We are donor A", null, null);
-
-        Bitmap icon2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.donor_b_profile_pic);
-        Profile p2 = new Profile("PLACEHOLDER", "Donor B", "555-555-5555", "1777 Le Roy Ave", "We are donor B", null, null);
-
-        Bitmap icon3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.donor_c_profile_pic);
-        Profile p3 = new Profile("PLACEHOLDER", "Donor C", "555-600-2020", "2222 Shattuck Ave", "We are donor C", null, null);
-
-        //mDonations.add(new DonationItem(p1, foodItems, "", "3pm", true));
-        //mDonations.add(new DonationItem(p2, foodItems, "", "3pm", false));
-        //mDonations.add(new DonationItem(p3, foodItems, "", "3pm", false));
-
-        setAdapterAndUpdateData();
     }
 }
