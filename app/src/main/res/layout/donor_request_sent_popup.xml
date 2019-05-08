@@ -25,11 +25,11 @@
             android:textColor="#D2000000"
             android:textSize="18sp"
             android:textStyle="bold"
-            card_view:layout_constraintStart_toStartOf="@+id/textView3"
+            card_view:layout_constraintStart_toStartOf="@+id/popup_text_chunk"
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/popup_text_chunk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -54,7 +54,7 @@
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="@+id/textView3" />
+            card_view:layout_constraintEnd_toEndOf="@+id/popup_text_chunk" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

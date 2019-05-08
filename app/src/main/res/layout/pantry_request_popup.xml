@@ -28,7 +28,7 @@
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/popup_text_chunk"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="30dp"
@@ -93,7 +93,7 @@
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintStart_toStartOf="@+id/textView3" />
+            card_view:layout_constraintStart_toStartOf="@+id/popup_text_chunk" />
 
 
     </android.support.constraint.ConstraintLayout>

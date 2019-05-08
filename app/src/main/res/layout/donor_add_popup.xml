@@ -30,7 +30,7 @@
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/popup_text_chunk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -48,8 +48,8 @@
             android:layout_marginTop="24dp"
             android:entries="@array/donate_options"
             android:spinnerMode="dropdown"
-            card_view:layout_constraintStart_toStartOf="@+id/textView3"
-            card_view:layout_constraintTop_toBottomOf="@+id/textView3"></android.support.v7.widget.AppCompatSpinner>
+            card_view:layout_constraintStart_toStartOf="@+id/popup_text_chunk"
+            card_view:layout_constraintTop_toBottomOf="@+id/popup_text_chunk"></android.support.v7.widget.AppCompatSpinner>
 
         <TextView
             android:id="@+id/textView4"

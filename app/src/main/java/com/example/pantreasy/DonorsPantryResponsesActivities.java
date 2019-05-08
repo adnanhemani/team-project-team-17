@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,6 +41,7 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
 
     private Button mPopupOkayButton;
     private Button mAddAnotherDonationButton;
+    private TextView mPopupTextChunk;
 
     private ArrayList<DonorResponseItem> mResponseItems;
 
@@ -62,6 +64,7 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
         mConfirmationPopup = mLayout.findViewById(R.id.response_confirmed_popup);
         mPopupOkayButton = mConfirmationPopup.findViewById(R.id.ok_button);
         mAddAnotherDonationButton = mConfirmationPopup.findViewById(R.id.add_another_donation_button);
+        mPopupTextChunk = mConfirmationPopup.findViewById(R.id.popup_text_chunk);
         mBlurredBackground.setVisibility(View.GONE);
         mConfirmationPopup.setVisibility(View.GONE);
 
@@ -130,6 +133,9 @@ public class DonorsPantryResponsesActivities extends AppCompatActivity {
                     if (response.UUID != responseItem.UUID)
                         mFirebaseManager.denyDonation(responseItem, donation);
                 }
+                Profile p = ((Pantreasy) getApplication()).pantryProfiles.get(responseItem.pantryProfileName);
+                String pickup = (donation.pickup) ? "picked up" : "dropped off";
+                mPopupTextChunk.setText("Your donation will be " + pickup + " at " + donation.time + " by: \n\n" + p.name + "\n" + p.address + "\n" + p.phoneNumber + "\n\n" + "Thank you for your donation!");
                 mFirebaseManager.confirmDonation(responseItem, donation);
                 ConstraintLayout view = (ConstraintLayout) findViewById(R.id.donor_response_view);
                 view.setDrawingCacheEnabled(true);
