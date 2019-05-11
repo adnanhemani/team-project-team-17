@@ -162,6 +162,10 @@ public class DonorAddActivity extends AppCompatActivity {
                 mBitmaps.put(foodName, bm);
                 mFirebaseManager.uploadBitmap(bm, fi.imageName);
                 mFoodList.add(fi);
+                mFoodNameText.getText().clear();
+                mExpirationDateText.getText().clear();
+                mQuantityText.getText().clear();
+                mFoodImage.setImageDrawable(getDrawable(R.drawable.image_placeholder));
                 setAdapterAndUpdateData();
             }
         });

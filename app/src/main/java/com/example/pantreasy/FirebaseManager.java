@@ -149,6 +149,9 @@ public class FirebaseManager {
 
     private List<FoodItem> foodItemsFromArrayList (ArrayList<HashMap> foodItemData) {
         List<FoodItem> foodItems = new ArrayList<FoodItem>();
+        if (foodItemData == null) {
+            return foodItems;
+        }
         for (int i = 0; i < foodItemData.size(); i++) {
             HashMap foodItem = foodItemData.get(i);
             boolean perishable = (boolean)foodItem.get("perishable");

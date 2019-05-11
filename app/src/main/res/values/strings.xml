@@ -6,26 +6,26 @@
     </string-array>
 
     <string name="donor_history">
-    ======= April 29, 2019 ======= \n
-    Berkeley Food Pantry \n
-    Apple, 10 lbs \n
-    Tomato, 20 lbs \n
-    Cabbages, 50 lbs \n
-    Carrots, 20 lbs \n
-        \n
-    ======= May 8, 2019 =======\n
-    Berkeley Food Pantry \n
-    Apple, 10 lbs\n
-    Tomato, 20 lbs\n
-    Cabbages, 50 lbs\n
-    Carrots, 20 lbs\n
-        \n
-    ======= May 10, 2019 =======\n
-    Berkeley Food Pantry\n
-    Apple, 10 lbs\n
-    Tomato, 20 lbs\n
-    Cabbages, 50 lbs\n
-    Carrots, 20 lbs\n
+    <!--======= April 29, 2019 ======= \n-->
+    <!--Berkeley Food Pantry \n-->
+    <!--Apple, 10 lbs \n-->
+    <!--Tomato, 20 lbs \n-->
+    <!--Cabbages, 50 lbs \n-->
+    <!--Carrots, 20 lbs \n-->
+        <!--\n-->
+    <!--======= May 8, 2019 =======\n-->
+    <!--Berkeley Food Pantry \n-->
+    <!--Apple, 10 lbs\n-->
+    <!--Tomato, 20 lbs\n-->
+    <!--Cabbages, 50 lbs\n-->
+    <!--Carrots, 20 lbs\n-->
+        <!--\n-->
+    <!--======= May 10, 2019 =======\n-->
+    <!--Berkeley Food Pantry\n-->
+    <!--Apple, 10 lbs\n-->
+    <!--Tomato, 20 lbs\n-->
+    <!--Cabbages, 50 lbs\n-->
+    <!--Carrots, 20 lbs\n-->
     </string>
 
     <string name="donor_reqquest_sent">
